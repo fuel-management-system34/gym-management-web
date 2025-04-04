@@ -1,0 +1,23 @@
+.pc-header-breadcrumb {
+  background: var(--pc-header-background);
+  color: #ffff !important;
+  min-height: 40px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1025;
+  display: flex;
+
+
+  .header-wrapper {
+    display: flex;
+    padding: 0 25px 0px 12px;
+    flex-grow: 1;
+    justify-content: space-between;
+
+
+  }
+
+
+}

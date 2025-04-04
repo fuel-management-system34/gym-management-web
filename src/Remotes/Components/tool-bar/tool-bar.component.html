@@ -1,0 +1,15 @@
+<div class="row  mb-2 toolbar ">
+  <div class="col-1 p-0 back-button-container toolbar-back-section">
+    <button mat-stroked-button class="back-button"><mat-icon>keyboard_arrow_left</mat-icon></button>
+  </div>
+  <div class="col-7 toolbar-title border title-section">
+    <h3 class="toolbar-header">{{ dashboardName }}</h3>
+  </div>
+  <div class="col-4 p-0 right-buttons button-section">
+    @for(button of buttons; track button){
+    <button mat-stroked-button class="toolbar-action-button" (click)="onButtonClick(button.action)">
+      {{ button.label }}
+    </button>
+    }
+  </div>
+</div>
