@@ -1,6 +1,5 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './Services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +10,7 @@ export class AppComponent implements OnInit {
   // public props
   title = 'Paradise project';
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.authService.checkAuthenticationOnInit();
-  }
+  ngOnInit() {}
 }

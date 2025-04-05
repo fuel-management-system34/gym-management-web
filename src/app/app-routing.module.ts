@@ -5,13 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import { GuestComponent } from './Layout/guest/guest.component';
 import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
-import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       {
         path: '',
@@ -33,10 +32,6 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
-      },
-      {
-        path: 'global-settings/users',
-        loadChildren: () => import('../Remotes/Global-settings/global-settings/users/users.module').then((m) => m.UsersModule)
       }
     ]
   },
@@ -45,12 +40,12 @@ const routes: Routes = [
     component: GuestComponent,
     children: [
       {
-        path: 'login',
-        loadComponent: () => import('./demo/authentication/login/login.component')
+        path: 'login'
+        //loadComponent: () => import('./demo/authentication/login/login.component')
       },
       {
-        path: 'register',
-        loadComponent: () => import('./demo/authentication/register/register.component')
+        path: 'register'
+        //loadComponent: () => import('./demo/authentication/register/register.component')
       }
     ]
   }

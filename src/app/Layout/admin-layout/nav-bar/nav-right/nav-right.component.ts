@@ -29,7 +29,6 @@ import {
   ArrowRightOutline,
   GithubOutline
 } from '@ant-design/icons-angular/icons';
-import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -46,7 +45,6 @@ export class NavRightComponent implements OnInit {
   loggedUserData: any;
   constructor(
     private iconService: IconService,
-    private authService: AuthService,
     private router: Router,
     private notificationUtilService: NotificationUtilService
   ) {
@@ -121,7 +119,6 @@ export class NavRightComponent implements OnInit {
   }
 
   logOut() {
-    this.authService.logout();
     this.notificationUtilService.showSuccess('User logged out successfully!');
     this.router.navigate(['/login']);
   }

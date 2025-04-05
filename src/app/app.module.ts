@@ -49,7 +49,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { TokenInterceptor } from './Services/Interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -105,6 +104,6 @@ import { TokenInterceptor } from './Services/Interceptor/auth.interceptor';
     ScrollingModule
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }]
+  providers: []
 })
 export class AppModule {}
