@@ -95,8 +95,13 @@ export class LoginComponent implements OnInit {
       (result) => {
         this.ngZone.run(() => {
           this.loading = false;
-          console.log('Navigating to:', this.returnUrl);
           this.router.navigate([this.returnUrl]);
+          setTimeout(
+            () => {
+              this.authService.startTokenExpirationTimer();
+            },
+            55 * 60 * 1000
+          ); // 55 minutes
         });
       },
       (error) => {

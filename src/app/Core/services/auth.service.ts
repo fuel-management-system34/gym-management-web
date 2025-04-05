@@ -70,18 +70,17 @@ export class AuthService {
       })
     );
   }
-
+  // Add this method to your existing AuthService
   refreshToken(): Observable<TokenResponse> {
     const refreshToken = this.tokenService.getRefreshToken();
-    if (!refreshToken) {
-      return throwError(() => new Error('No refresh token available'));
-    }
-
-    const request: RefreshTokenRequest = { refreshToken };
-    return this.apiService.post<TokenResponse>('/Auth/refresh-token', request).pipe(
-      tap((response) => this.setAuth(response)),
+    return this.apiService.post<TokenResponse>(`/Auth/refresh-token`, { refreshToken }).pipe(
+      tap((response) => {
+        // Update authentication status
+        // this.currentUserSubject.next(response);
+        this.isAuthenticatedSubject.next(true);
+      }),
       catchError((error) => {
-        this.purgeAuth();
+        console.error('Token refresh error', error);
         return throwError(() => error);
       })
     );
@@ -125,5 +124,59 @@ export class AuthService {
     // Set current user to null and mark as not authenticated
     this.currentUserSubject.next(null);
     this.isAuthenticatedSubject.next(false);
+  }
+
+  startTokenExpirationTimer(): void {
+    // Decode JWT to get expiration time
+    const token = localStorage.getItem('auth_token');
+    if (!token) return;
+
+    try {
+      // Parse the token
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      const expiresAt = tokenPayload.exp * 100; // Convert to milliseconds
+      const now = Date.now();
+
+      // Time until token expires in milliseconds
+      const timeUntilExpiration = expiresAt - now;
+
+      // If token is already expired, try to refresh
+      if (timeUntilExpiration <= 0) {
+        this.attemptRefresh();
+        return;
+      }
+
+      // Schedule refresh 1 minute before expiration
+      const refreshBuffer = 60 * 1000; // 1 minute in milliseconds
+      const timeToRefresh = timeUntilExpiration - refreshBuffer;
+
+      if (timeToRefresh > 0) {
+        setTimeout(() => {
+          this.attemptRefresh();
+        }, timeToRefresh);
+      } else {
+        // If less than buffer time remains, refresh now
+        this.attemptRefresh();
+      }
+    } catch (e) {
+      console.error('Error decoding token', e);
+    }
+  }
+
+  private attemptRefresh(): void {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      this.refreshToken().subscribe({
+        next: () => {
+          console.log('Token refreshed proactively');
+          // Restart the timer with new token
+          this.startTokenExpirationTimer();
+        },
+        error: () => {
+          console.error('Proactive token refresh failed');
+          // If refresh fails, user will be logged out on next API call
+        }
+      });
+    }
   }
 }
