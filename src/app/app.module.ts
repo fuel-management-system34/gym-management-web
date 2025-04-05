@@ -49,6 +49,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { JwtInterceptor } from './Core/interceptors/jwt.interceptor ';
 
 @NgModule({
   declarations: [AppComponent],
@@ -104,6 +105,6 @@ import { MatTreeModule } from '@angular/material/tree';
     ScrollingModule
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }]
 })
 export class AppModule {}

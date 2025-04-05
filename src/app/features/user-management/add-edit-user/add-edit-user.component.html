@@ -1,0 +1,108 @@
+<div class="user-form-container">
+  <h2 mat-dialog-title>{{ isEdit ? 'Edit User' : 'Create User' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="userForm">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="Enter username">
+          <mat-error *ngIf="userForm.get('username').hasError('required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('username').hasError('minlength')">
+            Username must be at least 3 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter email" type="email">
+          <mat-error *ngIf="userForm.get('email').hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('email').hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter first name">
+          <mat-error *ngIf="userForm.get('firstName').hasError('required')">
+            First name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter last name">
+          <mat-error *ngIf="userForm.get('lastName').hasError('required')">
+            Last name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Preferred Language</mat-label>
+          <mat-select formControlName="preferredLanguage">
+            <mat-option value="en">English</mat-option>
+            <mat-option value="si">Sinhala</mat-option>
+            <mat-option value="ta">Tamil</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <ng-container *ngIf="!isEdit">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Enter password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">
+            Password must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roleIds" multiple>
+          <mat-option *ngFor="let role of availableRoles" [value]="role.roleId">
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('roleIds').hasError('required')">
+          At least one role must be selected
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-row">
+        <mat-slide-toggle formControlName="isActive" color="primary">
+          {{ userForm.get('isActive').value ? 'Active' : 'Inactive' }}
+        </mat-slide-toggle>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="userForm.invalid || loading" (click)="onSubmit()">
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">{{ isEdit ? 'Update' : 'Create' }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>
