@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // angular import
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -50,6 +50,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { JwtInterceptor } from './Core/interceptors/jwt.interceptor ';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthService } from './Core/services/auth.service';
+import { delay, take } from 'rxjs';
+
+export function initializeAuth(authService: AuthService) {
+  return () => {
+    // Return a promise that resolves when auth check is complete
+    return new Promise((resolve) => {
+      // Subscribe to the authentication state once
+      authService.isAuthenticated.pipe(take(1)).subscribe(() => {
+        console.log('Auth initialization complete');
+        resolve(true);
+      });
+    });
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -102,9 +118,39 @@ import { JwtInterceptor } from './Core/interceptors/jwt.interceptor ';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true
+    })
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => {
+        return () => {
+          return new Promise<boolean>((resolve) => {
+            // Wait for auth service to initialize
+            authService.isAuthenticated
+              .pipe(
+                take(1),
+                delay(100) // Add small delay to ensure everything is ready
+              )
+              .subscribe(() => {
+                console.log('Auth initialization complete');
+                resolve(true);
+              });
+          });
+        };
+      },
+      deps: [AuthService],
+      multi: true
+    }
+  ]
 })
 export class AppModule {}

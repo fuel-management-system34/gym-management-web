@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { User } from 'src/app/Core/models/User';
 import { AuthService } from 'src/app/Core/services/auth.service';
@@ -47,7 +48,7 @@ export class UserProfileComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
     private dialog: MatDialog
   ) {}
 
@@ -82,7 +83,7 @@ export class UserProfileComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        // this.toastr.error('Failed to load user profile', 'Error');
+        this.toastr.error('Failed to load user profile', 'Error');
         console.error('Error loading profile:', error);
       }
     );
@@ -117,13 +118,12 @@ export class UserProfileComponent implements OnInit {
       )
       .subscribe(
         () => {
-          // this.toastr.success('Profile updated successfully', 'Success');
+          this.toastr.success('Profile updated successfully', 'Success');
           // Reload user profile to get updated data
           this.authService.loadUserProfile();
         },
         (error) => {
-          //  this.toastr.error('Failed to update profile', 'Error');
-          console.error('Error updating profile:', error);
+          this.toastr.error('Failed to update profile', 'Error');
         }
       );
   }

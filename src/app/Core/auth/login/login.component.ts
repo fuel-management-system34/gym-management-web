@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -35,8 +36,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private ngZone: NgZone
-    // private toastr: ToastrService
+    private ngZone: NgZone,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -110,10 +111,10 @@ export class LoginComponent implements OnInit {
           // If the error is 401 Unauthorized, it means the user is not registered in the system
           if (error.status === 401) {
             this.error = 'You are not authorized to access this system. Please contact your administrator.';
-            //this.toastr.error(this.error, 'Access Denied');
+            this.toastr.error(this.error, 'Access Denied');
           } else {
             this.error = 'Authentication failed. Please try again.';
-            //this.toastr.error(this.error, 'Error');
+            this.toastr.error(this.error, 'Error');
           }
         });
       }

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCommonModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-role-list',
@@ -40,8 +41,8 @@ export class RoleListComponent implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private dialog: MatDialog
-    //private toastr: ToastrService
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -76,8 +77,7 @@ export class RoleListComponent implements OnInit {
           this.dataSource.data = roles;
         },
         (error) => {
-          //this.toastr.error('Failed to load roles', 'Error');
-          console.error('Error loading roles:', error);
+          this.toastr.error('Failed to load roles', 'Error');
         }
       );
   }
@@ -110,12 +110,11 @@ export class RoleListComponent implements OnInit {
       if (result) {
         this.roleService.deleteRole(role.roleId).subscribe(
           () => {
-            // this.toastr.success('Role deleted successfully', 'Success');
+            this.toastr.success('Role deleted successfully', 'Success');
             this.loadRoles();
           },
           (error) => {
-            // this.toastr.error('Failed to delete role', 'Error');
-            console.error('Error deleting role:', error);
+            this.toastr.error('Failed to delete role', 'Error');
           }
         );
       }

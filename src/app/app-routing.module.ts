@@ -49,7 +49,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking' // Wait for initialization before navigation
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

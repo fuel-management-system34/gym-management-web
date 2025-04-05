@@ -14,6 +14,7 @@ import { User } from '../../..//Core/models/User';
 import { UserService } from '../../../Core/services/user.service';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -41,8 +42,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private dialog: MatDialog
-    // private toastr: ToastrService
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -77,8 +78,7 @@ export class UserListComponent implements OnInit {
           this.dataSource.data = users;
         },
         (error) => {
-          //this.toastr.error('Failed to load users', 'Error');
-          console.error('Error loading users:', error);
+          this.toastr.error('Failed to load users', 'Error');
         }
       );
   }
@@ -111,12 +111,11 @@ export class UserListComponent implements OnInit {
       if (result) {
         this.userService.deleteUser(user.userId).subscribe(
           () => {
-            //this.toastr.success('User deleted successfully', 'Success');
+            this.toastr.success('User deleted successfully', 'Success');
             this.loadUsers();
           },
           (error) => {
-            // this.toastr.error('Failed to delete user', 'Error');
-            console.error('Error deleting user:', error);
+            this.toastr.error('Failed to delete user', 'Error');
           }
         );
       }
@@ -143,11 +142,11 @@ export class UserListComponent implements OnInit {
 
         this.userService.updateUser(updatedUser).subscribe(
           () => {
-            // this.toastr.success(`User ${updatedUser.isActive ? 'activated' : 'deactivated'} successfully`, 'Success');
+            this.toastr.success(`User ${updatedUser.isActive ? 'activated' : 'deactivated'} successfully`, 'Success');
             this.loadUsers();
           },
           (error) => {
-            //  this.toastr.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`, 'Error');
+            this.toastr.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`, 'Error');
             console.error('Error updating user status:', error);
           }
         );
@@ -171,7 +170,7 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Here, you would implement the password reset functionality
-        // this.toastr.info('Password reset functionality would be implemented here', 'Information');
+        this.toastr.info('Password reset functionality would be implemented here', 'Information');
       }
     });
   }

@@ -16,6 +16,7 @@ import { RoleService } from '../../../Core/services/role.service';
 import { UserService } from '../../../Core/services/user.service';
 import { CreateUserRequest } from '../../../Core/models/CreateUserRequest ';
 import { UpdateUserRequest } from '../../../Core/models/UpdateUserRequest ';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -47,7 +48,7 @@ export class AddEditUserComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private roleService: RoleService,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<AddEditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { user?: User }
   ) {}
@@ -107,8 +108,7 @@ export class AddEditUserComponent implements OnInit {
           resolve();
         },
         (error) => {
-          // this.toastr.error('Failed to load roles', 'Error');
-          console.error('Error loading roles:', error);
+          this.toastr.error('Failed to load roles', 'Error');
           resolve();
         }
       );
@@ -145,12 +145,11 @@ export class AddEditUserComponent implements OnInit {
         )
         .subscribe(
           () => {
-            // this.toastr.success('User updated successfully', 'Success');
+            this.toastr.success('User updated successfully', 'Success');
             this.dialogRef.close(true);
           },
           (error) => {
-            //this.toastr.error('Failed to update user', 'Error');
-            console.error('Error updating user:', error);
+            this.toastr.error('Failed to update user', 'Error');
           }
         );
     } else {
@@ -174,11 +173,11 @@ export class AddEditUserComponent implements OnInit {
         )
         .subscribe(
           () => {
-            // this.toastr.success('User created successfully', 'Success');
+            this.toastr.success('User created successfully', 'Success');
             this.dialogRef.close(true);
           },
           (error) => {
-            // this.toastr.error('Failed to create user', 'Error');
+            this.toastr.error('Failed to create user', 'Error');
             console.error('Error creating user:', error);
           }
         );

@@ -13,18 +13,21 @@ export class AuthGuard {
     private router: Router
   ) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  // auth.guard.ts
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    console.log('AuthGuard checking authentication...');
+
     return this.authService.isAuthenticated.pipe(
       take(1),
       map((isAuthenticated) => {
+        console.log('AuthGuard: isAuthenticated =', isAuthenticated);
+
         if (isAuthenticated) {
           return true;
-        } else {
-          return this.router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
         }
+
+        console.log('AuthGuard: not authenticated, redirecting to login');
+        return this.router.createUrlTree(['/login']);
       })
     );
   }
