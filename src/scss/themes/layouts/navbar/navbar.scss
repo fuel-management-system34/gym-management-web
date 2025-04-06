@@ -110,21 +110,21 @@
       transition: all 0.08s cubic-bezier(0.37, 0.24, 0.53, 0.99);
     }
 
-    >img,
-    >span,
-    >svg,
-    >i {
+    > img,
+    > span,
+    > svg,
+    > i {
       position: relative;
       z-index: 5;
       transition: all 0.08s cubic-bezier(0.37, 0.24, 0.53, 0.99);
     }
 
-    >i {
+    > i {
       color: var(--white);
-      font-size: 16px;
+      font-size: 20px;
     }
 
-    >svg {
+    > svg {
       width: 20px;
       height: 20px;
     }
@@ -136,8 +136,8 @@
       text-decoration: none;
       color: var(--pc-header-color);
 
-      >svg,
-      >i {
+      > svg,
+      > i {
         color: var(--pc-header-color);
       }
 
@@ -161,7 +161,6 @@
         background-color: $secondary;
       }
     }
-
 
     .pc-h-badge {
       display: flex;
@@ -251,21 +250,21 @@
       transition: all 0.08s cubic-bezier(0.37, 0.24, 0.53, 0.99);
     }
 
-    >img,
-    >span,
-    >svg,
-    >i {
+    > img,
+    > span,
+    > svg,
+    > i {
       position: relative;
       z-index: 5;
       transition: all 0.08s cubic-bezier(0.37, 0.24, 0.53, 0.99);
     }
 
-    >i {
+    > i {
       color: var(--pc-header-background) !important;
       font-size: 16px;
     }
 
-    >svg {
+    > svg {
       width: 20px;
       height: 20px;
     }
@@ -278,8 +277,8 @@
       color: var(--pc-header-color);
       cursor: pointer;
 
-      >svg,
-      >i {
+      > svg,
+      > i {
         color: var(--pc-header-color);
       }
 
@@ -303,7 +302,6 @@
         background-color: $secondary;
       }
     }
-
 
     .pc-h-badge {
       display: flex;
@@ -385,7 +383,7 @@
       width: auto;
       padding: 7px;
 
-      >span>i {
+      > span > i {
         font-size: 22px;
         margin-right: 8px;
       }
@@ -401,8 +399,8 @@
           margin-right: 0;
         }
 
-        >span,
-        >span>i {
+        > span,
+        > span > i {
           display: none;
         }
       }
@@ -503,7 +501,6 @@
     max-width: 100%;
 
     .list-group-item-action {
-
       &:active,
       &:hover,
       &:focus {
@@ -573,7 +570,6 @@
     }
 
     .pc-head-link {
-
       .user-desc,
       .user-name {
         display: none;

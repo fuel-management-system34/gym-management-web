@@ -1,28 +1,29 @@
 <nav>
   <div class="navbar-wrapper">
 
-    <div [ngClass]="navCollapsed ? 'menu-icon-collapsed' : 'menu-icon'">
-      <a href="javascript:" title="click to menu collapse" class="pc-head-link ms-0" [ngClass]="{ on: navCollapsed }"
-        id="sidebar-hide mobile-collapse" (click)="navCollapse()">
-        @if (navCollapsed === true) {
-        <i antIcon type="menu-unfold" theme="outline"></i>
-        } @else {
-        <i antIcon type="menu-fold" theme="outline"></i>
-        }
+    <!-- <div [ngClass]="navCollapsed ? 'menu-icon-collapsed' : 'menu-icon'">
+      <a href="javascript:;" title="Click to collapse menu" class="pc-head-link ms-0" [ngClass]="{ on: navCollapsed }"
+        id="sidebar-hide" (click)="navCollapse()">
+
+        <i antIcon [type]="navCollapsed ? 'menu-unfold' : 'menu-fold'"
+          [ngClass]="navCollapsed ? 'menu-icon-unfold' : 'menu-icon-fold'" class="menu-fold" theme="outline">
+        </i>
+
       </a>
-    </div>
+    </div> -->
 
 
 
-    @if (!navCollapsed) {
+
+    <!-- @if (!navCollapsed) {
     <div class="navbar-inner p-2 mt-2">
       <form class="header-search">
         <i class="search f-12" antIcon type="search" theme="outline"></i>
         <input type="search" class="form-control" placeholder="Search" />
       </form>
-    </div>}
+    </div>} -->
 
 
-    <app-nav-content (NavCollapsedMob)="navCollapseMob()" class="scroll-div w-100 compact"></app-nav-content>
+    <app-nav-content (NavCollapsedMob)="navCollapseMob()" class="scroll-div w-100 compact mt-1"></app-nav-content>
   </div>
 </nav>

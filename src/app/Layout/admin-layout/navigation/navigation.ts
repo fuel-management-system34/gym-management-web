@@ -20,164 +20,93 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    title: 'dashboard',
     id: 'dashboard',
-    type: 'group',
-    children: [
-      {
-        id: 'default',
-        title: 'Default',
-        type: 'collapse',
-        classes: 'nav-item',
-        url: '/dashboard/default',
-        icon: 'dashboard',
-        breadcrumbs: false,
-        children: [
-          {
-            id: 'login',
-            title: 'Login',
-            type: 'item',
-            classes: 'nav-item',
-            url: '/login',
-            icon: 'login',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'login',
-            title: 'Login',
-            type: 'item',
-            classes: 'nav-item',
-            url: '/login',
-            icon: 'login',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'login',
-            title: 'Login',
-            type: 'item',
-            classes: 'nav-item',
-            url: '/login',
-            icon: 'login',
-            target: true,
-            breadcrumbs: false
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: 'authentication',
-    id: 'authentication',
-    type: 'group',
-    children: [
-      {
-        id: 'login',
-        title: 'Login',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/login',
-        icon: 'login',
-        target: true,
-        breadcrumbs: false
-      },
-      {
-        id: 'register',
-        title: 'Register',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'utilities',
     title: 'UI Components',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
-        id: 'typography',
-        title: 'Typography',
+        id: 'dashboard',
+        title: 'Dashboard',
         type: 'item',
         classes: 'nav-item',
-        url: '/typography',
-        icon: 'font-size'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
+        url: '/dashboard/default',
+        icon: 'dashboard'
       }
     ]
   },
-
   {
-    id: 'other',
+    id: 'Fuel',
     title: 'Other',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
         id: 'sample-page',
-        title: 'Sample Page',
+        title: 'Fuel Inventory',
         type: 'item',
         url: '/sample-page',
         classes: 'nav-item',
-        icon: 'chrome'
-      },
-      {
-        id: 'document',
-        title: 'Document',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/mantis-angular/',
-        icon: 'question',
-        target: true,
-        external: true
+        icon: 'format_color_fill'
       }
     ]
   },
   {
-    title: 'dashboard',
+    title: 'sales',
+    id: 'dashboard',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'sales',
+        title: 'Sales',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/global-settings',
+        icon: 'multiline_chart',
+        breadcrumbs: true
+      }
+    ]
+  },
+  {
+    title: 'customer',
+    id: 'dashboard',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'sales',
+        title: 'Customer',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/global-settings',
+        icon: 'supervisor_account',
+        breadcrumbs: true
+      }
+    ]
+  },
+  {
+    title: 'site-setings',
     id: 'dashboard',
     type: 'group',
     children: [
       {
-        id: 'gloabal settings',
-        title: 'Gloabal Settings',
+        id: 'sales',
+        title: 'Site settings',
         type: 'collapse',
         classes: 'nav-item',
         url: '/global-settings',
-        icon: 'setting',
-        breadcrumbs: false,
+        icon: 'settings',
+        breadcrumbs: true,
         children: [
           {
-            id: 'users',
+            id: 'user',
             title: 'Users',
             type: 'item',
             classes: 'nav-item',
-            url: 'global-settings/users',
-            icon: 'user',
-            target: false,
-            breadcrumbs: false
+            url: '/global-settings',
+            icon: 'supervised_user_circle',
+            breadcrumbs: true
           }
         ]
       }

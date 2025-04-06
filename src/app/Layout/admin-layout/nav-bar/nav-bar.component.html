@@ -2,13 +2,22 @@
   <div class="header-wrapper">
     <div class="m-header logo section">
       <a href="javascript:" class="b-brand">
-        <img src="assets/images/logo-dark.svg" alt="theme-logo" class="logo logo-dark logo-lg" />
+        <img src="assets/images/authentication/ceypetco.jpg" alt="theme-logo" class="logo logo-dark logo-lg"
+          width="90" />
+        <!-- <span class="title">CEYPETCO</span> -->
       </a>
+
+      <div class="pc-mob-drp">
+        <app-nav-left [navCollapsed]="navCollapsed" (NavCollapse)="navCollapse()"
+          (NavCollapsedMob)="navCollapseMob()"></app-nav-left>
+      </div>
+
+
     </div>
-    <div class="pc-mob-drp">
+    <!-- <div class="pc-mob-drp">
       <app-nav-left [navCollapsed]="navCollapsed" (NavCollapse)="navCollapse()"
         (NavCollapsedMob)="navCollapseMob()"></app-nav-left>
-    </div>
+    </div> -->
     <div>
       <app-nav-right></app-nav-right>
     </div>

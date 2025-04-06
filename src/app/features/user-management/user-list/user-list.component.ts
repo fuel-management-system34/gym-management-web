@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCommonModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
@@ -15,6 +15,11 @@ import { UserService } from '../../../Core/services/user.service';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatChipListbox, MatChipSet, MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-list',
@@ -29,7 +34,13 @@ import { ToastrService } from 'ngx-toastr';
     MatIconModule,
     MatButtonModule,
     AddEditUserComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatPaginatorModule,
+    MatMenuModule
   ]
 })
 export class UserListComponent implements OnInit {

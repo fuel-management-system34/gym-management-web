@@ -1,3 +1,4 @@
+/* Wrapper div styles */
 .menu-icon {
   float: right;
   margin-right: 10px;
@@ -5,6 +6,23 @@
 
 .menu-icon-collapsed {
   float: left;
+  margin-left: 12px;
   margin-top: 10px;
-  margin-left: 20px;
+}
+
+/* Icon base style */
+.menu-fold {
+  font-size: 20px;
+}
+
+/* Styles when nav is collapsed (menu-unfold icon) */
+.menu-icon-unfold {
+  float: left;
+  margin-top: 10px;
+  margin-left: -53px;
+}
+
+/* Optional styles when nav is expanded (menu-fold icon) */
+.menu-icon-fold {
+  /* Add specific styles if needed */
 }

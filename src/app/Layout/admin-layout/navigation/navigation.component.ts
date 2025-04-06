@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 // Angular import
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,7 @@ import { NavContentComponent } from './nav-content/nav-content.component';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   // media 1025 After Use Menu Open
   @Output() NavCollapsedMob = new EventEmitter();
 
@@ -28,7 +29,9 @@ export class NavigationComponent {
     this.windowWidth = window.innerWidth;
     this.navCollapsedMob = false;
   }
-
+  ngOnInit(): void {
+    console.log(this.navCollapse);
+  }
   // public method
   navCollapseMob() {
     if (this.windowWidth < 1025) {

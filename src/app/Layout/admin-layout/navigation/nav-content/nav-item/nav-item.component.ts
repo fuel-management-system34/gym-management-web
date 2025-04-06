@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 // Project import
 import { NavigationItem } from '../../navigation';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-item',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, MatIconModule],
   templateUrl: './nav-item.component.html',
   styleUrls: ['./nav-item.component.scss']
 })

@@ -8,11 +8,12 @@ import { RouterModule } from '@angular/router';
 import { NavigationItem } from '../../navigation';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { NavItemComponent } from '../nav-item/nav-item.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-collapse',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, NavItemComponent],
+  imports: [CommonModule, SharedModule, RouterModule, NavItemComponent, MatIconModule],
   templateUrl: './nav-collapse.component.html',
   styleUrls: ['./nav-collapse.component.scss'],
   animations: [

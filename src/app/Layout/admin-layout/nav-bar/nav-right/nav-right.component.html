@@ -1,9 +1,4 @@
 <ul class="list-unstyled">
-  <li class="pc-h-item">
-    <a class="pc-head-link-social-icon me-0 bg-gray-200">
-      <i antIcon type="github" theme="outline"></i>
-    </a>
-  </li>
   <li class="dropdown pc-h-item" ngbDropdown>
     <a class="pc-head-link-social-icon dropdown-toggle arrow-none me-0 bg-gray-200" data-bs-toggle="dropdown"
       ngbDropdownToggle>
@@ -97,10 +92,11 @@
   </li>
   <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
     <a class="pc-head-link dropdown-toggle arrow-none me-0" ngbDropdownToggle>
-      <img src="{{loggedUserData.picture}}" alt="user-image" class="user-avatar me-2" />
+      <img [src]="loggedUserData?.picture ? loggedUserData.picture : 'assets/images/user/avatar-1.jpg'" alt="user-image"
+        class="user-avatar me-2" />
       <span class="f-w-600">{{loggedUserData.name}}</span>
     </a>
-    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown  top-50" ngbDropdownMenu>
+    <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown  top-50 mt-5" ngbDropdownMenu>
       <div class="dropdown-header">
         <div class="d-flex mb-1">
           <div class="flex-shrink-0">
