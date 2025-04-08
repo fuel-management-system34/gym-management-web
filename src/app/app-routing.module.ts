@@ -1,3 +1,4 @@
+import { UserListComponent } from './features/user-management/user-list/user-list.component';
 // angular import
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,8 +24,8 @@ const routes: Routes = [
         loadComponent: () => import('./demo/default/dashboard/dashboard.component').then((c) => c.DefaultComponent)
       },
       {
-        path: 'typography',
-        loadComponent: () => import('./demo/ui-component/typography/typography.component')
+        path: 'users',
+        loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
       },
       {
         path: 'color',

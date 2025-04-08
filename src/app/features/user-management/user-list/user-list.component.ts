@@ -1,10 +1,10 @@
 import { UpdateUserRequest } from './../../../Core/models/UpdateUserRequest ';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCommonModule } from '@angular/material/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,6 +20,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipListbox, MatChipSet, MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../../../theme/shared/shared.module';
+import { BreadcrumbComponent } from '../../../theme/shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-user-list',
@@ -28,25 +31,29 @@ import { MatMenuModule } from '@angular/material/menu';
   standalone: true,
   imports: [
     CommonModule,
-    MatCommonModule,
     MatCardModule,
     MatTableModule,
-    MatIconModule,
+    MatPaginatorModule,
+    MatSort,
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    ReactiveFormsModule,
     AddEditUserComponent,
     ConfirmDialogComponent,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatChipsModule,
-    MatPaginatorModule,
-    MatMenuModule
+    SharedModule,
+    BreadcrumbComponent
   ]
 })
-export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'email', 'firstName', 'lastName', 'roles', 'isActive', 'actions'];
+export class UserListComponent implements OnInit, AfterViewInit {
+  displayedColumns = ['username', 'email', 'firstName', 'lastName', 'roles', 'isActive', 'actions'];
   dataSource = new MatTableDataSource<User>([]);
-  loading = true;
+  loading = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -61,12 +68,12 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -75,39 +82,29 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  loadUsers() {
+  loadUsers(): void {
     this.loading = true;
     this.userService
       .getUsers()
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
-      .subscribe(
-        (users) => {
-          this.dataSource.data = users;
-        },
-        (error) => {
-          this.toastr.error('Failed to load users', 'Error');
-        }
-      );
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (users) => (this.dataSource.data = users),
+        error: () => this.toastr.error('Failed to load users', 'Error')
+      });
   }
 
-  openUserForm(user?: User) {
+  openUserForm(user?: User): void {
     const dialogRef = this.dialog.open(AddEditUserComponent, {
       width: '600px',
       data: { user }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadUsers();
-      }
+      if (result) this.loadUsers();
     });
   }
 
-  deleteUser(user: User) {
+  deleteUser(user: User): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
       data: {
@@ -120,20 +117,18 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.userService.deleteUser(user.userId).subscribe(
-          () => {
+        this.userService.deleteUser(user.userId).subscribe({
+          next: () => {
             this.toastr.success('User deleted successfully', 'Success');
             this.loadUsers();
           },
-          (error) => {
-            this.toastr.error('Failed to delete user', 'Error');
-          }
-        );
+          error: () => this.toastr.error('Failed to delete user', 'Error')
+        });
       }
     });
   }
 
-  toggleUserStatus(user: User) {
+  toggleUserStatus(user: User): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
       data: {
@@ -146,28 +141,19 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const updatedUser = {
-          ...user,
-          isActive: !user.isActive
-        };
-
-        this.userService.updateUser(updatedUser).subscribe(
-          () => {
+        const updatedUser = { ...user, isActive: !user.isActive };
+        this.userService.updateUser(updatedUser).subscribe({
+          next: () => {
             this.toastr.success(`User ${updatedUser.isActive ? 'activated' : 'deactivated'} successfully`, 'Success');
             this.loadUsers();
           },
-          (error) => {
-            this.toastr.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`, 'Error');
-            console.error('Error updating user status:', error);
-          }
-        );
+          error: () => this.toastr.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`, 'Error')
+        });
       }
     });
   }
 
-  resetPassword(user: User) {
-    // In a real application, you might want to provide a form to enter a new password
-    // or generate a random password and send it to the user's email
+  resetPassword(user: User): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
       data: {
@@ -180,7 +166,7 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Here, you would implement the password reset functionality
+        // Implement reset password logic here
         this.toastr.info('Password reset functionality would be implemented here', 'Information');
       }
     });

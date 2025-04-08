@@ -26,32 +26,24 @@ export class AuthService {
     private tokenRefreshService: TokenRefreshService,
     private router: Router
   ) {
-    console.log('Auth service initializing');
-    console.log('Token in storage:', this.tokenService.getToken());
-    console.log('Refresh token in storage:', this.tokenService.getRefreshToken());
     this.init();
   }
 
   private init(): void {
     if (this.tokenService.getToken()) {
-      console.log('Token found, validating...');
       this.validateToken().subscribe({
         next: (isValid) => {
           if (isValid) {
-            console.log('Token is valid, loading user profile');
             this.loadUserProfile();
           } else {
-            console.log('Token is invalid, attempting to refresh');
             this.attemptRefresh();
           }
         },
         error: (error) => {
-          console.error('Error validating token:', error);
           this.attemptRefresh();
         }
       });
     } else {
-      console.log('No token found, not authenticated');
       this.isAuthenticatedSubject.next(false);
     }
   }
@@ -59,7 +51,6 @@ export class AuthService {
   googleLogin(credentials: GoogleLoginRequest): Observable<TokenResponse> {
     return this.apiService.post<TokenResponse>('/Auth/google-login', credentials).pipe(
       tap((response) => {
-        console.log('Login successful, storing auth data');
         this.setAuth(response);
         this.isAuthenticatedSubject.next(true);
 
@@ -67,7 +58,6 @@ export class AuthService {
         this.startTokenExpirationTimer();
       }),
       catchError((error) => {
-        console.error('Login failed:', error);
         return throwError(() => error);
       })
     );
@@ -76,12 +66,10 @@ export class AuthService {
   logout(): Observable<any> {
     return this.apiService.post('/Auth/logout').pipe(
       finalize(() => {
-        console.log('Logging out, clearing auth data');
         this.purgeAuth();
         this.router.navigate(['/login']);
       }),
       catchError((error) => {
-        console.error('Logout API error:', error);
         return throwError(() => error);
       })
     );
@@ -90,14 +78,11 @@ export class AuthService {
   refreshToken(refreshTokenParam?: string): Observable<TokenResponse> {
     const refreshToken = refreshTokenParam || this.tokenService.getRefreshToken();
     if (!refreshToken) {
-      console.error('No refresh token available');
       return throwError(() => new Error('No refresh token available'));
     }
 
-    console.log('Attempting to refresh token');
     return this.tokenRefreshService.refreshToken(refreshToken).pipe(
       tap((response) => {
-        console.log('Token refresh successful');
         // Save the new tokens
         this.tokenService.saveToken(response.token);
         if (response.refreshToken) {
@@ -112,7 +97,6 @@ export class AuthService {
         this.startTokenExpirationTimer();
       }),
       catchError((error) => {
-        console.error('Token refresh failed:', error);
         this.purgeAuth(); // Clear auth on refresh failure
         return throwError(() => error);
       })
@@ -120,29 +104,22 @@ export class AuthService {
   }
 
   validateToken(): Observable<boolean> {
-    console.log('Validating token with backend');
     const token = this.tokenService.getToken();
     if (!token) {
       return of(false);
     }
 
-    return this.tokenRefreshService.validateToken(token).pipe(
-      tap((isValid) => {
-        console.log('Token validation result:', isValid ? 'valid' : 'invalid');
-      })
-    );
+    return this.tokenRefreshService.validateToken(token).pipe(tap((isValid) => {}));
   }
 
   loadUserProfile(): void {
-    console.log('Loading user profile');
     this.apiService.get<User>('/Profile').subscribe({
       next: (user) => {
-        console.log('User profile loaded:', user);
         this.currentUserSubject.next(user);
         this.isAuthenticatedSubject.next(true);
+        localStorage.setItem('_userDetails', JSON.stringify(user));
       },
       error: (error) => {
-        console.error('Error loading profile:', error);
         // Only purge auth if it's a 401 error
         if (error.status === 401) {
           this.purgeAuth();
@@ -152,7 +129,6 @@ export class AuthService {
   }
 
   private setAuth(authResponse: TokenResponse): void {
-    console.log('Setting auth data with tokens');
     // Save JWT token and refresh token
     this.tokenService.saveToken(authResponse.token);
     this.tokenService.saveRefreshToken(authResponse.refreshToken);
@@ -162,7 +138,6 @@ export class AuthService {
   }
 
   private purgeAuth(): void {
-    console.log('Purging auth data');
     // Remove JWT token and refresh token
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
@@ -176,7 +151,6 @@ export class AuthService {
     // Decode JWT to get expiration time
     const token = this.tokenService.getToken();
     if (!token) {
-      console.log('No token to start expiration timer');
       return;
     }
 
@@ -192,11 +166,8 @@ export class AuthService {
       // Time until token expires in milliseconds
       const timeUntilExpiration = expiresAt - now;
 
-      console.log(`Token expires in ${Math.floor(timeUntilExpiration / 1000 / 60)} minutes`);
-
       // If token is already expired, try to refresh
       if (timeUntilExpiration <= 0) {
-        console.log('Token already expired, refreshing now');
         this.attemptRefresh();
         return;
       }
@@ -206,35 +177,25 @@ export class AuthService {
       const timeToRefresh = timeUntilExpiration - refreshBuffer;
 
       if (timeToRefresh > 0) {
-        console.log(`Scheduling token refresh in ${Math.floor(timeToRefresh / 1000 / 60)} minutes`);
         setTimeout(() => {
-          console.log('Time to refresh token');
           this.attemptRefresh();
         }, timeToRefresh);
       } else {
         // If less than buffer time remains, refresh now
-        console.log('Token close to expiration, refreshing now');
         this.attemptRefresh();
       }
-    } catch (e) {
-      console.error('Error setting up token expiration timer:', e);
-    }
+    } catch (e) {}
   }
 
   private attemptRefresh(): void {
     const refreshToken = this.tokenService.getRefreshToken();
     if (!refreshToken) {
-      console.log('No refresh token available');
       return;
     }
 
-    console.log('Attempting to refresh token');
     this.refreshToken(refreshToken).subscribe({
-      next: () => {
-        console.log('Token refreshed successfully');
-      },
+      next: () => {},
       error: (error) => {
-        console.error('Token refresh failed:', error);
         // User will be logged out on next API call that returns 401
       }
     });

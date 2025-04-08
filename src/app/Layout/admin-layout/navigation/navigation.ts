@@ -104,8 +104,8 @@ export const NavigationItems: NavigationItem[] = [
             title: 'Users',
             type: 'item',
             classes: 'nav-item',
-            url: '/global-settings',
-            icon: 'supervised_user_circle',
+            url: '/users',
+            icon: 'people_outline',
             breadcrumbs: true
           }
         ]
