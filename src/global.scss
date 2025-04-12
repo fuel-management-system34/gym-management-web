@@ -541,3 +541,58 @@ app-custom-notification {
 .cdk-overlay-container {
   z-index: 9999 !important;
 }
+
+/* ------------------------------
+  SLIDE TOGGLE
+   ------------------------------ */
+
+.mat-mdc-slide-toggle.mat-primary {
+  // Set the track color when checked
+  --mdc-switch-selected-track-color: var(--pc-header-background);
+  --mdc-switch-selected-hover-track-color: var(--pc-header-background);
+  --mdc-switch-selected-focus-track-color: var(--pc-header-background);
+  --mdc-switch-selected-pressed-track-color: var(--pc-header-background);
+
+  // Set the handle/thumb color when checked
+  --mdc-switch-selected-handle-color: var(--pc-header-background);
+  --mdc-switch-selected-hover-handle-color: var(--pc-header-background);
+  --mdc-switch-selected-focus-handle-color: var(--pc-header-background);
+  --mdc-switch-selected-pressed-handle-color: var(--pc-header-background);
+
+  // Set the icon color when checked
+  --mdc-switch-selected-icon-color: #fff;
+
+  // Set the focus/state layer colors
+  --mdc-switch-selected-hover-state-layer-color: var(--pc-header-background);
+  --mdc-switch-selected-focus-state-layer-color: var(--pc-header-background);
+  --mdc-switch-selected-pressed-state-layer-color: var(--pc-header-background);
+}
+
+// Optional: For more complete styling, you can also customize the unchecked state
+.mat-mdc-slide-toggle {
+  // You can set the unselected track color if needed
+  --mdc-switch-unselected-track-color: #e0e0e0;
+  --mdc-switch-unselected-hover-track-color: #d0d0d0;
+
+  // You can set the unselected handle color if needed
+  --mdc-switch-unselected-handle-color: #fafafa;
+  --mdc-switch-unselected-hover-handle-color: #f0f0f0;
+
+  // You can set the unselected icon color if needed
+  --mdc-switch-unselected-icon-color: #666666;
+}
+
+/* For Angular Material versions that don't fully support the CSS variables approach,
+   you can add this fallback method */
+.mat-mdc-slide-toggle.mat-primary.mat-mdc-slide-toggle-checked {
+  .mdc-switch__track {
+    background-color: var(--pc-header-background) !important;
+  }
+
+  .mdc-switch__handle-track {
+    .mdc-switch__handle {
+      background-color: var(--pc-header-background) !important;
+      border-color: var(--pc-header-background) !important;
+    }
+  }
+}
