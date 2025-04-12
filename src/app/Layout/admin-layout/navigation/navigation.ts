@@ -105,7 +105,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/users',
-            icon: 'people_outline',
+            icon: 'dot',
             breadcrumbs: true
           }
         ]

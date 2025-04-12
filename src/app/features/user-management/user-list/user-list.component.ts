@@ -18,11 +18,12 @@ import { ToastrService } from 'ngx-toastr';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatChipListbox, MatChipSet, MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../../theme/shared/shared.module';
 import { BreadcrumbComponent } from '../../../theme/shared/components/breadcrumb/breadcrumb.component';
+import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton-loader-table/skeleton-loader-table.component';
 
 @Component({
   selector: 'app-user-list',
@@ -47,13 +48,14 @@ import { BreadcrumbComponent } from '../../../theme/shared/components/breadcrumb
     AddEditUserComponent,
     ConfirmDialogComponent,
     SharedModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    SkeletonLoaderTableComponent
   ]
 })
 export class UserListComponent implements OnInit, AfterViewInit {
   displayedColumns = ['username', 'email', 'firstName', 'lastName', 'roles', 'isActive', 'actions'];
   dataSource = new MatTableDataSource<User>([]);
-  loading = false;
+  loading = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

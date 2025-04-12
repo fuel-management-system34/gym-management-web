@@ -23,6 +23,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatChipsModule } from '@angular/material/chips';
+import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -37,7 +39,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSelectModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    SharedModule,
+    MatChipsModule
   ]
 })
 export class AddEditUserComponent implements OnInit, OnDestroy {
