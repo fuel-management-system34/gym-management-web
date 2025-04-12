@@ -66,13 +66,23 @@ export class NavRightComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    try {
+    this.getUserDataWithRetry(3);
+  }
+
+  getUserDataWithRetry(retries: number): void {
+    let attempts = 0;
+    const interval = setInterval(() => {
       const userData = this.tokenService.getUserData();
-      this.activeUserData = JSON.parse(userData);
-    } catch (e) {
-      console.error('Invalid user data in tokenService:', e);
-      this.activeUserData = {} as User;
-    }
+      attempts++;
+
+      if (userData) {
+        this.activeUserData = JSON.parse(userData);
+        clearInterval(interval);
+      } else if (attempts >= retries) {
+        clearInterval(interval);
+        console.warn('Failed to retrieve user data after retries.');
+      }
+    }, 1000); // Retry every 1 second
   }
 
   logOut(): void {

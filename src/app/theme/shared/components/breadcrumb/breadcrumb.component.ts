@@ -10,6 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { IconModule, IconService } from '@ant-design/icons-angular';
 import { GlobalOutline, NodeExpandOutline } from '@ant-design/icons-angular/icons';
 import { NavigationItem, NavigationItems } from '../../../../Layout/admin-layout/navigation/navigation';
+import { MatIconModule } from '@angular/material/icon';
 
 interface titleType {
   // eslint-disable-next-line
@@ -25,7 +26,7 @@ interface titleType {
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule, IconModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
