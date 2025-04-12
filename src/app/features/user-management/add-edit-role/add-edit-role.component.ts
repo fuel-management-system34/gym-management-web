@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { finalize } from 'rxjs';
 import { Role } from '../../../Core/models/Role';
 import { RoleService } from '../../../Core/services/role.service';
+import { NotificationService } from 'src/app/Services/notification-util.service';
 
 @Component({
   selector: 'app-add-edit-role',
@@ -20,7 +21,7 @@ export class AddEditRoleComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private roleService: RoleService,
-    //private toastr: ToastrService,
+    private notificationService: NotificationService,
     public dialogRef: MatDialogRef<AddEditRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { role?: Role }
   ) {}
@@ -68,12 +69,11 @@ export class AddEditRoleComponent implements OnInit {
         )
         .subscribe(
           () => {
-            //this.toastr.success('Role updated successfully', 'Success');
+            this.notificationService.success(`Role updated successfully`);
             this.dialogRef.close(true);
           },
           (error) => {
-            //this.toastr.error('Failed to update role', 'Error');
-            console.error('Error updating role:', error);
+            this.notificationService.error(`Error updating role`);
           }
         );
     } else {
@@ -91,11 +91,11 @@ export class AddEditRoleComponent implements OnInit {
         )
         .subscribe(
           () => {
-            // this.toastr.success('Role created successfully', 'Success');
+            this.notificationService.success(`Role created successfully`);
             this.dialogRef.close(true);
           },
           (error) => {
-            //this.toastr.error('Failed to create role', 'Error');
+            this.notificationService.error(`Failed to create role`);
             console.error('Error creating role:', error);
           }
         );

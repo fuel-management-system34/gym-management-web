@@ -1,0 +1,543 @@
+/* Global styles for reducing Angular Material component sizes */
+
+/* ------------------------------
+   Form Field Styles (13px)
+   ------------------------------ */
+.mat-mdc-form-field {
+  // Reduce the overall height
+  &.mat-mdc-form-field-type-mat-input,
+  &.mat-mdc-form-field-type-mat-select,
+  &.mat-mdc-form-field-type-mat-native-select {
+    // Adjust the vertical padding
+    .mat-mdc-text-field-wrapper {
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    // Adjust the input area height
+    .mat-mdc-form-field-infix {
+      min-height: 36px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    // Adjust label position
+    .mdc-floating-label:not(.mdc-floating-label--float-above) {
+      transform: translateY(-10px) scale(1);
+    }
+
+    // Set font size for the input to 13px
+    .mat-mdc-input-element,
+    .mat-mdc-select-value-text {
+      font-size: 13px;
+    }
+
+    // Adjust the label font size to 13px
+    .mat-mdc-floating-label {
+      font-size: 13px;
+    }
+
+    // Adjust hint and error message
+    .mat-mdc-form-field-hint-wrapper,
+    .mat-mdc-form-field-error-wrapper {
+      padding-top: 4px;
+      font-size: 11px;
+    }
+  }
+
+  // Reduce size for textarea
+  &.mat-form-field-type-mat-textarea {
+    .mat-mdc-text-field-wrapper {
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+  }
+
+  // Reduce icon size
+  .mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+  }
+
+  // Adjust the appearance for outline
+  &.mat-mdc-form-field-appearance-outline {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__trailing {
+      border-radius: 4px;
+    }
+  }
+}
+
+// Reduce select option height
+.mat-mdc-select-panel {
+  .mat-mdc-option {
+    min-height: 32px;
+    font-size: 13px;
+
+    .mat-mdc-option-text {
+      font-size: 13px;
+    }
+  }
+}
+
+// Reduce datepicker size
+.mat-datepicker-content {
+  .mat-calendar {
+    font-size: 13px;
+  }
+}
+
+// Adjust the form field subscript (error/hint) wrapper
+.mat-mdc-form-field-subscript-wrapper {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* ------------------------------
+   Button Styles (13px)
+   ------------------------------ */
+// Reduce button height and font size
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-icon-button {
+  // Set font size to 13px
+  font-size: 13px !important;
+  line-height: 32px !important;
+  height: 32px !important;
+
+  // Adjust padding for better proportions
+  padding: 0 12px !important;
+
+  // Reduce min-width
+  min-width: 64px !important;
+
+  // Adjust border radius for better proportion
+  border-radius: 4px !important;
+
+  // Adjust letter spacing
+  letter-spacing: 0.5px !important;
+
+  // Adjust the text and icon alignment
+  .mdc-button__label {
+    font-size: 13px !important;
+  }
+
+  // Adjust icon size inside buttons
+  .mat-icon {
+    font-size: 16px !important;
+    height: 16px !important;
+    width: 16px !important;
+    line-height: 16px !important;
+    margin-right: 6px !important;
+    vertical-align: middle !important;
+  }
+}
+
+// Special handling for icon buttons
+.mat-mdc-icon-button {
+  width: 32px !important;
+  padding: 0 !important;
+
+  .mat-icon {
+    margin-right: 0 !important;
+  }
+}
+
+// Adjust FAB buttons
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  height: 40px !important;
+  width: 40px !important;
+
+  &.mat-mdc-mini-fab {
+    height: 32px !important;
+    width: 32px !important;
+  }
+
+  .mat-icon {
+    font-size: 18px !important;
+    height: 18px !important;
+    width: 18px !important;
+    line-height: 18px !important;
+  }
+}
+.mat-mdc-raised-button {
+  background-color: var(--pc-header-background) !important;
+}
+
+/* ------------------------------
+   Menu Styles (13px)
+   ------------------------------ */
+// Reduce menu item height and font size
+.mat-mdc-menu-panel {
+  // Reduce min-width
+  min-width: 112px !important;
+
+  // Adjust the menu panel
+  .mat-mdc-menu-content {
+    padding: 4px 0 !important;
+  }
+
+  // Style menu items
+  .mat-mdc-menu-item {
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 13px !important;
+    padding: 0 12px !important;
+    min-height: 36px !important;
+
+    // Adjust icon size in menu items
+    .mat-icon {
+      margin-right: 10px !important;
+      font-size: 16px !important;
+      height: 16px !important;
+      width: 16px !important;
+      line-height: 16px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Dialog Styles (13px)
+   ------------------------------ */
+.mat-mdc-dialog-container {
+  .mat-mdc-dialog-title {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    padding: 16px 16px 8px !important;
+  }
+
+  .mat-mdc-dialog-content {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    padding: 0 16px 16px !important;
+  }
+
+  .mat-mdc-dialog-actions {
+    padding: 8px 16px 16px !important;
+    min-height: 46px !important;
+  }
+}
+
+/* ------------------------------
+   Card Styles (13px)
+   ------------------------------ */
+.mat-mdc-card {
+  .mat-mdc-card-title {
+    font-size: 16px !important;
+  }
+
+  .mat-mdc-card-subtitle {
+    font-size: 13px !important;
+  }
+
+  .mat-mdc-card-content {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    padding: 12px 16px !important;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 8px !important;
+  }
+}
+
+/* ------------------------------
+   List Styles (13px)
+   ------------------------------ */
+.mat-mdc-list {
+  .mat-mdc-list-item {
+    height: 40px !important;
+    font-size: 13px !important;
+
+    .mat-icon {
+      font-size: 16px !important;
+      height: 16px !important;
+      width: 16px !important;
+      line-height: 16px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Table Styles (13px)
+   ------------------------------ */
+.mat-mdc-table {
+  font-size: 13px !important;
+
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
+    padding: 0 15px !important;
+  }
+
+  .mat-mdc-header-cell {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+  }
+
+  .mat-mdc-row,
+  .mat-mdc-header-row {
+    height: 50px !important;
+  }
+}
+
+/* ------------------------------
+   Tabs Styles (13px)
+   ------------------------------ */
+.mat-mdc-tab {
+  height: 40px !important;
+  font-size: 13px !important;
+
+  .mat-icon {
+    font-size: 16px !important;
+    height: 16px !important;
+    width: 16px !important;
+    line-height: 16px !important;
+    margin-right: 6px !important;
+  }
+}
+
+/* ------------------------------
+   Chips Styles (13px)
+   ------------------------------ */
+.mat-mdc-chip {
+  font-size: 13px !important;
+  height: 28px !important;
+
+  .mat-icon {
+    font-size: 16px !important;
+    height: 16px !important;
+    width: 16px !important;
+  }
+}
+
+/* ------------------------------
+   Toolbar Styles (reduced height)
+   ------------------------------ */
+.mat-toolbar {
+  height: 52px !important;
+  font-size: 16px !important;
+
+  &.mat-toolbar-row {
+    height: 52px !important;
+  }
+
+  .mat-icon {
+    font-size: 20px !important;
+    height: 20px !important;
+    width: 20px !important;
+  }
+}
+
+/* ------------------------------
+   Autocomplete Styles (13px)
+   ------------------------------ */
+.mat-mdc-autocomplete-panel {
+  .mat-mdc-option {
+    font-size: 13px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+
+    .mat-icon {
+      font-size: 16px !important;
+      height: 16px !important;
+      width: 16px !important;
+      margin-right: 8px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Snackbar Styles (13px)
+   ------------------------------ */
+.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    min-height: 40px !important;
+  }
+
+  .mat-mdc-snack-bar-label {
+    font-size: 13px !important;
+  }
+
+  .mat-mdc-snack-bar-actions {
+    .mat-mdc-button {
+      font-size: 13px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Radio & Checkbox Styles (13px)
+   ------------------------------ */
+.mat-mdc-radio-button {
+  .mdc-form-field {
+    font-size: 13px !important;
+  }
+
+  .mdc-radio {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+.mat-mdc-checkbox {
+  .mdc-form-field {
+    font-size: 13px !important;
+  }
+
+  .mdc-checkbox {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* ------------------------------
+   Expansion Panel Styles (13px)
+   ------------------------------ */
+.mat-expansion-panel {
+  .mat-expansion-panel-header {
+    height: 40px !important;
+    font-size: 13px !important;
+  }
+
+  .mat-expansion-panel-body {
+    font-size: 13px !important;
+    padding: 0 16px 16px !important;
+  }
+}
+
+/* ------------------------------
+   Badge Styles (smaller)
+   ------------------------------ */
+.mat-badge {
+  .mat-badge-content {
+    font-size: 10px !important;
+    height: 16px !important;
+    width: 16px !important;
+    line-height: 16px !important;
+  }
+}
+
+/* ------------------------------
+   Progress Indicator Styles (smaller)
+   ------------------------------ */
+.mat-progress-spinner,
+.mat-spinner {
+  &[diameter='32'] {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+.mat-progress-bar {
+  height: 4px !important;
+}
+
+/* ------------------------------
+   Tooltip Styles (13px)
+   ------------------------------ */
+.mat-mdc-tooltip {
+  font-size: 11px !important;
+  margin: 6px !important;
+  padding: 6px 8px !important;
+}
+
+/* ------------------------------
+   Tree Styles (13px)
+   ------------------------------ */
+.mat-tree {
+  .mat-tree-node {
+    min-height: 36px !important;
+    font-size: 13px !important;
+
+    .mat-icon {
+      font-size: 16px !important;
+      height: 16px !important;
+      width: 16px !important;
+      margin-right: 8px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Paginator Styles (13px)
+   ------------------------------ */
+.mat-mdc-paginator {
+  font-size: 12px !important;
+
+  .mat-mdc-select-value-text {
+    font-size: 13px !important;
+  }
+
+  .mat-mdc-icon-button {
+    width: 32px !important;
+    height: 32px !important;
+
+    .mat-icon {
+      font-size: 16px !important;
+      height: 16px !important;
+      width: 16px !important;
+    }
+  }
+}
+
+/* ------------------------------
+   Slider Styles (smaller)
+   ------------------------------ */
+.mat-mdc-slider {
+  height: 32px !important;
+
+  .mdc-slider__thumb {
+    height: 16px !important;
+    width: 16px !important;
+  }
+}
+
+/* ------------------------------
+   Notification layout Styles (smaller)
+   ------------------------------ */
+/* Add these styles to your styles.scss file */
+
+// Override snackbar container
+.mat-mdc-snack-bar-container {
+  z-index: 9999 !important;
+
+  // Remove padding and background
+  .mdc-snackbar__surface {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    min-height: unset !important;
+    padding: 0 !important;
+  }
+
+  // Reset internal padding
+  .mat-mdc-snack-bar-label {
+    padding: 0 !important;
+  }
+}
+
+// Apply animation to notifications
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+app-custom-notification {
+  animation: slideInRight 0.3s ease-out forwards;
+  display: block;
+}
+
+// Ensure overlay container is top-most
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}

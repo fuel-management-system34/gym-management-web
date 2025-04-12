@@ -39,7 +39,6 @@ File: style.css
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-
 html,
 body {
   height: 100%;
@@ -47,9 +46,19 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .dashoard-mat-card {
   min-height: 70vh;
+}
+
+.chip-active {
+  background-color: #b7ff8b !important;
+  color: black;
+}
+
+.chip-inactive {
+  background-color: #beffca !important;
+  color: black;
 }

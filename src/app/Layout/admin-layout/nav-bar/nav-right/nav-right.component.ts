@@ -24,7 +24,7 @@ import {
 import { TokenService } from 'src/app/Core/services/token.service';
 import { User } from 'src/app/Core/models/User';
 import { AuthService } from 'src/app/Core/services/auth.service';
-import { NotificationUtilService } from '../../../../Services/notification-util.service';
+import { NotificationService } from '../../../../Services/notification-util.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -58,7 +58,7 @@ export class NavRightComponent implements OnInit, OnDestroy {
   constructor(
     private iconService: IconService,
     private router: Router,
-    private notificationUtilService: NotificationUtilService,
+    private notificationUtilService: NotificationService,
     private tokenService: TokenService,
     private authService: AuthService
   ) {
@@ -91,11 +91,11 @@ export class NavRightComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.notificationUtilService.showSuccess('Logged out successfully');
+          this.notificationUtilService.success('Logged out successfully');
         },
         error: (err) => {
           console.error('Logout failed:', err);
-          this.notificationUtilService.showError('Logout failed');
+          this.notificationUtilService.error('Logout failed');
         }
       });
   }

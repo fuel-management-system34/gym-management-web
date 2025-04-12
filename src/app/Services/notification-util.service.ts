@@ -1,36 +1,47 @@
+// src/app/core/services/notification.service.ts
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { CustomNotificationComponent } from '../theme/shared/components/custom-notification/custom-notification.component';
+
+export type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+export interface NotificationData {
+  type: NotificationType;
+  title: string;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationUtilService {
+export class NotificationService {
   constructor(private snackBar: MatSnackBar) {}
 
-  private showSnackbar(content: string, action: string, duration: number, panelClass: string) {
-    let sb = this.snackBar.open(content, action, {
+  private show(data: NotificationData, duration: number = 5000): void {
+    const config: MatSnackBarConfig = {
       duration: duration,
-      panelClass: panelClass,
+      horizontalPosition: 'center',
       verticalPosition: 'top',
-      horizontalPosition: 'center'
-    });
-    sb.onAction().subscribe(() => {
-      sb.dismiss();
-    });
+      data: data,
+      panelClass: 'custom-notification'
+    };
+
+    this.snackBar.openFromComponent(CustomNotificationComponent, config);
   }
 
-  // Show success snackbar
-  showSuccess(content: string, action: string = 'Close', duration: number = 6000) {
-    this.showSnackbar(content, action, duration, 'snackbar-success');
+  success(message: string, title: string = 'Success'): void {
+    this.show({ type: 'success', title, message });
   }
 
-  // Show error snackbar
-  showError(content: string, action: string = 'Close', duration: number = 6000) {
-    this.showSnackbar(content, action, duration, 'snackbar-error');
+  info(message: string, title: string = 'Info'): void {
+    this.show({ type: 'info', title, message });
   }
 
-  // Show warning snackbar
-  showWarning(content: string, action: string = 'Close', duration: number = 6000) {
-    this.showSnackbar(content, action, duration, 'snackbar-warning');
+  warning(message: string, title: string = 'Warning'): void {
+    this.show({ type: 'warning', title, message });
+  }
+
+  error(message: string, title: string = 'Error'): void {
+    this.show({ type: 'error', title, message });
   }
 }

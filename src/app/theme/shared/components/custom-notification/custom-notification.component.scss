@@ -1,0 +1,139 @@
+// src/app/shared/components/custom-notification/custom-notification.component.scss
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.notification-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow:
+    0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  margin: 8px;
+  width: calc(100% - 16px);
+  box-sizing: border-box;
+}
+
+.notification-icon {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+  }
+}
+
+.notification-content {
+  flex: 1;
+
+  .notification-title {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .notification-message {
+    font-size: 14px;
+  }
+}
+
+.notification-close {
+  margin: -8px -8px -8px 8px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background-color: transparent !important;
+  border: none !important;
+
+  mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+  }
+}
+
+// Success notification (green)
+.notification-success-container {
+  background-color: #d4edda;
+  //border-left: 4px solid #28a745;
+
+  .notification-icon,
+  .notification-title {
+    color: #155724;
+  }
+
+  .notification-message {
+    color: #155724;
+  }
+
+  .notification-close {
+    color: #155724;
+  }
+}
+
+// Info notification (blue)
+.notification-info-container {
+  background-color: #d1ecf1;
+  //border-left: 4px solid #17a2b8;
+
+  .notification-icon,
+  .notification-title {
+    color: #0c5460;
+  }
+
+  .notification-message {
+    color: #0c5460;
+  }
+
+  .notification-close {
+    color: #0c5460;
+  }
+}
+
+// Warning notification (yellow)
+.notification-warning-container {
+  background-color: #fff3cd;
+  //border-left: 4px solid #ffc107;
+
+  .notification-icon,
+  .notification-title {
+    color: #856404;
+  }
+
+  .notification-message {
+    color: #856404;
+  }
+
+  .notification-close {
+    color: #856404;
+  }
+}
+
+// Error notification (red)
+.notification-error-container {
+  background-color: #f8d7da;
+  //border-left: 4px solid #dc3545;
+
+  .notification-icon,
+  .notification-title {
+    color: #721c24;
+  }
+
+  .notification-message {
+    color: #721c24;
+  }
+
+  .notification-close {
+    color: #721c24;
+  }
+}
