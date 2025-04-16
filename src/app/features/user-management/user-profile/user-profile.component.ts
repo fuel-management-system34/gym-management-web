@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatCommonModule } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,11 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { User } from 'src/app/Core/models/User';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { UserService } from 'src/app/Core/services/user.service';
+import { NotificationService } from '../../../Services/notification-util.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -48,7 +48,7 @@ export class UserProfileComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-    private toastr: ToastrService,
+    private notificationService: NotificationService,
     private dialog: MatDialog
   ) {}
 
@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        this.toastr.error('Failed to load user profile', 'Error');
+        this.notificationService.error(`Failed to load user profile`);
         console.error('Error loading profile:', error);
       }
     );
@@ -118,12 +118,12 @@ export class UserProfileComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.toastr.success('Profile updated successfully', 'Success');
+          this.notificationService.success(`Profile updated successfully`);
           // Reload user profile to get updated data
           this.authService.loadUserProfile();
         },
         (error) => {
-          this.toastr.error('Failed to update profile', 'Error');
+          this.notificationService.success(`Failed to update profile`);
         }
       );
   }

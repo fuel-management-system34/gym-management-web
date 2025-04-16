@@ -1,0 +1,12 @@
+<div class="notification-container" [ngClass]="getContainerClass()">
+  <!-- <div class="notification-icon">
+    <mat-icon>{{ getIcon() }}</mat-icon>
+  </div> -->
+  <div class="notification-content">
+    <!-- <div class="notification-title">{{ data.title }}</div> -->
+    <div class="notification-message">{{ data.message }}</div>
+  </div>
+  <button mat-icon-button class="notification-close" (click)="close()">
+    <mat-icon class="mt-1">close</mat-icon>
+  </button>
+</div>

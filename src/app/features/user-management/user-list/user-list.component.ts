@@ -14,7 +14,6 @@ import { User } from '../../..//Core/models/User';
 import { UserService } from '../../../Core/services/user.service';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { ToastrService } from 'ngx-toastr';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../../theme/shared/shared.module';
 import { BreadcrumbComponent } from '../../../theme/shared/components/breadcrumb/breadcrumb.component';
 import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton-loader-table/skeleton-loader-table.component';
+import { NotificationService } from 'src/app/Services/notification-util.service';
 
 @Component({
   selector: 'app-user-list',
@@ -49,11 +49,12 @@ import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton
     ConfirmDialogComponent,
     SharedModule,
     BreadcrumbComponent,
-    SkeletonLoaderTableComponent
+    SkeletonLoaderTableComponent,
+    MatDialogModule
   ]
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['username', 'email', 'firstName', 'lastName', 'roles', 'isActive', 'actions'];
+  displayedColumns = ['username', 'email', 'firstName', 'lastName', 'isActive', 'actions'];
   dataSource = new MatTableDataSource<User>([]);
   loading = true;
 
@@ -63,7 +64,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -91,13 +92,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (users) => (this.dataSource.data = users),
-        error: () => this.toastr.error('Failed to load users', 'Error')
+        error: () => this.notificationService.error('Failed to load users')
       });
   }
 
   openUserForm(user?: User): void {
     const dialogRef = this.dialog.open(AddEditUserComponent, {
-      width: '600px',
+      width: '800px',
       data: { user }
     });
 
@@ -121,10 +122,10 @@ export class UserListComponent implements OnInit, AfterViewInit {
       if (result) {
         this.userService.deleteUser(user.userId).subscribe({
           next: () => {
-            this.toastr.success('User deleted successfully', 'Success');
+            this.notificationService.success(`User deleted successfully`);
             this.loadUsers();
           },
-          error: () => this.toastr.error('Failed to delete user', 'Error')
+          error: () => this.notificationService.error(`Failed to delete user`)
         });
       }
     });
@@ -146,10 +147,10 @@ export class UserListComponent implements OnInit, AfterViewInit {
         const updatedUser = { ...user, isActive: !user.isActive };
         this.userService.updateUser(updatedUser).subscribe({
           next: () => {
-            this.toastr.success(`User ${updatedUser.isActive ? 'activated' : 'deactivated'} successfully`, 'Success');
+            this.notificationService.success(`User ${updatedUser.isActive ? 'activated' : 'deactivated'} successfully`);
             this.loadUsers();
           },
-          error: () => this.toastr.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`, 'Error')
+          error: () => this.notificationService.error(`Failed to ${updatedUser.isActive ? 'activate' : 'deactivate'} user`)
         });
       }
     });
@@ -169,7 +170,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Implement reset password logic here
-        this.toastr.info('Password reset functionality would be implemented here', 'Information');
+        this.notificationService.error(`Password reset functionality would be implemented here`);
       }
     });
   }

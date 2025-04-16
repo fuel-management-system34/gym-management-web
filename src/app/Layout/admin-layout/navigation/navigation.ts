@@ -107,6 +107,15 @@ export const NavigationItems: NavigationItem[] = [
             url: '/users',
             icon: 'dot',
             breadcrumbs: true
+          },
+          {
+            id: 'SiteSetting',
+            title: 'Site settings',
+            type: 'item',
+            classes: 'nav-item',
+            url: '/site-settings',
+            icon: 'dot',
+            breadcrumbs: true
           }
         ]
       }

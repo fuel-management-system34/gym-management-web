@@ -1,30 +1,22 @@
-import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatCommonModule, MatNativeDateModule } from '@angular/material/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { finalize, Subscription } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Subscription } from 'rxjs';
+import { NotificationService } from 'src/app/Services/notification-util.service';
+import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { Role } from '../../../Core/models/Role';
 import { User } from '../../../Core/models/User';
 import { RoleService } from '../../../Core/services/role.service';
 import { UserService } from '../../../Core/services/user.service';
-import { CreateUserRequest } from '../../../Core/models/CreateUserRequest ';
-import { UpdateUserRequest } from '../../../Core/models/UpdateUserRequest ';
-import { ToastrService } from 'ngx-toastr';
-import { MatSelectModule } from '@angular/material/select';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatChipsModule } from '@angular/material/chips';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -42,7 +34,8 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
     MatIconModule,
     MatCardModule,
     SharedModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
   ]
 })
 export class AddEditUserComponent implements OnInit, OnDestroy {
@@ -60,7 +53,7 @@ export class AddEditUserComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: { user: User },
     private userService: UserService,
     private roleService: RoleService,
-    private toastr: ToastrService
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +72,7 @@ export class AddEditUserComponent implements OnInit, OnDestroy {
         this.availableRoles = roles;
       },
       () => {
-        this.toastr.error('Failed to load roles', 'Error');
+        this.notificationService.error(`Failed to load roles`);
       }
     );
     this.subscriptions.add(sub);
@@ -138,12 +131,12 @@ export class AddEditUserComponent implements OnInit, OnDestroy {
     const sub = request.subscribe({
       next: () => {
         this.loading = false;
-        this.toastr.success(`User ${this.isEdit ? 'updated' : 'created'} successfully!`);
+        this.notificationService.success(`User ${this.isEdit ? 'updated' : 'created'} successfully!`);
         this.dialogRef.close(true);
       },
       error: () => {
         this.loading = false;
-        this.toastr.error('Something went wrong!', 'Error');
+        this.notificationService.success(`Role updated successfully`);
       }
     });
 
