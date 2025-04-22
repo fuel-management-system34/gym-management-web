@@ -9,7 +9,8 @@
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="openUserForm()">
-          <mat-icon>add</mat-icon> Add User
+          <mat-icon>add</mat-icon>
+          Add User
         </button>
       </div>
 
@@ -62,21 +63,23 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openUserForm(user)">
-                  <mat-icon>edit</mat-icon> <span>Edit</span>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
                 </button>
                 <button mat-menu-item (click)="toggleUserStatus(user)">
                   <mat-icon>{{ user.isActive ? 'block' : 'check_circle' }}</mat-icon>
                   <span>{{ user.isActive ? 'Deactivate' : 'Activate' }}</span>
                 </button>
                 <button mat-menu-item (click)="deleteUser(user)">
-                  <mat-icon>delete</mat-icon> <span>Delete</span>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
                 </button>
               </mat-menu>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="7">No data matching the filter</td>
           </tr>

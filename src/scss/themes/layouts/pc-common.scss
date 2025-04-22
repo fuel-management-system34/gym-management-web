@@ -28,11 +28,11 @@ body {
     }
   }
 
-  .page-header+.row {
+  .page-header + .row {
     padding-top: 24px;
   }
 
-  .page-header+.coded-content {
+  .page-header + .coded-content {
     padding-top: calc(30px + 55px);
   }
 

@@ -18,8 +18,7 @@ export class AuthGuard {
 
     if (this.tokenService.getToken() != null) {
       return of(true);
-    }
-    else {
+    } else {
       return of(this.router.createUrlTree(['/login']));
     }
   }
