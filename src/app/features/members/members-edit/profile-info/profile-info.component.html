@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="breadcrumb">
+    Gym Management /
+    <span>Members Add > {{ ActiveTab }}</span>
+  </div>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="save()">Save</button>
+</mat-toolbar>
+
+<mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="500ms" active-indicator-color active-focus-label-text-color>
+  <mat-tab label="Demographics"></mat-tab>
+  <mat-tab label="Contact Info"></mat-tab>
+  <mat-tab label="Emergency Contact"></mat-tab>
+  <mat-tab label="Health Goals"></mat-tab>
+</mat-tab-group>
+
+<router-outlet></router-outlet>

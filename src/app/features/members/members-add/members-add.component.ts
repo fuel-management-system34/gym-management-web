@@ -10,6 +10,8 @@ import { MemberApiService } from '../../../Services/api/member-api.service';
 import { CommonModule, Location } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { NotificationService } from '../../../Services/notification-util.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-add',
@@ -35,6 +37,8 @@ export class MembersAddComponent {
   private fb = inject(FormBuilder);
   private memberService = inject(MemberApiService);
   private location = inject(Location);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
 
   constructor() {
     this.createForm();
@@ -52,16 +56,15 @@ export class MembersAddComponent {
 
   onSubmit(): void {
     if (this.memberForm.valid) {
-      // Call the service to add the member to the database
-      this.memberService.addMember(this.memberForm.value).subscribe(
-        (response) => {
-          console.log('Member added successfully', response);
-          // Optionally reset the form or navigate elsewhere
+      this.memberService.addMember(this.memberForm.value).subscribe({
+        next: () => {
+          this.notificationService.success('Member added successfully');
+          this.router.navigate(['/members']);
         },
-        (error) => {
-          console.error('Error adding member', error);
+        error: () => {
+          this.notificationService.error('Error adding member');
         }
-      );
+      });
     }
   }
 

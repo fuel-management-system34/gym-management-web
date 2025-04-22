@@ -1,14 +1,11 @@
-import { UserListComponent } from './features/user-management/user-list/user-list.component';
-// angular import
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 // Project import
 import { GuestComponent } from './Layout/guest/guest.component';
 import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
 import { AuthGuard } from './Core/guards/auth.guard';
-import { MembersListComponent } from './features/members/members-list/members-list.component';
 import { MembersComponent } from './features/members/members.component';
+import { MembersEditComponent } from './features/members/members-edit/members-edit.component';
 
 const routes: Routes = [
   {
@@ -47,8 +44,61 @@ const routes: Routes = [
             loadComponent: () => import('./features/members/members-add/members-add.component').then((c) => c.MembersAddComponent)
           },
           {
-            path: 'edit/:id', // Path for editing an existing member
-            loadComponent: () => import('./features/members/members-edit/members-edit.component').then((c) => c.MembersEditComponent)
+            path: 'edit/:id',
+            component: MembersEditComponent,
+            children: [
+              { path: '', redirectTo: 'profile', pathMatch: 'full' },
+              {
+                path: 'profile',
+                loadComponent: () =>
+                  import('./features/members/members-edit/profile-info/profile-info.component').then((c) => c.ProfileInfoComponent),
+                children: [
+                  { path: '', redirectTo: 'demographics', pathMatch: 'full' },
+                  {
+                    path: 'demographics',
+                    loadComponent: () =>
+                      import('./features/members/members-edit/profile-info/demographics/demographics.component').then(
+                        (c) => c.DemographicsComponent
+                      )
+                  },
+                  {
+                    path: 'contact-info',
+                    loadComponent: () =>
+                      import('./features/members/members-edit/profile-info/contact-info/contact-info.component').then(
+                        (c) => c.ContactInfoComponent
+                      )
+                  },
+                  {
+                    path: 'emergency-contact',
+                    loadComponent: () =>
+                      import('./features/members/members-edit/profile-info/emergency-contact/emergency-contact.component').then(
+                        (c) => c.EmergencyContactComponent
+                      )
+                  },
+                  {
+                    path: 'health-goals',
+                    loadComponent: () =>
+                      import('./features/members/members-edit/profile-info/health-goals/health-goals.component').then(
+                        (c) => c.HealthGoalsComponent
+                      )
+                  }
+                ]
+              },
+              {
+                path: 'membership',
+                loadComponent: () =>
+                  import('./features/members/members-edit/membership/membership.component').then((c) => c.MembershipComponent)
+              },
+              {
+                path: 'attendance',
+                loadComponent: () =>
+                  import('./features/members/members-edit/attendance/attendance.component').then((c) => c.AttendanceComponent)
+              },
+              {
+                path: 'billing',
+                loadComponent: () => import('./features/members/members-edit/billing/billing.component').then((c) => c.BillingComponent)
+              }
+            ]
           }
         ]
       }

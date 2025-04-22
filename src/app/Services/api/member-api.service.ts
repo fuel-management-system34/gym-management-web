@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { ApiService } from '../../Core/services/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberApiService {
-  private apiUrl = 'https://api.example.com/members'; // Replace with your actual API URL
-
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
   addMember(memberData: any): Observable<any> {
-    return this.http.post(this.apiUrl, memberData);
+    return this.apiService.post<any>('/member/add', memberData).pipe(catchError((error) => throwError(() => error)));
   }
 }
