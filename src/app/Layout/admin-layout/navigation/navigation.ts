@@ -36,16 +36,16 @@ export const NavigationItems: NavigationItem[] = [
     ]
   },
   {
-    id: 'Fuel',
+    id: 'Members',
     title: 'Other',
     type: 'group',
     icon: 'icon-navigation',
     children: [
       {
         id: 'sample-page',
-        title: 'Fuel Inventory',
+        title: 'Members',
         type: 'item',
-        url: '/sample-page',
+        url: '/members',
         classes: 'nav-item',
         icon: 'format_color_fill'
       }

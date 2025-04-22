@@ -7,12 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { GuestComponent } from './Layout/guest/guest.component';
 import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
 import { AuthGuard } from './Core/guards/auth.guard';
+import { MembersListComponent } from './features/members/members-list/members-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -32,8 +33,8 @@ const routes: Routes = [
         loadComponent: () => import('./demo/ui-component/ui-color/ui-color.component')
       },
       {
-        path: 'sample-page',
-        loadComponent: () => import('./demo/other/sample-page/sample-page.component')
+        path: 'members',
+        loadComponent: () => import('./features/members/members-list/members-list.component').then((c) => c.MembersListComponent)
       }
     ]
   },
