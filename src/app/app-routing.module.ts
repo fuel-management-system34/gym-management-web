@@ -8,6 +8,7 @@ import { GuestComponent } from './Layout/guest/guest.component';
 import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
 import { AuthGuard } from './Core/guards/auth.guard';
 import { MembersListComponent } from './features/members/members-list/members-list.component';
+import { MembersComponent } from './features/members/members.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,22 @@ const routes: Routes = [
       },
       {
         path: 'members',
-        loadComponent: () => import('./features/members/members-list/members-list.component').then((c) => c.MembersListComponent)
+        component: MembersComponent,
+        children: [
+          {
+            path: '', // Default route for the member list
+            pathMatch: 'full',
+            loadComponent: () => import('./features/members/members-list/members-list.component').then((c) => c.MembersListComponent)
+          },
+          {
+            path: 'new', // Path for adding a new member
+            loadComponent: () => import('./features/members/members-add/members-add.component').then((c) => c.MembersAddComponent)
+          },
+          {
+            path: 'edit/:id', // Path for editing an existing member
+            loadComponent: () => import('./features/members/members-edit/members-edit.component').then((c) => c.MembersEditComponent)
+          }
+        ]
       }
     ]
   },

@@ -1,40 +1,40 @@
 .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
 
-    .breadcrumb {
-        font-size: 16px;
-        color: white;
+  .breadcrumb {
+    font-size: 16px;
+    color: white;
 
-        span {
-            font-weight: 600;
-            margin-left: 4px;
-        }
+    span {
+      font-weight: 600;
+      margin-left: 4px;
     }
+  }
 
-    .spacer {
-        flex: 1 1 auto;
-    }
+  .spacer {
+    flex: 1 1 auto;
+  }
 
-    button {
-        font-weight: 500;
-    }
+  button {
+    font-weight: 500;
+  }
 }
 
 .filter-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
 
-    mat-form-field {
-        width: 250px;
-    }
+  mat-form-field {
+    width: 250px;
+  }
 }
 
 .mat-elevation-z8 {
-    overflow-x: auto;
-    border-radius: 8px;
+  overflow-x: auto;
+  border-radius: 8px;
 }
