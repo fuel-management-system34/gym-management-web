@@ -266,6 +266,22 @@
 /* ------------------------------
    Table Styles (13px)
    ------------------------------ */
+.mat-elevation-z8.table-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 350px); // Adjust based on your layout
+}
+
+.mat-elevation-z8 .table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 200px; // fallback height
+}
+
+.mat-elevation-z8 .mat-paginator {
+  border-top: 1px solid #ddd;
+}
+
 .mat-mdc-table {
   font-size: 13px !important;
 
@@ -594,5 +610,19 @@ app-custom-notification {
       background-color: var(--pc-header-background) !important;
       border-color: var(--pc-header-background) !important;
     }
+  }
+}
+
+/* ------------------------------
+  Toolbar
+   ------------------------------ */
+
+.mat-toolbar {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+  color: var(--mat-table-row-item-label-text-color) !important;
+  background-color: #ffff !important;
+
+  .breadcrumb {
+    color: var(--mat-table-row-item-label-text-color) !important;
   }
 }

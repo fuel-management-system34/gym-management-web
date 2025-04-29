@@ -12,6 +12,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-members-list',
@@ -28,7 +30,8 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatButtonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatIconModule
   ]
 })
 export class MembersListComponent implements OnInit {

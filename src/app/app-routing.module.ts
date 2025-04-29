@@ -27,6 +27,10 @@ const routes: Routes = [
         loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
       },
       {
+        path: 'site-settings',
+        loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent)
+      },
+      {
         path: 'color',
         loadComponent: () => import('./demo/ui-component/ui-color/ui-color.component')
       },
