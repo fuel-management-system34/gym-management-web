@@ -19,6 +19,7 @@ import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { AddEditUserComponent } from '../../user-management/add-edit-user/add-edit-user.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -45,13 +46,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SharedModule,
     BreadcrumbComponent,
     SkeletonLoaderTableComponent,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxMatTimepickerModule
   ]
 })
 export class AddEditEventComponent {
   title = '';
   service = '';
   description = '';
+  members = '';
+  trainer = '';
   start: string;
   end: string;
 
@@ -60,10 +64,14 @@ export class AddEditEventComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data.event) {
-      this.title = data.event.title;
-      this.description = data.event.description;
-      this.start = data.event.startStr;
-      this.end = data.event.endStr;
+      const event = data.event;
+      this.title = event.title?.split(' (')[0] || '';
+      this.service = event.extendedProps?.service || '';
+      this.description = event.extendedProps?.description || '';
+      this.members = event.extendedProps?.members || '';
+      this.trainer = event.extendedProps?.trainer || '';
+      this.start = event.startStr;
+      this.end = event.endStr;
     } else if (data.date) {
       this.start = data.date;
       this.end = data.date;
@@ -73,6 +81,10 @@ export class AddEditEventComponent {
   save() {
     this.dialogRef.close({
       title: this.title,
+      service: this.service,
+      description: this.description,
+      members: this.members,
+      trainer: this.trainer,
       start: this.start,
       end: this.end
     });

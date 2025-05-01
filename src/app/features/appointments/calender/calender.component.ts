@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -18,9 +18,10 @@ import { AddEditEventComponent } from '../add-edit-event/add-edit-event.componen
   imports: [CommonModule, FullCalendarModule, MatCardModule, AddEditEventComponent]
 })
 export class CalenderComponent {
-  calendarOptions: CalendarOptions;
+  @ViewChild('calendar') calendarComponent: any;
 
   events = [];
+  calendarOptions: CalendarOptions;
 
   constructor(private dialog: MatDialog) {
     this.calendarOptions = {
@@ -33,13 +34,6 @@ export class CalenderComponent {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      buttonText: {
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day',
-        list: 'list'
       },
       dateClick: this.handleDateClick.bind(this),
       eventClick: this.handleEventClick.bind(this),
@@ -55,16 +49,20 @@ export class CalenderComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.events = [
-          ...this.events,
-          {
-            title: result.title,
+        const calendarApi = (document.querySelector('full-calendar') as any)?.getApi?.();
+        if (calendarApi) {
+          calendarApi.addEvent({
+            title: `${result.title} (${result.service})`,
             start: result.start,
             end: result.end,
-            allDay: false
-          }
-        ];
-        this.calendarOptions.events = [...this.events]; // Refresh
+            extendedProps: {
+              description: result.description,
+              service: result.service,
+              members: result.members,
+              trainer: result.trainer
+            }
+          });
+        }
       }
     });
   }
@@ -76,15 +74,18 @@ export class CalenderComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        arg.event.setProp('title', result.title);
+        arg.event.setProp('title', `${result.title} (${result.service})`);
         arg.event.setStart(result.start);
         arg.event.setEnd(result.end);
+        arg.event.setExtendedProp('description', result.description);
+        arg.event.setExtendedProp('service', result.service);
+        arg.event.setExtendedProp('members', result.members);
+        arg.event.setExtendedProp('trainer', result.trainer);
       }
     });
   }
 
   handleEventDrop(arg: EventDropArg) {
-    const { event } = arg;
-    console.log('Event dropped to:', event.start, event.end);
+    console.log('Dropped to:', arg.event.start, arg.event.end);
   }
 }
