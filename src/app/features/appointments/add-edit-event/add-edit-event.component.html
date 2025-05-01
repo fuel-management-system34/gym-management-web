@@ -1,0 +1,39 @@
+<div class="common-dialog">
+  <div class="common-dialog-header">
+    <h2 mat-dialog-title>{{ data.event ? 'Edit' : 'Add' }} Event</h2>
+  </div>
+
+  <mat-dialog-content class="common-dialog-content">
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="title" />
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Service</mat-label>
+          <input matInput [(ngModel)]="title" />
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Start Time</mat-label>
+          <input matInput [(ngModel)]="start" type="datetime-local" />
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>End Time</mat-label>
+          <input matInput [(ngModel)]="end" type="datetime-local" />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="common-dialog-actions">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>

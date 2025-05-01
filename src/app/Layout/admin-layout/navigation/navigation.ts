@@ -69,6 +69,23 @@ export const NavigationItems: NavigationItem[] = [
     ]
   },
   {
+    title: 'Appoinments',
+    id: 'Appoinments',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Appoinments',
+        title: 'Appoinments',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/appointments',
+        icon: 'calendar',
+        breadcrumbs: true
+      }
+    ]
+  },
+  {
     title: 'customer',
     id: 'dashboard',
     type: 'group',

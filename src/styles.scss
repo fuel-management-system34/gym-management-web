@@ -62,3 +62,55 @@ body {
   background-color: #beffca !important;
   color: black;
 }
+
+/* Change background and text color of FullCalendar buttons */
+.fc .fc-button {
+  background-color: var(--pc-header-background) !important; /* custom background color */
+  color: white; /* text color */
+  border: none;
+  border-radius: 4px;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--pc-header-background) !important; /* darker on hover */
+}
+
+.fc .fc-button-primary {
+  background-color: var(--pc-header-background) !important; /* different color for primary buttons */
+  color: white;
+}
+/* Header title (e.g., "Apr 27 – May 3, 2025") */
+.fc .fc-toolbar-title {
+  font-size: 18px;
+  color: #2b2a2a;
+  font-weight: 500;
+}
+
+.fc .fc-button {
+  font-size: 14px;
+  color: white;
+  background-color: var(--pc-header-background) !important; // blue
+  border: none;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--pc-header-background) !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 13px;
+  color: #444444;
+  font-weight: 500;
+}
+.fc .fc-timegrid-slot-label {
+  font-size: 12px;
+  color: #777;
+}
+.fc .fc-event-title {
+  font-size: 12px;
+  color: #ffffff; // white text on events
+}
+
+.fc .fc-event {
+  background-color: var(--pc-header-background) !important; // change event background color
+}

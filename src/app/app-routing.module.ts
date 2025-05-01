@@ -31,6 +31,10 @@ const routes: Routes = [
         loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent)
       },
       {
+        path: 'appointments',
+        loadComponent: () => import('./features/appointments/calender/calender.component').then((c) => c.CalenderComponent)
+      },
+      {
         path: 'color',
         loadComponent: () => import('./demo/ui-component/ui-color/ui-color.component')
       },
