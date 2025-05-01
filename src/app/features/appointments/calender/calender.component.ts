@@ -49,6 +49,7 @@ export class CalenderComponent {
 
   handleDateClick(arg: DateClickArg) {
     const dialogRef = this.dialog.open(AddEditEventComponent, {
+      width: '800px',
       data: { date: arg.dateStr }
     });
 

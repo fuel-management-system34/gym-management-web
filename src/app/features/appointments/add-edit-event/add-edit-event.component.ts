@@ -18,6 +18,7 @@ import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton
 import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/breadcrumb.component';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { AddEditUserComponent } from '../../user-management/add-edit-user/add-edit-user.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -43,11 +44,14 @@ import { AddEditUserComponent } from '../../user-management/add-edit-user/add-ed
     ConfirmDialogComponent,
     SharedModule,
     BreadcrumbComponent,
-    SkeletonLoaderTableComponent
+    SkeletonLoaderTableComponent,
+    MatSlideToggleModule
   ]
 })
 export class AddEditEventComponent {
   title = '';
+  service = '';
+  description = '';
   start: string;
   end: string;
 
@@ -57,6 +61,7 @@ export class AddEditEventComponent {
   ) {
     if (data.event) {
       this.title = data.event.title;
+      this.description = data.event.description;
       this.start = data.event.startStr;
       this.end = data.event.endStr;
     } else if (data.date) {
