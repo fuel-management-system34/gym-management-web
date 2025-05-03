@@ -1,0 +1,111 @@
+:host {
+    display: block;
+    padding: 24px;
+    background: #f0f2f5;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Welcome banner */
+.welcome-banner {
+    background: linear-gradient(135deg, #2196f3, #21cbf3);
+    color: #fff;
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 32px;
+
+    h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 16px;
+        opacity: 0.9;
+        margin: 0;
+    }
+}
+
+/* Metric cards */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+
+    .metric-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            transform: translateY(-4px);
+        }
+
+        .metric-icon {
+            font-size: 42px;
+            margin-right: 16px;
+            color: #1976d2;
+        }
+
+        .metric-info h3 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .metric-info p {
+            margin: 4px 0 0;
+            color: #555;
+            font-size: 14px;
+        }
+    }
+}
+
+/* Recent activity section */
+.activity-card {
+    padding: 24px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+        color: #333;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .activity-icon {
+            font-size: 28px;
+            color: #03a9f4;
+            margin-right: 12px;
+        }
+
+        .activity-details {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                font-weight: 500;
+                color: #333;
+                font-size: 14px;
+            }
+
+            small {
+                font-size: 12px;
+                color: #888;
+            }
+        }
+    }
+}

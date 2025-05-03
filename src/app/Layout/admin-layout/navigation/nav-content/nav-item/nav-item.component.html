@@ -9,7 +9,7 @@
           </span>
         }
         @if (item.icon) {
-          <span class="coded-mtext">{{ item.title }}</span>
+          <span class="coded-mtext mt-2">{{ item.title }}</span>
         } @else {
           {{ item.title }}
         }
@@ -26,14 +26,13 @@
           </span>
         }
         @if (item.icon) {
-          <span class="coded-mtext">{{ item.title }}</span>
+          <span class="coded-mtext mt-2">{{ item.title }}</span>
         } @else {
           {{ item.title }}
         }
       </a>
     </li>
   }
-
 } @else {
   @if (item.url && !item.external) {
     <li [ngClass]="item.classes!" [routerLinkActive]="['active']">
@@ -45,7 +44,7 @@
           </span>
         }
         @if (item.icon) {
-          <span class="coded-mtext">{{ item.title }}</span>
+          <span class="coded-mtext mt-2">{{ item.title }}</span>
         } @else {
           {{ item.title }}
         }
@@ -62,7 +61,7 @@
           </span>
         }
         @if (item.icon) {
-          <span class="coded-mtext">{{ item.title }}</span>
+          <span class="coded-mtext mt-2">{{ item.title }}</span>
         } @else {
           {{ item.title }}
         }

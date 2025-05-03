@@ -6,37 +6,43 @@ import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
 import { AuthGuard } from './Core/guards/auth.guard';
 import { MembersComponent } from './features/members/members.component';
 import { MembersEditComponent } from './features/members/members-edit/members-edit.component';
+import { TrainersComponent } from './features/trainers/trainers.component';
+import { TrainersAddComponent } from './features/trainers/trainers-add/trainers-add.component';
+import { TrainersEditComponent } from './features/trainers/trainers-edit/trainers-edit.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: '/dashboard/default',
+        redirectTo: '/home',
         pathMatch: 'full'
       },
       {
-        path: 'dashboard/default',
-        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then((c) => c.DefaultComponent)
-      },
-      {
-        path: 'users',
-        loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+        path: 'home',
+        loadComponent: () => import('./features/home/home.component').then((c) => c.HomeComponent)
       },
       {
         path: 'site-settings',
-        loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent)
+        loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent),
+        children: [
+          { path: '', redirectTo: 'users', pathMatch: 'full' },
+          {
+            path: 'users',
+            loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+          },
+          {
+            path: 'sites',
+            loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+          }
+        ]
       },
       {
         path: 'appointments',
         loadComponent: () => import('./features/appointments/calender/calender.component').then((c) => c.CalenderComponent)
-      },
-      {
-        path: 'color',
-        loadComponent: () => import('./demo/ui-component/ui-color/ui-color.component')
       },
       {
         path: 'members',
@@ -105,6 +111,74 @@ const routes: Routes = [
               {
                 path: 'billing',
                 loadComponent: () => import('./features/members/members-edit/billing/billing.component').then((c) => c.BillingComponent)
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'trainers',
+        component: TrainersComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            loadComponent: () => import('./features/trainers/trainers-list/trainers-list.component').then((c) => c.TrainersListComponent)
+          },
+          {
+            path: 'new',
+            loadComponent: () => import('./features/trainers/trainers-add/trainers-add.component').then((c) => c.TrainersAddComponent)
+          },
+          {
+            path: 'edit/:id',
+            component: TrainersEditComponent,
+            children: [
+              { path: '', redirectTo: 'profile', pathMatch: 'full' },
+              {
+                path: 'profile',
+                loadComponent: () =>
+                  import('./features/trainers/trainers-edit/profile-info/profile-info.component').then((c) => c.ProfileInfoComponent),
+                children: [
+                  // { path: '', redirectTo: 'demographics', pathMatch: 'full' },
+                  // {
+                  //   path: 'demographics',
+                  //   loadComponent: () =>
+                  //     import('./features/trainers/trainers-edit/profile-info/demographics/demographics.component').then(
+                  //       (c) => c.DemographicsComponent
+                  //     )
+                  // },
+                  // {
+                  //   path: 'contact-info',
+                  //   loadComponent: () =>
+                  //     import('./features/members/members-edit/profile-info/contact-info/contact-info.component').then(
+                  //       (c) => c.ContactInfoComponent
+                  //     )
+                  // },
+                  // {
+                  //   path: 'emergency-contact',
+                  //   loadComponent: () =>
+                  //     import('./features/members/members-edit/profile-info/emergency-contact/emergency-contact.component').then(
+                  //       (c) => c.EmergencyContactComponent
+                  //     )
+                  // },
+                  // {
+                  //   path: 'health-goals',
+                  //   loadComponent: () =>
+                  //     import('./features/members/members-edit/profile-info/health-goals/health-goals.component').then(
+                  //       (c) => c.HealthGoalsComponent
+                  //     )
+                  // }
+                ]
+              },
+              {
+                path: 'attendance',
+                loadComponent: () =>
+                  import('./features/trainers/trainers-edit/attendance/attendance.component').then((c) => c.AttendanceComponent)
+              },
+              {
+                path: 'financial',
+                loadComponent: () =>
+                  import('./features/trainers/trainers-edit/financial/financial.component').then((c) => c.FinancialComponent)
               }
             ]
           }

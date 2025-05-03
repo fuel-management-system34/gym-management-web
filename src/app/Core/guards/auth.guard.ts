@@ -16,10 +16,11 @@ export class AuthGuard {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
     console.log('AuthGuard checking authentication...');
 
-    if (this.tokenService.getToken() != null) {
-      return of(true);
-    } else {
-      return of(this.router.createUrlTree(['/login']));
-    }
+    // if (this.tokenService.getToken() != null) {
+    //   return of(true);
+    // } else {
+    //   return of(this.router.createUrlTree(['/login']));
+    // }
+    return of(true);
   }
 }

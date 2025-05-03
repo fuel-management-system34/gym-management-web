@@ -20,87 +20,36 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    id: 'dashboard',
-    title: 'UI Components',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard/default',
-        icon: 'dashboard'
-      }
-    ]
+    id: 'home',
+    title: 'Home',
+    type: 'item',
+    url: '/home',
+    classes: 'nav-item',
+    icon: 'home'
   },
   {
     id: 'Members',
-    title: 'Other',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sample-page',
-        title: 'Members',
-        type: 'item',
-        url: '/members',
-        classes: 'nav-item',
-        icon: 'format_color_fill'
-      }
-    ]
+    title: 'Members',
+    type: 'item',
+    icon: 'member',
+    url: '/members',
+    classes: 'nav-item'
   },
   {
-    title: 'sales',
-    id: 'dashboard',
-    type: 'group',
+    id: 'Trainers',
+    title: 'Trainers & Staff',
+    type: 'item',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sales',
-        title: 'Sales',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/global-settings',
-        icon: 'multiline_chart',
-        breadcrumbs: true
-      }
-    ]
+    url: '/trainers',
+    classes: 'nav-item'
   },
   {
     title: 'Appoinments',
     id: 'Appoinments',
     type: 'group',
     icon: 'icon-navigation',
-    children: [
-      {
-        id: 'Appoinments',
-        title: 'Appoinments',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/appointments',
-        icon: 'calendar',
-        breadcrumbs: true
-      }
-    ]
-  },
-  {
-    title: 'customer',
-    id: 'dashboard',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sales',
-        title: 'Customer',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/global-settings',
-        icon: 'supervisor_account',
-        breadcrumbs: true
-      }
-    ]
+    classes: 'nav-item',
+    url: '/appointments'
   },
   {
     title: 'site-setings',
@@ -112,7 +61,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Site settings',
         type: 'collapse',
         classes: 'nav-item',
-        url: '/global-settings',
+        url: '/site-settings',
         icon: 'settings',
         breadcrumbs: true,
         children: [
@@ -121,16 +70,16 @@ export const NavigationItems: NavigationItem[] = [
             title: 'Users',
             type: 'item',
             classes: 'nav-item',
-            url: '/users',
+            url: '/site-settings/users',
             icon: 'dot',
             breadcrumbs: true
           },
           {
-            id: 'SiteSetting',
-            title: 'Site settings',
+            id: 'Sites',
+            title: 'Sites',
             type: 'item',
             classes: 'nav-item',
-            url: '/site-settings',
+            url: '/site-settings/sites',
             icon: 'dot',
             breadcrumbs: true
           }

@@ -1,0 +1,31 @@
+<!-- Welcome Banner -->
+<mat-card class="welcome-banner">
+  <h1>Welcome to FitPro Gym Dashboard</h1>
+  <p>Monitor your gym's performance, staff, and members at a glance.</p>
+</mat-card>
+
+<!-- Metrics Overview -->
+<div class="metrics-grid">
+  <mat-card class="metric-card" *ngFor="let metric of metrics">
+    <mat-icon class="metric-icon">{{ metric.icon }}</mat-icon>
+    <div class="metric-info">
+      <h3>{{ metric.value }}</h3>
+      <p>{{ metric.label }}</p>
+    </div>
+  </mat-card>
+</div>
+
+<!-- Recent Activities -->
+<mat-card class="activity-card">
+  <h2>Recent Activities</h2>
+  <div *ngFor="let item of recentActivities" class="activity-item">
+    <mat-icon class="activity-icon">notifications</mat-icon>
+    <div class="activity-details">
+      <span>
+        <strong>{{ item.user }}</strong>
+        {{ item.activity }}
+      </span>
+      <small>{{ item.time }}</small>
+    </div>
+  </div>
+</mat-card>
