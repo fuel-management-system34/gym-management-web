@@ -7,7 +7,6 @@ import { AuthGuard } from './Core/guards/auth.guard';
 import { MembersComponent } from './features/members/members.component';
 import { MembersEditComponent } from './features/members/members-edit/members-edit.component';
 import { TrainersComponent } from './features/trainers/trainers.component';
-import { TrainersAddComponent } from './features/trainers/trainers-add/trainers-add.component';
 import { TrainersEditComponent } from './features/trainers/trainers-edit/trainers-edit.component';
 
 const routes: Routes = [
@@ -137,38 +136,7 @@ const routes: Routes = [
               {
                 path: 'profile',
                 loadComponent: () =>
-                  import('./features/trainers/trainers-edit/profile-info/profile-info.component').then((c) => c.ProfileInfoComponent),
-                children: [
-                  // { path: '', redirectTo: 'demographics', pathMatch: 'full' },
-                  // {
-                  //   path: 'demographics',
-                  //   loadComponent: () =>
-                  //     import('./features/trainers/trainers-edit/profile-info/demographics/demographics.component').then(
-                  //       (c) => c.DemographicsComponent
-                  //     )
-                  // },
-                  // {
-                  //   path: 'contact-info',
-                  //   loadComponent: () =>
-                  //     import('./features/members/members-edit/profile-info/contact-info/contact-info.component').then(
-                  //       (c) => c.ContactInfoComponent
-                  //     )
-                  // },
-                  // {
-                  //   path: 'emergency-contact',
-                  //   loadComponent: () =>
-                  //     import('./features/members/members-edit/profile-info/emergency-contact/emergency-contact.component').then(
-                  //       (c) => c.EmergencyContactComponent
-                  //     )
-                  // },
-                  // {
-                  //   path: 'health-goals',
-                  //   loadComponent: () =>
-                  //     import('./features/members/members-edit/profile-info/health-goals/health-goals.component').then(
-                  //       (c) => c.HealthGoalsComponent
-                  //     )
-                  // }
-                ]
+                  import('./features/trainers/trainers-edit/profile-info/profile-info.component').then((c) => c.ProfileInfoComponent)
               },
               {
                 path: 'attendance',

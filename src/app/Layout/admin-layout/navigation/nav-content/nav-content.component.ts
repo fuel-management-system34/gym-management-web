@@ -1,77 +1,67 @@
-// Angular import
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CommonModule, Location, LocationStrategy } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
-// project import
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { NavigationItem, NavigationItems } from '../navigation';
-import { environment } from 'src/environments/environment';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { NavCollapseComponent } from './nav-collapse/nav-collapse.component';
+import { NgScrollbar } from 'ngx-scrollbar';
 import { NavGroupComponent } from './nav-group/nav-group.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
-
-// icon
-import { IconService } from '@ant-design/icons-angular';
-import {
-  DashboardOutline,
-  CreditCardOutline,
-  LoginOutline,
-  QuestionOutline,
-  ChromeOutline,
-  FontSizeOutline,
-  ProfileOutline,
-  BgColorsOutline,
-  AntDesignOutline
-} from '@ant-design/icons-angular/icons';
+import { LocationStrategy, Location, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav-content',
   standalone: true,
-  imports: [SharedModule, CommonModule, RouterModule, NavCollapseComponent, NavGroupComponent, NavItemComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgScrollbar,
+    NavGroupComponent,
+    NavItemComponent
+  ],
   templateUrl: './nav-content.component.html',
   styleUrls: ['./nav-content.component.scss']
 })
 export class NavContentComponent implements OnInit {
-  // public props
   @Output() NavCollapsedMob: EventEmitter<string> = new EventEmitter();
-
-  navigations: NavigationItem[];
-
-  // version
-  title = 'Demo application for version numbering';
-  currentApplicationVersion = environment.appVersion;
-
-  navigation = NavigationItems;
+  navSearchText: string = '';
+  navigations: NavigationItem[] = NavigationItems;
   windowWidth = window.innerWidth;
+  navCollapsed: boolean;
+  navCollapsedMob: boolean;
 
-  // Constructor
   constructor(
     private location: Location,
-    private locationStrategy: LocationStrategy,
-    private iconService: IconService
-  ) {
-    this.iconService.addIcon(
-      ...[
-        DashboardOutline,
-        CreditCardOutline,
-        FontSizeOutline,
-        LoginOutline,
-        ProfileOutline,
-        BgColorsOutline,
-        AntDesignOutline,
-        ChromeOutline,
-        QuestionOutline
-      ]
-    );
-    this.navigations = NavigationItems;
-  }
+    private locationStrategy: LocationStrategy
+  ) {}
 
-  // Life cycle events
   ngOnInit() {
     if (this.windowWidth < 1025) {
       (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
     }
+  }
+
+  filteredNavigation(): NavigationItem[] {
+    const keyword = this.navSearchText.toLowerCase().trim();
+
+    if (!keyword) return this.navigations;
+
+    return this.navigations
+      .map((item) => {
+        // Filter group children too
+        if (item.type === 'group' && item.children) {
+          const filteredChildren = item.children.filter((child) => child.title?.toLowerCase().includes(keyword));
+          return filteredChildren.length > 0 ? { ...item, children: filteredChildren } : null;
+        }
+
+        return item.title?.toLowerCase().includes(keyword) ? item : null;
+      })
+      .filter((item): item is NavigationItem => item !== null);
   }
 
   fireOutClick() {
@@ -103,5 +93,9 @@ export class NavContentComponent implements OnInit {
     if (this.windowWidth < 1025 && document.querySelector('app-navigation.coded-navbar').classList.contains('mob-open')) {
       this.NavCollapsedMob.emit();
     }
+  }
+
+  toggleSidebar() {
+    this.NavCollapsedMob.emit();
   }
 }

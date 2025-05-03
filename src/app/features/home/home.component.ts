@@ -14,15 +14,18 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 export class HomeComponent {
   metrics = [
-    { icon: 'groups', label: 'Active Members', value: 324 },
-    { icon: 'sports_gymnastics', label: 'Total Trainers', value: 12 },
-    { icon: 'payments', label: 'Monthly Income', value: '₹84,500' },
-    { icon: 'event', label: 'Upcoming Classes', value: 7 }
+    { icon: 'groups', value: 128, label: 'Active Members' },
+    { icon: 'person_add', value: 12, label: 'New This Week' },
+    { icon: 'fitness_center', value: 9, label: 'Available Trainers' },
+    { icon: 'payments', value: '₹ 54,000', label: 'Monthly Revenue' },
+    { icon: 'event', value: 6, label: "Today's Sessions" },
+    { icon: 'schedule', value: 4, label: 'Renewals This Week' }
   ];
 
   recentActivities = [
-    { user: 'Amit R.', activity: 'Checked in', time: '2 mins ago' },
-    { user: 'Sara P.', activity: 'Paid monthly fee', time: '10 mins ago' },
-    { user: 'James K.', activity: 'Booked yoga class', time: '30 mins ago' }
+    { user: 'John D.', activity: ' booked a PT session.', time: '2 mins ago' },
+    { user: 'Priya R.', activity: ' renewed her membership.', time: '15 mins ago' },
+    { user: 'Trainer Raj', activity: ' completed 3 sessions today.', time: '1 hour ago' },
+    { user: 'Admin', activity: ' added new yoga class.', time: '3 hours ago' }
   ];
 }
