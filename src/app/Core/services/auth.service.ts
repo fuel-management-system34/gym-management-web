@@ -63,6 +63,22 @@ export class AuthService {
     );
   }
 
+    // JWT login
+    login(credentials: { email: string; password: string }): Observable<TokenResponse> {
+      return this.apiService.post<TokenResponse>('login', credentials).pipe(
+        tap((response) => {
+          this.setAuth(response);
+          this.isAuthenticatedSubject.next(true);
+  
+          // Start token expiration timer
+          this.startTokenExpirationTimer();
+        }),
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      );
+    }
+
   logout(): Observable<any> {
     return this.apiService.post('/Auth/logout').pipe(
       finalize(() => {
@@ -113,7 +129,7 @@ export class AuthService {
   }
 
   loadUserProfile(): void {
-    this.apiService.get<User>('/Profile').subscribe({
+    this.apiService.get<User>('me').subscribe({
       next: (user) => {
         this.currentUserSubject.next(user);
         this.isAuthenticatedSubject.next(true);

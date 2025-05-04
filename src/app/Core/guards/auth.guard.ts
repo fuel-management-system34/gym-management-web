@@ -12,15 +12,27 @@ export class AuthGuard {
     private tokenService: TokenService
   ) {}
 
-  // auth.guard.ts
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    console.log('AuthGuard checking authentication...');
+    const token = this.tokenService.getToken();
 
-    // if (this.tokenService.getToken() != null) {
-    //   return of(true);
-    // } else {
-    //   return of(this.router.createUrlTree(['/login']));
-    // }
-    return of(true);
+    if (token && !this.isTokenExpired(token)) {
+      return of(true);
+    } else {
+      console.warn('AuthGuard: No token or expired. Redirecting to /login...');
+      return of(this.router.createUrlTree(['/login']));
+    }
+  }
+
+  private isTokenExpired(token: string): boolean {
+    try {
+      const [, payload] = token.split('.');
+      const decodedPayload = JSON.parse(atob(payload));
+      const exp = decodedPayload.exp;
+      const now = Math.floor(Date.now() / 1000);
+      return exp < now;
+    } catch (e) {
+      console.error('Token parsing failed', e);
+      return true;
+    }
   }
 }
