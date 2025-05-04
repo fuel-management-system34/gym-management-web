@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MemberApiService } from 'src/app/Services/api/member-api.service';
 
 @Component({
   selector: 'app-members-list',
@@ -42,7 +43,10 @@ export class MembersListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private memberService: MemberApiService  
+  ) {
     this.filterForm = this.fb.group({
       name: [''],
       email: ['']
@@ -50,11 +54,12 @@ export class MembersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = MEMBER_DATA;
+    this.loadMembers();
+    // this.dataSource.data = MEMBER_DATA;
 
-    this.filterForm.valueChanges.subscribe((values) => {
-      this.applyFilter(values);
-    });
+    // this.filterForm.valueChanges.subscribe((values) => {
+    //   this.applyFilter(values);
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -68,6 +73,17 @@ export class MembersListComponent implements OnInit {
       return data.name.toLowerCase().includes(filters.name.toLowerCase()) && data.email.toLowerCase().includes(filters.email.toLowerCase());
     };
     this.dataSource.filter = JSON.stringify(values);
+  }
+
+  loadMembers(): void {
+    this.memberService.getAllMembers().subscribe({
+      next: (members) => {
+        this.dataSource.data = members?.data;
+      },
+      error: (err) => {
+        console.error('Failed to load members:', err);
+      }
+    });
   }
 }
 
