@@ -44,6 +44,13 @@ const routes: Routes = [
         loadComponent: () => import('./features/appointments/calender/calender.component').then((c) => c.CalenderComponent)
       },
       {
+        path: 'workout-plans',
+        loadComponent: () =>
+          import('./features/workout plans/workout-plans-dashboard/workout-plans-dashboard.component').then(
+            (c) => c.WorkoutPlansDashboardComponent
+          )
+      },
+      {
         path: 'members',
         component: MembersComponent,
         children: [

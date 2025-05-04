@@ -119,7 +119,7 @@ export const NavigationItems: NavigationItem[] = [
     type: 'item',
     icon: 'fitness_center', // Correct Material icon name for plans
     classes: 'nav-item',
-    url: '/plans'
+    url: '/workout-plans'
   },
   {
     title: 'Store',
