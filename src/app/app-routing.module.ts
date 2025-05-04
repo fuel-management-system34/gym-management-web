@@ -26,6 +26,10 @@ const routes: Routes = [
         loadComponent: () => import('./features/home/home.component').then((c) => c.HomeComponent)
       },
       {
+        path: 'store',
+        loadComponent: () => import('./features/store/store.component').then((c) => c.StoreComponent)
+      },
+      {
         path: 'site-settings',
         loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent),
         children: [
