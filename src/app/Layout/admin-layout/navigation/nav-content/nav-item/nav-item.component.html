@@ -1,71 +1,23 @@
-@if (!isSideBarCollapsed) {
-  @if (item.url && !item.external) {
-    <li [ngClass]="item.classes!" [routerLinkActive]="['active']">
-      <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)">
-        @if (item.icon) {
-          <span class="coded-micon">
-            <!-- <i antIcon type="{{ item.icon }}" theme="outline"></i> -->
-            <mat-icon>{{ item.icon }}</mat-icon>
-          </span>
-        }
-        @if (item.icon) {
-          <span class="coded-mtext mt-2">{{ item.title }}</span>
-        } @else {
-          {{ item.title }}
-        }
-      </a>
-    </li>
-  }
-  @if (item.url && item.external) {
-    <li [ngClass]="item.classes!">
-      <a [target]="item.target ? '_blank' : '_self'" [href]="item.url">
-        @if (item.icon) {
-          <span class="coded-micon">
-            <!-- <i antIcon type="{{ item.icon }}" theme="outline"></i> -->
-            <mat-icon>{{ item.icon }}</mat-icon>
-          </span>
-        }
-        @if (item.icon) {
-          <span class="coded-mtext mt-2">{{ item.title }}</span>
-        } @else {
-          {{ item.title }}
-        }
-      </a>
-    </li>
-  }
-} @else {
-  @if (item.url && !item.external) {
-    <li [ngClass]="item.classes!" [routerLinkActive]="['active']">
-      <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)">
-        @if (item.icon) {
-          <span class="coded-micon only-icon">
-            <!-- <i antIcon type="{{ item.icon }}" theme="outline"></i> -->
-            <mat-icon>{{ item.icon }}</mat-icon>
-          </span>
-        }
-        @if (item.icon) {
-          <span class="coded-mtext mt-2">{{ item.title }}</span>
-        } @else {
-          {{ item.title }}
-        }
-      </a>
-    </li>
-  }
-  @if (item.url && item.external) {
-    <li [ngClass]="item.classes!">
-      <a [target]="item.target ? '_blank' : '_self'" [href]="item.url">
-        @if (item.icon) {
-          <span class="coded-micon">
-            <!-- <i antIcon type="{{ item.icon }}" theme="outline"></i> -->
-            <mat-icon>{{ item.icon }}</mat-icon>
-          </span>
-        }
-        @if (item.icon) {
-          <span class="coded-mtext mt-2">{{ item.title }}</span>
-        } @else {
-          {{ item.title }}
-        }
-      </a>
-    </li>
-  }
-}
+<ng-container *ngIf="!isSideBarCollapsed">
+  <li [ngClass]="item.classes" [routerLinkActive]="['active']">
+    <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)" class="nav-item">
+      <span *ngIf="item.icon" class="coded-micon">
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </span>
+      <span *ngIf="item.icon" class="coded-mtext mt-2">{{ item.title }}</span>
+      <span *ngIf="!item.icon" class="coded-mtext mt-2">{{ item.title }}</span>
+    </a>
+  </li>
+</ng-container>
+
+<ng-container *ngIf="isSideBarCollapsed">
+  <li [ngClass]="item.classes" [routerLinkActive]="['active']">
+    <a [target]="item.target ? '_blank' : '_self'" [routerLink]="[item.url]" (click)="closeOtherMenu($event)" class="nav-item collapsed">
+      <span *ngIf="item.icon" class="coded-micon only-icon">
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </span>
+      <span *ngIf="item.icon" class="coded-mtext mt-2">{{ item.title }}</span>
+      <span *ngIf="!item.icon" class="coded-mtext mt-2">{{ item.title }}</span>
+    </a>
+  </li>
+</ng-container>

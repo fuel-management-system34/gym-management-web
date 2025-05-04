@@ -2,15 +2,15 @@
 <ng-scrollbar style="height: calc(100vh - 60px)" visibility="hover" id="nav-ps-mantis">
   <div class="navbar-content mt-2">
     <!-- Top Bar: Collapse Button + Search Bar -->
-    <div class="nav-header search-bar d-flex pl-3 py-2">
-      <mat-form-field appearance="outline" floatLabel="auto" style="flex: 1">
+    <!-- <div class="nav-header search-bar d-flex pl-3 py-2">
+      <mat-form-field appearance="outline" floatLabel="auto" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input matInput placeholder="Search menu" [(ngModel)]="navSearchText" />
       </mat-form-field>
-      <button mat-icon-button (click)="toggleSidebar()" aria-label="Toggle sidebar">
+      <button mat-icon-button (click)="toggleSidebar()" aria-label="Toggle sidebar" class="toggle-sidebar-btn">
         <mat-icon>menu</mat-icon>
       </button>
-    </div>
+    </div> -->
 
     <!-- Navigation Items -->
     <ul class="nav coded-inner-navbar" (clickOutside)="fireOutClick()" (mouseleave)="navMob()">

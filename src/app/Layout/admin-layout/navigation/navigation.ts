@@ -25,13 +25,13 @@ export const NavigationItems: NavigationItem[] = [
     type: 'item',
     url: '/home',
     classes: 'nav-item',
-    icon: 'home'
+    icon: 'home' // Correct Material icon name
   },
   {
     id: 'Members',
     title: 'Members',
     type: 'item',
-    icon: 'member',
+    icon: 'group', // Correct Material icon name for members
     url: '/members',
     classes: 'nav-item'
   },
@@ -39,15 +39,15 @@ export const NavigationItems: NavigationItem[] = [
     id: 'Trainers',
     title: 'Trainers & Staff',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'people', // Correct Material icon name for trainers & staff
     url: '/trainers',
     classes: 'nav-item'
   },
   {
-    title: 'Appoinments',
-    id: 'Appoinments',
+    title: 'Appointments',
+    id: 'Appointments',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'event', // Correct Material icon name for appointments
     classes: 'nav-item',
     url: '/appointments'
   },
@@ -55,7 +55,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Memberships',
     id: 'Memberships',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'card_membership', // Correct Material icon name for memberships
     classes: 'nav-item',
     url: '/memberships'
   },
@@ -63,7 +63,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Finance & Billing',
     id: 'Finance & Billing',
     type: 'group',
-    icon: 'icon-navigation',
+    icon: 'account_balance_wallet', // Correct Material icon name for finance & billing
     classes: 'nav-item',
     url: '/finance',
     children: [
@@ -71,7 +71,7 @@ export const NavigationItems: NavigationItem[] = [
         id: 'sales',
         title: 'Finance & Billing',
         type: 'collapse',
-        icon: 'finance',
+        icon: 'attach_money', // Correct Material icon name for sales/finance
         breadcrumbs: true,
         children: [
           {
@@ -80,7 +80,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/finance/invoices',
-            icon: 'dot',
+            icon: 'description', // Correct Material icon name for invoices
             breadcrumbs: true
           },
           {
@@ -89,7 +89,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/finance/payments',
-            icon: 'dot',
+            icon: 'payment', // Correct Material icon name for payments
             breadcrumbs: true
           },
           {
@@ -98,7 +98,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/finance/sales',
-            icon: 'dot',
+            icon: 'local_atm', // Correct Material icon name for sales
             breadcrumbs: true
           }
         ]
@@ -109,7 +109,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Reports',
     id: 'Reports',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'insert_chart', // Correct Material icon name for reports
     classes: 'nav-item',
     url: '/reports'
   },
@@ -117,7 +117,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Plans (Workout & Diet)',
     id: 'Plans',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'fitness_center', // Correct Material icon name for plans
     classes: 'nav-item',
     url: '/plans'
   },
@@ -125,7 +125,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Store',
     id: 'Store',
     type: 'item',
-    icon: 'icon-navigation',
+    icon: 'storefront', // Correct Material icon name for store
     classes: 'nav-item',
     url: '/store'
   },
@@ -139,7 +139,7 @@ export const NavigationItems: NavigationItem[] = [
         id: 'facilities',
         title: 'Resources & Facilities',
         type: 'collapse',
-        icon: 'facilities',
+        icon: 'business', // Correct Material icon name for resources & facilities
         breadcrumbs: true,
         children: [
           {
@@ -148,7 +148,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/facilities',
-            icon: 'dot',
+            icon: 'location_city', // Correct Material icon name for sites
             breadcrumbs: true
           },
           {
@@ -157,7 +157,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/usageLogs',
-            icon: 'dot',
+            icon: 'history', // Correct Material icon name for usage logs
             breadcrumbs: true
           },
           {
@@ -166,7 +166,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/maintenance',
-            icon: 'dot',
+            icon: 'build', // Correct Material icon name for maintenance
             breadcrumbs: true
           }
         ]
@@ -177,20 +177,20 @@ export const NavigationItems: NavigationItem[] = [
     id: 'Communications',
     title: 'Communications',
     type: 'item',
-    icon: 'communications',
+    icon: 'chat', // Correct Material icon name for communications
     url: '/communications',
     classes: 'nav-item'
   },
   {
-    title: 'site-setings',
-    id: 'site-setings',
+    title: 'Site Settings',
+    id: 'site-settings',
     type: 'group',
     children: [
       {
         id: 'sites',
         title: 'Site settings',
         type: 'collapse',
-        icon: 'settings',
+        icon: 'settings', // Correct Material icon name for settings
         breadcrumbs: true,
         children: [
           {
@@ -199,7 +199,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/site-settings/sites',
-            icon: 'dot',
+            icon: 'domain', // Correct Material icon name for sites
             breadcrumbs: true
           },
           {
@@ -208,7 +208,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/site-settings/holidays',
-            icon: 'dot',
+            icon: 'event_note', // Correct Material icon name for holidays
             breadcrumbs: true
           },
           {
@@ -217,7 +217,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/site-settings/users',
-            icon: 'dot',
+            icon: 'group_add', // Correct Material icon name for users
             breadcrumbs: true
           },
           {
@@ -226,7 +226,7 @@ export const NavigationItems: NavigationItem[] = [
             type: 'item',
             classes: 'nav-item',
             url: '/site-settings/roles',
-            icon: 'dot',
+            icon: 'security', // Correct Material icon name for roles
             breadcrumbs: true
           }
         ]

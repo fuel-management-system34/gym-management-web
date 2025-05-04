@@ -17,7 +17,7 @@ export class HomeComponent {
     { icon: 'groups', value: 128, label: 'Active Members' },
     { icon: 'person_add', value: 12, label: 'New This Week' },
     { icon: 'fitness_center', value: 9, label: 'Available Trainers' },
-    { icon: 'payments', value: '₹ 54,000', label: 'Monthly Revenue' },
+    { icon: 'payments', value: 'Rs. 54,000', label: 'Monthly Revenue' },
     { icon: 'event', value: 6, label: "Today's Sessions" },
     { icon: 'schedule', value: 4, label: 'Renewals This Week' }
   ];

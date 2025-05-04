@@ -3,3 +3,56 @@
     height: 50px;
     padding-left: 10px;
 }
+
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #333; // Dark background for better contrast
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Light shadow for modern look
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.search-field {
+    flex: 1;
+    max-width: 300px; // Limit the search field's width
+    margin-right: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-input-element {
+    padding-left: 32px; // Give space for the search icon
+}
+
+mat-icon {
+    font-size: 20px;
+}
+
+.toggle-sidebar-btn {
+    background: none;
+    border: none;
+    color: #fff; // White icon for better visibility
+    padding: 8px;
+}
+
+.toggle-sidebar-btn mat-icon {
+    font-size: 24px; // Make the icon a bit larger for better visibility
+}
+
+button.mat-icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); // Add subtle hover effect
+}
