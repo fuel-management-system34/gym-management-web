@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,18 +20,33 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onLogin() {
-    if (this.loginForm.valid) {
-      const credentials = this.loginForm.value;
-      this.router.navigate(['/home']);
+  onLogin(): void {
+    if (this.loginForm.invalid) {
+      return;
     }
+
+    const credentials = this.loginForm.value;
+
+    // Call the login method in AuthService
+    this.authService.login(credentials).subscribe({
+      next: (response) => {
+        // After successful login, redirect to dashboard or home page
+        this.router.navigate(['/home']); // or any other page
+      },
+      error: (error) => {
+        // Handle error (e.g., show a login error message)
+        console.error('Login failed', error);
+        alert('Login failed. Please check your credentials.');
+      },
+    });
   }
 }

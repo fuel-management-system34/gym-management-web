@@ -13,7 +13,7 @@ export class TokenRefreshService {
   constructor(private http: HttpClient) {}
 
   refreshToken(refreshToken: string): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>(`${this.apiUrl}/Auth/refresh-token`, { refreshToken });
+    return this.http.post<TokenResponse>(`${this.apiUrl}refresh`, { refreshToken });
   }
 
   validateToken(token: string): Observable<boolean> {
