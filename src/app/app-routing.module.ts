@@ -8,6 +8,7 @@ import { MembersComponent } from './features/members/members.component';
 import { MembersEditComponent } from './features/members/members-edit/members-edit.component';
 import { TrainersComponent } from './features/trainers/trainers.component';
 import { TrainersEditComponent } from './features/trainers/trainers-edit/trainers-edit.component';
+import { ReportsComponent } from './features/reports/reports.component';
 
 const routes: Routes = [
   {
@@ -156,6 +157,42 @@ const routes: Routes = [
                   import('./features/trainers/trainers-edit/financial/financial.component').then((c) => c.FinancialComponent)
               }
             ]
+          }
+        ]
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            loadComponent: () =>
+              import('./features/reports/member-attendance/member-attendance.component').then((c) => c.MemberAttendanceComponent)
+          },
+          {
+            path: 'attendance',
+            loadComponent: () =>
+              import('./features/reports/member-attendance/member-attendance.component').then((c) => c.MemberAttendanceComponent)
+          },
+          {
+            path: 'payments',
+            loadComponent: () =>
+              import('./features/reports/payment-summary/payment-summary.component').then((c) => c.PaymentSummaryComponent)
+          },
+          {
+            path: 'sales',
+            loadComponent: () => import('./features/reports/sales/sales.component').then((c) => c.SalesComponent)
+          },
+          {
+            path: 'trainerPerformance',
+            loadComponent: () =>
+              import('./features/reports/trainer-performance/trainer-performance.component').then((c) => c.TrainerPerformanceComponent)
+          },
+          {
+            path: 'classEnrollment',
+            loadComponent: () =>
+              import('./features/reports/class-enrollment/class-enrollment.component').then((c) => c.ClassEnrollmentComponent)
           }
         ]
       }

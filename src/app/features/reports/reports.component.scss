@@ -1,0 +1,57 @@
+.custom-tabs {
+    background: #f9f9f9;
+    margin-bottom: 1rem;
+
+    ::ng-deep .mat-tab-label {
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        padding: 12px 24px;
+        display: inline-block;
+        color: #555;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    a.active-tab {
+        font-weight: bold;
+        color: #3f51b5;
+        border-bottom: 2px solid #3f51b5;
+    }
+}
+
+.tab-content {
+    padding: 0 16px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+
+    .breadcrumb {
+        font-size: 16px;
+        color: white;
+
+        span {
+            font-weight: 600;
+            margin-left: 4px;
+        }
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    button {
+        font-weight: 500;
+    }
+}
