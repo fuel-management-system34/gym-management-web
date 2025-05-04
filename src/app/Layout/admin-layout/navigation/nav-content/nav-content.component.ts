@@ -34,6 +34,7 @@ export class NavContentComponent implements OnInit {
   windowWidth = window.innerWidth;
   navCollapsed: boolean;
   navCollapsedMob: boolean;
+  filteredNavItems: NavigationItem[] = [];
 
   constructor(
     private location: Location,
@@ -44,24 +45,30 @@ export class NavContentComponent implements OnInit {
     if (this.windowWidth < 1025) {
       (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
     }
+    this.filteredNavItems = this.getFilteredNavigation();
   }
 
-  filteredNavigation(): NavigationItem[] {
-    const keyword = this.navSearchText.toLowerCase().trim();
+  onSearchChange() {
+    this.filteredNavItems = this.getFilteredNavigation();
+  }
 
+  getFilteredNavigation(): NavigationItem[] {
+    const keyword = this.navSearchText.toLowerCase().trim();
     if (!keyword) return this.navigations;
 
-    return this.navigations
-      .map((item) => {
-        // Filter group children too
-        if (item.type === 'group' && item.children) {
-          const filteredChildren = item.children.filter((child) => child.title?.toLowerCase().includes(keyword));
-          return filteredChildren.length > 0 ? { ...item, children: filteredChildren } : null;
-        }
+    const filterItems = (items: NavigationItem[]): NavigationItem[] => {
+      return items
+        .map((item) => {
+          if (item.children?.length) {
+            const filteredChildren = filterItems(item.children);
+            return filteredChildren.length ? { ...item, children: filteredChildren } : null;
+          }
+          return item.title?.toLowerCase().includes(keyword) ? item : null;
+        })
+        .filter((item): item is NavigationItem => item !== null);
+    };
 
-        return item.title?.toLowerCase().includes(keyword) ? item : null;
-      })
-      .filter((item): item is NavigationItem => item !== null);
+    return filterItems(this.navigations);
   }
 
   fireOutClick() {
@@ -96,6 +103,7 @@ export class NavContentComponent implements OnInit {
   }
 
   toggleSidebar() {
+    this.navCollapsed = !this.navCollapsed;
     this.NavCollapsedMob.emit();
   }
 }
