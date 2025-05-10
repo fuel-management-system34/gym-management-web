@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuItems } from '../../../Models/menu-items.type';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isCollapsed = false;
-  menu = MenuItems;
+  searchControl: FormControl = new FormControl('');
+  filteredItems = MenuItems;
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
@@ -26,5 +29,27 @@ export class SidebarComponent {
     } else {
       this.expandedGroups.add(item.title);
     }
+  }
+
+  ngOnInit(): void {
+    this.searchControl.valueChanges.pipe(debounceTime(200)).subscribe((term: string) => {
+      const search = term.toLowerCase().trim();
+      if (!search) {
+        this.filteredItems = MenuItems;
+        return;
+      }
+
+      this.filteredItems = MenuItems.map((item) => {
+        if (item.children) {
+          const filteredChildren = item.children.filter((child: any) => child.title.toLowerCase().includes(search));
+          if (filteredChildren.length > 0) {
+            return { ...item, children: filteredChildren };
+          }
+        } else if (item.title.toLowerCase().includes(search)) {
+          return item;
+        }
+        return null;
+      }).filter(Boolean);
+    });
   }
 }

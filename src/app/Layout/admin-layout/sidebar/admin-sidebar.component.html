@@ -2,7 +2,7 @@
   <nav class="p-2">
     <div class="row">
       <div class="search" *ngIf="!isCollapsed">
-        <input type="text" placeholder="Search" class="menu-search" />
+        <input type="text" [formControl]="searchControl" placeholder="Search" class="menu-search" />
       </div>
       <div class="collapsed-btn" *ngIf="!isCollapsed">
         <button (click)="toggleSidebar()" class="toggle-btn">
@@ -15,7 +15,7 @@
     </div>
 
     <ul class="sidebar-menu">
-      <ng-container *ngFor="let item of menu">
+      <ng-container *ngFor="let item of filteredItems">
         <!-- Parent without children -->
         <li *ngIf="!item.children">
           <a [routerLink]="item.route">

@@ -2,6 +2,7 @@ export const MenuItems: any = [
   { title: 'Home', icon: 'home', route: '/home' },
   { title: 'Members', icon: 'group', route: '/members' },
   { title: 'Trainers', icon: 'accessibility', route: '/trainers' },
+  { title: 'Reports', icon: 'insert_chart', route: '/reports' },
   {
     title: 'Finance & Billing',
     icon: 'account_balance_wallet',

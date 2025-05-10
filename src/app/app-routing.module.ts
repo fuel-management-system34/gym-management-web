@@ -202,7 +202,7 @@ const routes: Routes = [
   },
   {
     path: '*',
-    redirectTo: '/home'
+    loadComponent: () => import('./Layout/admin-layout/admin-layout.component').then((c) => c.AdminComponent)
   }
 ];
 
