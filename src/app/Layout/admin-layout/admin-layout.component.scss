@@ -1,3 +1,22 @@
-.ml-7 {
-  margin-left: 20px;
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.admin-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f7f9fb;
+}
+
+.dashboard-router {
+  margin-top: 4rem;
 }

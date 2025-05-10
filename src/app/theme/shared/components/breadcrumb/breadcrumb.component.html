@@ -2,7 +2,7 @@
   @if (last && breadcrumb.breadcrumbs !== false) {
     <div class="page-header">
       <div class="page-block">
-        <div class="row align-items-center">
+        <div class="align-items-center">
           <div class="col-md-12">
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
@@ -27,15 +27,6 @@
               }
             </ul>
           </div>
-          <!-- <div class="col-md-12">
-            <div class="page-header-title">
-              @for (breadcrumb of navigationList; track breadcrumb; let last = $last) {
-                @if (last) {
-                  <h2 class="mb-0 f-w-600 mt-2">{{ breadcrumb.title }}</h2>
-                }
-              }
-            </div>
-          </div> -->
         </div>
       </div>
     </div>

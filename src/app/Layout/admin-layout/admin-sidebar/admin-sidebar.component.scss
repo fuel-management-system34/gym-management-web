@@ -1,0 +1,65 @@
+.admin-sidebar {
+    width: 250px;
+    background-color: #34495e;
+    color: white;
+    padding: 1rem;
+    padding-top: 5rem !important;
+    transition: width 0.2s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+
+    &.collapsed {
+        width: 60px;
+    }
+
+    .toggle-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+
+    .menu-search {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        border: none;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 0.75rem;
+
+            a {
+                text-decoration: none;
+                color: white;
+                font-weight: 500;
+                display: block;
+
+                &:hover {
+                    color: #1abc9c;
+                }
+            }
+        }
+    }
+}
+
+.logo-img {
+    width: 140px;
+    height: auto;
+}
+
+.search{
+    width: 80%;
+}
+
+.collapsed-btn {
+    width: 20%;
+}

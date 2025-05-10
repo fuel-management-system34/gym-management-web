@@ -1,12 +1,3 @@
-<mat-toolbar color="primary" class="toolbar">
-  <div class="breadcrumb">
-    Iron Forge Fitness Center /
-    <span>Members Add > {{ ActiveTab }}</span>
-  </div>
-  <span class="spacer"></span>
-  <button mat-raised-button color="accent" (click)="save()">Save</button>
-</mat-toolbar>
-
 <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="500ms" active-indicator-color active-focus-label-text-color>
   <mat-tab label="Demographics"></mat-tab>
   <mat-tab label="Contact Info"></mat-tab>

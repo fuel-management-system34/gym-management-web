@@ -1,32 +1,13 @@
-<!-- Sidebar and Navbar -->
-<app-nav-bar (NavCollapsedMob)="navMobClick()" (NavCollapse)="navCollapsed = !navCollapsed"></app-nav-bar>
+<app-nav-bar></app-nav-bar>
+<div class="admin-layout">
+  <div class="admin-body">
+    <app-admin-sidebar></app-admin-sidebar>
 
-<app-navigation
-  class="pc-sidebar"
-  [ngClass]="{
-    'navbar-collapsed': navCollapsed,
-    'mob-open': navCollapsedMob
-  }"
-  (NavCollapse)="navCollapsed = !navCollapsed"
-></app-navigation>
-
-<!-- Main Content -->
-<div class="pc-container">
-  <div class="coded-wrapper">
-    <app-breadcrumb></app-breadcrumb>
-
-    <div class="coded-content">
-      <div class="coded-inner-content">
-        <div class="main-body">
-          <div class="page-wrapper ml-2">
-            <!-- The content for different views/routes -->
-            <router-outlet></router-outlet>
-          </div>
-        </div>
+    <div class="admin-content">
+      <app-breadcrumb></app-breadcrumb>
+      <div class="dashboard-router">
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
-
-  <!-- Overlay for mobile menu -->
-  <div class="pc-menu-overlay" (click)="closeMenu()" (keydown)="handleKeyDown($event)" tabindex="0"></div>
 </div>

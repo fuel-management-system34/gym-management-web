@@ -1,0 +1,43 @@
+<aside [class.collapsed]="isCollapsed" class="admin-sidebar">
+  <nav>
+    <div class="row" *ngIf="!isCollapsed">
+      <div class="search">
+        <input type="text" placeholder="Search..." class="menu-search" />
+      </div>
+      <div class="collapsed-btn">
+        <button (click)="toggleSidebar()" class="toggle-btn">
+          {{ isCollapsed ? '☰' : '✖' }}
+        </button>
+      </div>
+    </div>
+    <button (click)="toggleSidebar()" class="toggle-btn" *ngIf="isCollapsed">
+      {{ isCollapsed ? '☰' : '✖' }}
+    </button>
+    <ul>
+      <li>
+        <a routerLink="/home">
+          🏋️
+          <span *ngIf="!isCollapsed">Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/members">
+          👥
+          <span *ngIf="!isCollapsed">Members</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/payments">
+          💳
+          <span *ngIf="!isCollapsed">Payments</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/reports">
+          📊
+          <span *ngIf="!isCollapsed">Reports</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>
