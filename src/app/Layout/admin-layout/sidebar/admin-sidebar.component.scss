@@ -3,7 +3,7 @@
     background-color: #34495e;
     color: white;
     padding-top: 70px !important;
-    transition: width 0.2s ease;
+    transition: width 0.5s ease;
     overflow-y: auto;
     overflow-x: hidden;
     height: 100vh;
@@ -32,7 +32,6 @@
         .sidebar-menu {
             list-style: none;
             padding: 0;
-            transition: width 0.2s ease;
     
             li {
                 margin: 0.25rem 0;

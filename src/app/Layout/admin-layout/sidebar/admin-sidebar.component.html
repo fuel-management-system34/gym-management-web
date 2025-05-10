@@ -33,7 +33,7 @@
               {{ expandedGroups.has(item.title) ? 'expand_less' : 'expand_more' }}
             </span>
           </div>
-          <ul *ngIf="expandedGroups.has(item.title) && !isCollapsed" class="submenu">
+          <ul *ngIf="!isCollapsed && expandedGroups.has(item.title)" class="submenu">
             <li *ngFor="let child of item.children" class="child-item">
               <a [routerLink]="child.route">
                 <span class="material-icons">{{ child.icon }}</span>
