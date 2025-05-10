@@ -1,15 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { finalize } from 'rxjs';
 import { Role } from '../../../Core/models/Role';
 import { RoleService } from '../../../Core/services/role.service';
 import { NotificationService } from 'src/app/Services/notification-util.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-edit-role',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, MatDialogModule, MatFormFieldModule, ReactiveFormsModule, MatProgressSpinner],
   templateUrl: './add-edit-role.component.html',
   styleUrl: './add-edit-role.component.scss'
 })

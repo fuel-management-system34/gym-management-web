@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { TokenResponse } from '../models/TokenResponse ';
+import { TokenResponse } from '../models/TokenResponse';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

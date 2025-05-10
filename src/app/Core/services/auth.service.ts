@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, map, of, switchMap, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of, tap, throwError } from 'rxjs';
 import { User } from '../models/User';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
-import { GoogleLoginRequest } from '../models/GoogleLoginRequest ';
-import { TokenResponse } from '../models/TokenResponse ';
-import { RegisterRequest } from '../models/RegisterRequest ';
-import { RefreshTokenRequest } from '../models/RefreshTokenRequest ';
+import { TokenResponse } from '../models/TokenResponse';
 import { TokenService } from './token.service';
 import { TokenRefreshService } from './token-refresh.service';
 
@@ -48,8 +45,9 @@ export class AuthService {
     }
   }
 
-  googleLogin(credentials: GoogleLoginRequest): Observable<TokenResponse> {
-    return this.apiService.post<TokenResponse>('/Auth/google-login', credentials).pipe(
+  // JWT login
+  login(credentials: { email: string; password: string }): Observable<TokenResponse> {
+    return this.apiService.post<TokenResponse>('login', credentials).pipe(
       tap((response) => {
         this.setAuth(response);
         this.isAuthenticatedSubject.next(true);
@@ -62,22 +60,6 @@ export class AuthService {
       })
     );
   }
-
-    // JWT login
-    login(credentials: { email: string; password: string }): Observable<TokenResponse> {
-      return this.apiService.post<TokenResponse>('login', credentials).pipe(
-        tap((response) => {
-          this.setAuth(response);
-          this.isAuthenticatedSubject.next(true);
-  
-          // Start token expiration timer
-          this.startTokenExpirationTimer();
-        }),
-        catchError((error) => {
-          return throwError(() => error);
-        })
-      );
-    }
 
   logout(): Observable<any> {
     return this.apiService.post('/Auth/logout').pipe(

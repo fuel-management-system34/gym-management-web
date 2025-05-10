@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
@@ -14,6 +14,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCommonModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NotificationService } from '../../../Services/notification-util.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinner, MatSpinner } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-role-list',
@@ -25,8 +28,10 @@ import { NotificationService } from '../../../Services/notification-util.service
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    ConfirmDialogComponent,
-    AddEditRoleComponent
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatProgressSpinner,
+    MatMenuModule
   ],
   templateUrl: './role-list.component.html',
   styleUrl: './role-list.component.scss'

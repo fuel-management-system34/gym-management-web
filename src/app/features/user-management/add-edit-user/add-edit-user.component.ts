@@ -21,7 +21,7 @@ import { UserService } from '../../../Core/services/user.service';
 @Component({
   selector: 'app-add-edit-user',
   templateUrl: './add-edit-user.component.html',
-  styleUrls: ['./add-edit-user.component.css'],
+  styleUrls: ['./add-edit-user.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

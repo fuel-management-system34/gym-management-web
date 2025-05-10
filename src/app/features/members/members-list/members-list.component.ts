@@ -13,8 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { MemberApiService } from 'src/app/Services/api/member-api.service';
+import { Member } from '../../workout plans/workout-plans-dashboard/workout-plans-dashboard.component';
 
 @Component({
   selector: 'app-members-list',
@@ -45,7 +45,7 @@ export class MembersListComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private memberService: MemberApiService  
+    private memberService: MemberApiService
   ) {
     this.filterForm = this.fb.group({
       name: [''],
@@ -85,16 +85,6 @@ export class MembersListComponent implements OnInit {
       }
     });
   }
-}
-
-export interface Member {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  membership: string;
-  joinDate: string;
-  status: string;
 }
 
 const MEMBER_DATA: Member[] = [

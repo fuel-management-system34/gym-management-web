@@ -3,8 +3,8 @@ import { ApiService } from './api.service';
 import { catchError, Observable } from 'rxjs';
 import { Role } from '../models/Role';
 import { User } from '../models/User';
+import { UpdateRoleRequest } from '../models/UpdateRoleRequest';
 import { CreateRoleRequest } from '../models/CreateRoleRequest ';
-import { UpdateRoleRequest } from '../models/UpdateRoleRequest ';
 
 @Injectable({
   providedIn: 'root'

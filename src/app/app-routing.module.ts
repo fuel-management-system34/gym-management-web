@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GuestComponent } from './Layout/guest/guest.component';
 import { AdminComponent } from './Layout/admin-layout/admin-layout.component';
 import { AuthGuard } from './Core/guards/auth.guard';
 import { MembersComponent } from './features/members/members.component';
@@ -59,12 +58,12 @@ const routes: Routes = [
         component: MembersComponent,
         children: [
           {
-            path: '', // Default route for the member list
+            path: '',
             pathMatch: 'full',
             loadComponent: () => import('./features/members/members-list/members-list.component').then((c) => c.MembersListComponent)
           },
           {
-            path: 'new', // Path for adding a new member
+            path: 'new',
             loadComponent: () => import('./features/members/members-add/members-add.component').then((c) => c.MembersAddComponent)
           },
           {
@@ -210,7 +209,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledBlocking' // Wait for initialization before navigation
+      initialNavigation: 'enabledBlocking'
     })
   ],
   exports: [RouterModule]

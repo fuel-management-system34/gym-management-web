@@ -49,7 +49,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { JwtInterceptor } from './Core/interceptors/jwt.interceptor ';
+import { JwtInterceptor } from './Core/interceptors/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './Core/services/auth.service';
 import { delay, take } from 'rxjs';

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../models/User';
-import { CreateUserRequest } from '../models/CreateUserRequest ';
-import { UpdateUserRequest } from '../models/UpdateUserRequest ';
-import { ChangePasswordRequest, ResetPasswordRequest } from '../models/ChangePasswordRequest ';
+import { CreateUserRequest } from '../models/CreateUserRequest';
+import { UpdateUserRequest } from '../models/UpdateUserRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -32,14 +31,6 @@ export class UserService {
     return this.apiService.delete(`/users/${id}`).pipe(catchError((error) => throwError(() => error)));
   }
 
-  changePassword(request: ChangePasswordRequest): Observable<any> {
-    return this.apiService.put(`/users/${request.userId}/change-password`, request).pipe(catchError((error) => throwError(() => error)));
-  }
-
-  resetPassword(request: ResetPasswordRequest): Observable<any> {
-    return this.apiService.put(`/users/${request.userId}/reset-password`, request).pipe(catchError((error) => throwError(() => error)));
-  }
-
   getUserRoles(userId: number): Observable<string[]> {
     return this.apiService.get<string[]>(`/users/${userId}/roles`).pipe(catchError((error) => throwError(() => error)));
   }
@@ -54,9 +45,5 @@ export class UserService {
 
   updateProfile(userData: UpdateUserRequest): Observable<any> {
     return this.apiService.put('/profile', userData).pipe(catchError((error) => throwError(() => error)));
-  }
-
-  changeProfilePassword(request: ChangePasswordRequest): Observable<any> {
-    return this.apiService.put('/profile/change-password', request).pipe(catchError((error) => throwError(() => error)));
   }
 }

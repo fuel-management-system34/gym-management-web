@@ -1,9 +1,7 @@
-import { UpdateUserRequest } from './../../../Core/models/UpdateUserRequest ';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatCommonModule } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -21,14 +19,12 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../../theme/shared/shared.module';
-import { BreadcrumbComponent } from '../../../theme/shared/components/breadcrumb/breadcrumb.component';
-import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton-loader-table/skeleton-loader-table.component';
 import { NotificationService } from 'src/app/Services/notification-util.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css'],
+  styleUrls: ['./user-list.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -45,11 +41,7 @@ import { NotificationService } from 'src/app/Services/notification-util.service'
     MatProgressSpinnerModule,
     MatMenuModule,
     ReactiveFormsModule,
-    AddEditUserComponent,
-    ConfirmDialogComponent,
     SharedModule,
-    BreadcrumbComponent,
-    SkeletonLoaderTableComponent,
     MatDialogModule
   ]
 })
