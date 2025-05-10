@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -197,10 +197,6 @@ const routes: Routes = [
               import('./features/reports/class-enrollment/class-enrollment.component').then((c) => c.ClassEnrollmentComponent)
           }
         ]
-      },
-      {
-        path: '*',
-        loadComponent: () => import('./Layout/admin-layout/admin-layout.component').then((c) => c.AdminComponent)
       }
     ]
   },

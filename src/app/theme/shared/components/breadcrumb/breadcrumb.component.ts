@@ -21,7 +21,6 @@ interface Breadcrumb {
 })
 export class BreadcrumbComponent {
   navigationList: Breadcrumb[] = [];
-  type: 'theme1' | 'theme2' = 'theme1';
 
   constructor(
     private router: Router,
