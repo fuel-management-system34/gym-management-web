@@ -26,49 +26,62 @@
         padding: 0.5rem;
         margin-bottom: 1rem;
         border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid #ccc;
         border: none;
     }
 
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-    
-            li {
-                margin: 0.25rem 0;
-    
-                a,
-                .menu-group {
-                    display: flex;
-                    align-items: center;
-                    padding: 7px;
-                    text-decoration: none;
-                    cursor: pointer;
-                    color: white;
-    
-                    .material-icons {
-                        margin-right: 0.5rem;
-                    }
-    
-                    .expand-icon {
-                        margin-left: auto;
-                    }
-    
-                    &:hover {
-                        background-color: #1abc9c;
-                    }
+    &::placeholder {
+        color: #999; // Light grey placeholder text
+        font-style: italic; // Optional
+        opacity: 1; // Ensures visibility in all browsers
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 0.25rem 0;
+
+            a,
+            .menu-group {
+                display: flex;
+                align-items: center;
+                padding: 7px;
+                text-decoration: none;
+                cursor: pointer;
+                color: white;
+
+                .material-icons {
+                    margin-right: 0.5rem;
                 }
-    
-                .submenu {
-                    padding-left: 2rem;
-    
-                    li {
-                        a {
-                            font-size: 0.95rem;
-                        }
+
+                .expand-icon {
+                    margin-left: auto;
+                }
+
+                &:hover {
+                    background-color: #1abc9c;
+                }
+
+                &.active-tab {
+                    background-color: #1abc9c;
+                    color: white;
+                }
+            }
+
+            .submenu {
+                padding-left: 2rem;
+
+                li {
+                    a {
+                        font-size: 0.95rem;
                     }
                 }
             }
         }
+    }
 }
 
 .logo-img {

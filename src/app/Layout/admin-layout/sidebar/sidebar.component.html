@@ -18,7 +18,7 @@
       <ng-container *ngFor="let item of filteredItems">
         <!-- Parent without children -->
         <li *ngIf="!item.children">
-          <a [routerLink]="item.route">
+          <a [routerLink]="item.route" [class.active-tab]="isActiveRoute(item.route)">
             <span class="material-icons">{{ item.icon }}</span>
             <span class="menu-item" *ngIf="!isCollapsed">{{ item.title }}</span>
           </a>
@@ -35,7 +35,7 @@
           </div>
           <ul *ngIf="!isCollapsed && expandedGroups.has(item.title)" class="submenu">
             <li *ngFor="let child of item.children" class="child-item">
-              <a [routerLink]="child.route">
+              <a [routerLink]="child.route" [class.active-tab]="isActiveRoute(child.route)">
                 <span class="material-icons">{{ child.icon }}</span>
                 <span class="menu-item">{{ child.title }}</span>
               </a>

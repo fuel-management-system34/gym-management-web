@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MenuItems } from '../../../Models/menu-items.type';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
@@ -16,6 +16,12 @@ export class SidebarComponent implements OnInit {
   isCollapsed = false;
   searchControl: FormControl = new FormControl('');
   filteredItems = MenuItems;
+
+  constructor(public router: Router) {}
+
+  isActiveRoute(route: string): boolean {
+    return this.router.url.startsWith(route);
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
