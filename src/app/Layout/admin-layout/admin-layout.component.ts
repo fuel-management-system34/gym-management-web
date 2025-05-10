@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../../theme/shared/components/breadcrumb/breadcrumb.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SidebarComponent } from './sidebar/admin-sidebar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-admin-dashboard',

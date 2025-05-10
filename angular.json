@@ -35,7 +35,6 @@
               "@angular/material/prebuilt-themes/rose-red.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
-              "src/global.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
