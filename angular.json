@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mantis-free-version": {
+    "iron-forge-gym-management-system": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -98,6 +98,34 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "front": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.front.ts"
+                  }
+                ]
+            },  
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -106,13 +134,19 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mantis-free-version:build:production"
+              "buildTarget": "iron-forge-gym-management-system:build:production"
             },
             "development": {
-              "buildTarget": "mantis-free-version:build:development"
+              "buildTarget": "iron-forge-gym-management-system:build:development"
             },
             "staging": {
-              "buildTarget": "mantis-free-version:build:staging"
+              "buildTarget": "iron-forge-gym-management-system:build:staging"
+            },
+            "front": {
+              "buildTarget": "iron-forge-gym-management-system:build:front"
+            },
+            "local": {
+              "buildTarget": "iron-forge-gym-management-system:build:local"
             }
           },
           "defaultConfiguration": "development"
