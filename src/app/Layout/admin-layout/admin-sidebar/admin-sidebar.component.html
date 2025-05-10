@@ -1,43 +1,48 @@
 <aside [class.collapsed]="isCollapsed" class="admin-sidebar">
-  <nav>
-    <div class="row" *ngIf="!isCollapsed">
-      <div class="search">
-        <input type="text" placeholder="Search..." class="menu-search" />
+  <nav class="p-2">
+    <div class="row">
+      <div class="search" *ngIf="!isCollapsed">
+        <input type="text" placeholder="Search" class="menu-search" />
       </div>
-      <div class="collapsed-btn">
+      <div class="collapsed-btn" *ngIf="!isCollapsed">
         <button (click)="toggleSidebar()" class="toggle-btn">
-          {{ isCollapsed ? '☰' : '✖' }}
+          {{ isCollapsed ? '»' : '«' }}
         </button>
       </div>
+      <button (click)="toggleSidebar()" class="toggle-btn" *ngIf="isCollapsed">
+        {{ isCollapsed ? '»' : '«' }}
+      </button>
     </div>
-    <button (click)="toggleSidebar()" class="toggle-btn" *ngIf="isCollapsed">
-      {{ isCollapsed ? '☰' : '✖' }}
-    </button>
-    <ul>
-      <li>
-        <a routerLink="/home">
-          🏋️
-          <span *ngIf="!isCollapsed">Home</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/members">
-          👥
-          <span *ngIf="!isCollapsed">Members</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/payments">
-          💳
-          <span *ngIf="!isCollapsed">Payments</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/admin/reports">
-          📊
-          <span *ngIf="!isCollapsed">Reports</span>
-        </a>
-      </li>
+
+    <ul class="sidebar-menu">
+      <ng-container *ngFor="let item of menu">
+        <!-- Parent without children -->
+        <li *ngIf="!item.children">
+          <a [routerLink]="item.route">
+            <span class="material-icons">{{ item.icon }}</span>
+            <span class="menu-item" *ngIf="!isCollapsed">{{ item.title }}</span>
+          </a>
+        </li>
+
+        <!-- Parent with children -->
+        <li *ngIf="item.children">
+          <div class="menu-group" (click)="toggleGroup(item)">
+            <span class="material-icons">{{ item.icon }}</span>
+            <span class="menu-item" *ngIf="!isCollapsed">{{ item.title }}</span>
+            <span class="material-icons expand-icon" *ngIf="!isCollapsed">
+              {{ expandedGroups.has(item.title) ? 'expand_less' : 'expand_more' }}
+            </span>
+          </div>
+          <ul *ngIf="expandedGroups.has(item.title) && !isCollapsed" class="submenu">
+            <li *ngFor="let child of item.children" class="child-item">
+              <a [routerLink]="child.route">
+                <span class="material-icons">{{ child.icon }}</span>
+                <span class="menu-item">{{ child.title }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
     </ul>
   </nav>
 </aside>

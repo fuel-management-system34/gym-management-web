@@ -202,14 +202,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
-    component: GuestComponent,
-    children: [
-      {
-        path: 'login',
-        loadComponent: () => import('./Core/auth/login/login.component').then((c) => c.LoginComponent)
-      }
-    ]
+    path: '*',
+    redirectTo: '/home'
   }
 ];
 
