@@ -61,3 +61,39 @@
         }
     }
 }
+
+.margin-right{
+    margin-right: 10px;
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    background-color: #1abc9c; // You can replace with your theme variable
+    color: white;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-left: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px;
+
+    .btn-icon {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+
+    .btn-text {
+        font-size: 14px;
+    }
+
+    &:hover {
+        background-color: darken(#1abc9c, 5%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+        background-color: darken(#1abc9c, 10%);
+    }
+}

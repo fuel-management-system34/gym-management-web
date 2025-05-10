@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MemberApiService } from 'src/app/Services/api/member-api.service';
 import { Member } from '../../workout plans/workout-plans-dashboard/workout-plans-dashboard.component';
+import { ToolbarService } from 'src/app/Core/services/toolbar.service';
 
 @Component({
   selector: 'app-members-list',
@@ -45,7 +46,8 @@ export class MembersListComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private memberService: MemberApiService
+    private memberService: MemberApiService,
+    private toolbarService: ToolbarService
   ) {
     this.filterForm = this.fb.group({
       name: [''],
@@ -55,11 +57,35 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMembers();
+    this.setToolBar();
     // this.dataSource.data = MEMBER_DATA;
 
     // this.filterForm.valueChanges.subscribe((values) => {
     //   this.applyFilter(values);
     // });
+  }
+
+  setToolBar(): void {
+    this.toolbarService.reset();
+    this.toolbarService.setVisible([
+      {
+        title: 'Refresh',
+        icon: 'refresh',
+        callback: () => this.loadMembers()
+      },
+      {
+        title: 'New',
+        icon: 'new',
+        callback: () => this.loadMembers()
+      }
+    ]);
+    this.toolbarService.setDisabled([
+      {
+        title: 'Refresh',
+        icon: 'refresh',
+        callback: () => this.loadMembers()
+      }
+    ]);
   }
 
   ngAfterViewInit(): void {

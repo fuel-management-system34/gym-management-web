@@ -4,6 +4,9 @@ import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuItems } from '../../../../Models/menu-items.type';
+import { ToolbarService } from '../../../../Core/services/toolbar.service';
+import { ToolbarButton } from 'src/app/Core/models/toolbar-button.type';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 interface Breadcrumb {
   url: string | false;
@@ -15,18 +18,24 @@ interface Breadcrumb {
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatProgressSpinner],
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
   navigationList: Breadcrumb[] = [];
+  toolbarButtons: ToolbarButton[] = [];
 
   constructor(
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private toolbarService: ToolbarService
   ) {
     this.initBreadcrumb();
+
+    this.toolbarService.visibleBtns$.subscribe((actions) => {
+      this.toolbarButtons = actions;
+    });
   }
 
   initBreadcrumb() {
