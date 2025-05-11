@@ -64,4 +64,8 @@ export class BreadcrumbComponent {
     }
     return [];
   }
+
+  toolbarBtnClick(toolbarButton: ToolbarButton): void {
+    this.toolbarService.clickButton$.next(toolbarButton);
+  }
 }
