@@ -223,7 +223,7 @@
 
     >i {
       color: var(--pc-header-background) !important;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     >svg {
@@ -455,53 +455,6 @@
           height: 14px;
         }
       }
-    }
-  }
-
-  .dropdown-notification {
-    min-width: 420px;
-    max-width: 100%;
-
-    .list-group-item-action {
-
-      &:active,
-      &:hover,
-      &:focus {
-        background: shift-color($primary, $soft-bg-level);
-      }
-
-      .user-avatar,
-      h5 {
-        cursor: pointer;
-      }
-    }
-
-    .badge {
-      font-size: 0.8125rem;
-      padding: 0.43em 1em;
-    }
-
-    .user-avatar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-    }
-
-    .notification-file {
-      display: flex;
-      align-items: center;
-
-      i {
-        font-size: 20px;
-        margin-right: 16px;
-      }
-    }
-
-    @media (max-width: 575.98px) {
-      min-width: 100%;
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { SharedModule } from '../../../../theme/shared/shared.module';
 import { IconService } from '@ant-design/icons-angular';
 import {
   BellOutline,
@@ -21,12 +21,13 @@ import {
   ArrowRightOutline,
   GithubOutline
 } from '@ant-design/icons-angular/icons';
-import { TokenService } from 'src/app/Core/services/token.service';
-import { User } from 'src/app/Core/models/User';
-import { AuthService } from 'src/app/Core/services/auth.service';
+import { TokenService } from '../../../../Core/services/token.service';
+import { User } from '../../../../Core/models/User';
+import { AuthService } from '../../../../Core/services/auth.service';
 import { NotificationService } from '../../../../Services/notification-util.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { QuickPanelService } from '../../../../Core/services/quick-panel.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -60,7 +61,8 @@ export class NavRightComponent implements OnInit, OnDestroy {
     private router: Router,
     private notificationUtilService: NotificationService,
     private tokenService: TokenService,
-    private authService: AuthService
+    private authService: AuthService,
+    private quickPanelService: QuickPanelService
   ) {
     this.registerIcons();
   }
@@ -121,6 +123,10 @@ export class NavRightComponent implements OnInit, OnDestroy {
       WalletOutline
     ];
     this.iconService.addIcon(...icons);
+  }
+
+  onNotificationClick() {
+    this.quickPanelService.toggle();
   }
 
   ngOnDestroy(): void {

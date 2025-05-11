@@ -3,7 +3,7 @@
     <div class="page-header">
       <div class="col-md-12 d-flex">
         <div class="col-8">
-          <ul class="breadcrumb mt-3">
+          <ul class="breadcrumb mt-2" [ngClass]="{ 'mt-3': toolbarButtons.length > 0 }">
             <li class="breadcrumb-item">
               <a [routerLink]="['/home']" title="Home" class="home"><mat-icon>home</mat-icon></a>
             </li>
