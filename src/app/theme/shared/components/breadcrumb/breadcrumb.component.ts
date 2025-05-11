@@ -38,12 +38,13 @@ export class BreadcrumbComponent {
     });
   }
 
-  initBreadcrumb() {
+  initBreadcrumb(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         const path = event.urlAfterRedirects;
         const list = this.generateBreadcrumb(MenuItems, path);
         this.navigationList = list;
+
         const pageTitle = list[list.length - 1]?.title || 'Welcome';
         this.titleService.setTitle(`${pageTitle} | Iron Forge Fitness`);
       }
@@ -51,18 +52,50 @@ export class BreadcrumbComponent {
   }
 
   generateBreadcrumb(items: any[], url: string): Breadcrumb[] {
-    for (const item of items) {
-      if (item.route === url) {
-        return [{ url: item.route, title: item.title, type: 'item', breadcrumbs: true }];
-      }
-      if (item.children) {
-        const childTrail = this.generateBreadcrumb(item.children, url);
-        if (childTrail.length > 0) {
-          return [{ url: false, title: item.title, type: 'group', breadcrumbs: true }, ...childTrail];
+    const segments = url.split('/').filter(Boolean);
+    const trail: Breadcrumb[] = [];
+
+    const findTrail = (nodes: any[], pathSoFar: string): boolean => {
+      for (const node of nodes) {
+        if (!node.route) continue;
+
+        const nodeSegments = node.route.split('/').filter(Boolean);
+        let match = true;
+        for (let i = 0; i < nodeSegments.length; i++) {
+          if (!segments[i]) {
+            match = false;
+            break;
+          }
+          if (nodeSegments[i].startsWith(':')) continue; // dynamic
+          if (nodeSegments[i] !== segments[i]) {
+            match = false;
+            break;
+          }
+        }
+
+        if (match) {
+          const actualUrl = '/' + segments.slice(0, nodeSegments.length).join('/');
+          trail.push({
+            url: node.route.includes(':') ? false : actualUrl, // don't link dynamic param segments
+            title: node.title,
+            type: 'item',
+            breadcrumbs: true
+          });
+
+          if (node.children) {
+            const found = findTrail(node.children, actualUrl);
+            if (found) return true;
+          }
+
+          if (segments.length === nodeSegments.length) return true;
+          trail.pop(); // backtrack
         }
       }
-    }
-    return [];
+      return false;
+    };
+
+    findTrail(items, '');
+    return trail;
   }
 
   toolbarBtnClick(toolbarButton: ToolbarButton): void {
