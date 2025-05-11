@@ -12,6 +12,11 @@ export class MemberApiService {
   }
 
   addMember(memberData: any): Observable<any> {
-    return this.apiService.post<any>('/member/add', memberData);
+    return this.apiService.post<any>('members', memberData);
   }
+
+  fetchById(id: number): Observable<any> {
+    return this.apiService.get<any>(`members/${id}`);
+  }
+
 }

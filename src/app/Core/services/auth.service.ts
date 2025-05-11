@@ -62,7 +62,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.apiService.post('/Auth/logout').pipe(
+    return this.apiService.post('logout').pipe(
       finalize(() => {
         this.purgeAuth();
         this.router.navigate(['/login']);

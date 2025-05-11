@@ -53,6 +53,8 @@ import { JwtInterceptor } from './Core/interceptors/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './Core/services/auth.service';
 import { delay, take } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function initializeAuth(authService: AuthService) {
   return () => {
@@ -119,6 +121,9 @@ export function initializeAuth(authService: AuthService) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

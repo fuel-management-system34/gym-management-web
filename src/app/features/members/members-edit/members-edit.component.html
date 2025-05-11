@@ -1,36 +1,36 @@
 <div class="member-banner mat-elevation-z3">
-  <img class="avatar" src="https://i.pravatar.cc/100?img=12" alt="Member Avatar" />
+  <img class="avatar" [src]="member?.profile_picture || 'https://i.pravatar.cc/100?img=12'" alt="Member Avatar" />
 
   <div class="member-details">
-    <h2>John Doe</h2>
+    <h2>{{ member?.first_name }} {{ member?.last_name }}</h2>
     <div class="info-grid">
       <div>
         <strong>Member ID:</strong>
-        GM-001234
+        {{ member?.member_code }}
       </div>
       <div>
         <strong>Joined:</strong>
-        Jan 10, 2023
+        {{ member?.created_at | date:'MMM d, yyyy' }}
       </div>
       <div>
         <strong>Membership:</strong>
-        Gold Monthly
+        {{ member?.membership_type }}
       </div>
       <div>
         <strong>Expires On:</strong>
-        May 10, 2025
+        {{ member?.created_at | date:'MMM d, yyyy' }}
       </div>
       <div>
         <strong>Phone:</strong>
-        +1 (555) 123-4567
+        {{ member?.phone_number }}
       </div>
       <div>
         <strong>Email:</strong>
-        john.doegmail.com
+        {{ member?.email }}
       </div>
       <div>
         <strong>Last Check-in:</strong>
-        Apr 21, 2025 - 5:45 PM
+        {{ member?.created_at | date:'MMM d, yyyy h:mm a' }}
       </div>
     </div>
   </div>
