@@ -1,15 +1,4 @@
 <mat-card>
-  <mat-toolbar color="primary" class="toolbar">
-    <div class="breadcrumb">
-      Iron Forge Fitness Center /
-      <span>Trainer & Staff Add</span>
-    </div>
-    <span class="spacer"></span>
-    <button mat-icon-button (click)="goBack()" aria-label="Back">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button mat-raised-button color="accent" (click)="onSubmit()" [disabled]="!staffForm.valid">Save</button>
-  </mat-toolbar>
   <mat-card-content>
     <form [formGroup]="staffForm" class="form-container">
       <div class="row">
