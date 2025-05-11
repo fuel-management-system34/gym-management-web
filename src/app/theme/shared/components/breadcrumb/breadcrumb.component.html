@@ -4,10 +4,14 @@
       <div class="col-md-12 d-flex">
         <div class="col-8">
           <ul class="breadcrumb mt-2" [ngClass]="{ 'mt-3': toolbarButtons.length > 0 }">
-            <li class="breadcrumb-item">
-              <a [routerLink]="['/home']" title="Home" class="home"><mat-icon>home</mat-icon></a>
-            </li>
-            @for (breadcrumb of navigationList; track breadcrumb) {
+            @for (breadcrumb of navigationList; track breadcrumb; let first = $first) {
+              @if (first) {
+                <li class="breadcrumb-item">
+                  <a [routerLink]="[breadcrumb.url]" class="icon">
+                    <mat-icon>{{ breadcrumb.icon }}</mat-icon>
+                  </a>
+                </li>
+              }
               @if (breadcrumb.url !== false) {
                 <li class="breadcrumb-item mt-1">
                   <a [routerLink]="breadcrumb.url" class="large-font">{{ breadcrumb.title }}</a>

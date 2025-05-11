@@ -12,6 +12,7 @@ interface Breadcrumb {
   url: string | false;
   title: string;
   type: string;
+  icon: string;
   breadcrumbs?: boolean;
 }
 
@@ -79,6 +80,7 @@ export class BreadcrumbComponent {
             url: node.route.includes(':') ? false : actualUrl, // don't link dynamic param segments
             title: node.title,
             type: 'item',
+            icon: node.icon,
             breadcrumbs: true
           });
 
