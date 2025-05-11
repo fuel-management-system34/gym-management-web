@@ -8,6 +8,12 @@
     overflow-x: hidden;
     height: 100vh;
 
+    .cstm-padding{
+        padding: 0.5rem !important;
+        padding-right: 0px !important;
+        padding-top: 0px !important;
+    }
+
     &.collapsed {
         width: 60px;
     }
@@ -28,7 +34,6 @@
         margin-bottom: 1rem;
         border-radius: 4px;
         font-size: 17px;
-        border: 1px solid #ccc;
         border: none;
     }
 
@@ -41,6 +46,7 @@
     .sidebar-menu {
         list-style: none;
         padding: 0;
+        margin-left:5px;
 
         li {
             margin: 0.25rem 0;

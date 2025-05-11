@@ -1,0 +1,40 @@
+.quick-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 25vw;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1030;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+        right: 0;
+    }
+
+    .quick-panel-header {
+            height: 60px;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        background: #1976d2;
+        color: white;
+
+        button {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    .quick-panel-body {
+        padding: 1rem;
+        overflow-y: auto;
+        flex: 1;
+    }
+}

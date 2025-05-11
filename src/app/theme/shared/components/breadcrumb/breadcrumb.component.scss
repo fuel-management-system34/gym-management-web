@@ -43,7 +43,7 @@
         }
 
         .breadcrumb-item {
-            .home {
+            .icon {
                 color: var(--pc-sidebar-color);
                 font-size: 14px;
             }
@@ -69,12 +69,13 @@
 .toolbar-btn {
     display: flex;
     align-items: center;
-    background-color: #1abc9c; // You can replace with your theme variable
+    background-color: #1abc9c;
     color: white;
     font-weight: 500;
     padding: 8px 16px;
     border-radius: 8px;
     margin-left: 12px;
+    border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
