@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div class="login-card">
+    <mat-card class="mat-elevation-z4">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Gym Logo" />
+        <h2>Welcome to IRON FORGE</h2>
+        <p class="subtext mt-2">Your Fitness Journey Starts Here</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+        <mat-form-field appearance="outline" floatLabel="auto">
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="auto">
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="full-width login-btn" [disabled]="loginForm.invalid">Login</button>
+      </form>
+
+      <div class="login-footer">
+        <a routerLink="/forgot-password" class="cstm-mr">Forgot Password?</a>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<form [formGroup]="goalForm" (ngSubmit)="onSubmit()" class="goal-form">
+  <div class="form-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Goal Type</mat-label>
+      <mat-select formControlName="goalType" required>
+        <mat-option value="weightLoss">Weight Loss</mat-option>
+        <mat-option value="muscleGain">Muscle Gain</mat-option>
+        <mat-option value="endurance">Endurance</mat-option>
+        <mat-option value="flexibility">Flexibility</mat-option>
+        <mat-option value="generalFitness">General Fitness</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Workout Frequency (per week)</mat-label>
+      <input matInput type="number" formControlName="frequency" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Target Weight (kg)</mat-label>
+      <input matInput type="number" formControlName="targetWeight" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Target Body Fat (%)</mat-label>
+      <input matInput type="number" formControlName="targetFat" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Target Muscle Mass (kg)</mat-label>
+      <input matInput type="number" formControlName="muscleMass" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Preferred Activities</mat-label>
+    <input matInput formControlName="activities" placeholder="E.g. Running, Weight Training, Yoga" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Goal Deadline</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="deadline" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Notes</mat-label>
+    <textarea matInput rows="3" formControlName="notes"></textarea>
+  </mat-form-field>
+</form>

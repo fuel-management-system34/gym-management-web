@@ -1,0 +1,55 @@
+<div class="common-dialog">
+  <div class="common-dialog-header">
+    <h2 mat-dialog-title>Site Details</h2>
+  </div>
+
+  <mat-dialog-content class="common-dialog-content">
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="company-form">
+
+      <div class="row">
+        <div class="col-6 mt-2">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Company name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Site</mat-label>
+            <input matInput formControlName="site" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Telephone</mat-label>
+            <input matInput formControlName="telephone" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-6 align-context-center mt-2">
+          <div class="file-section">
+            <button mat-raised-button color="primary" (click)="fileInput.click()">
+              <mat-icon>upload</mat-icon>
+              Upload Logo
+            </button>
+            <input type="file" hidden #fileInput (change)="onFileChange($event, 'logo')" accept="image/*" />
+            <img *ngIf="logoPreview" [src]="logoPreview" class="preview-img" alt="Logo Preview" />
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="common-dialog-actions">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">
+      Update
+    </button>
+  </mat-dialog-actions>
+</div>

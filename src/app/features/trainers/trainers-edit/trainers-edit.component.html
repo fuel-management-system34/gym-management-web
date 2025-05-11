@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="breadcrumb">
+    Iron Forge Fitness Center /
+    <span>Trainers & Staff Edit</span>
+  </div>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="goBack()" aria-label="Back">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" (click)="enableEdit()">Edit</button>
+</mat-toolbar>
+
+<mat-card class="trainer-detail-banner">
+  <div class="banner-content">
+    <img [src]="trainer.profileImage || 'assets/images/default-avatar.png'" alt="Profile" class="profile-img" />
+
+    <div class="details">
+      <h2>{{ trainer.name }}</h2>
+      <div class="role-exp">
+        <mat-chip color="primary" selected>{{ trainer.role }}</mat-chip>
+        <span class="exp">{{ trainer.experience }} years experience</span>
+      </div>
+
+      <div class="contact">
+        <div>
+          <strong>Email:</strong>
+          {{ trainer.email }}
+        </div>
+        <div>
+          <strong>Phone:</strong>
+          {{ trainer.phone }}
+        </div>
+      </div>
+    </div>
+
+    <div class="status-actions">
+      <mat-chip color="accent" [ngClass]="trainer.status === 'Active' ? 'active' : 'inactive'" selected>
+        {{ trainer.status }}
+      </mat-chip>
+    </div>
+  </div>
+</mat-card>
+
+<div class="edit-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="profile" routerLinkActive="active">Profile Info</a>
+        <a mat-list-item routerLink="membership" routerLinkActive="active">Membership</a>
+        <a mat-list-item routerLink="attendance" routerLinkActive="active">Attendance</a>
+        <a mat-list-item routerLink="billing" routerLinkActive="active">Billing</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

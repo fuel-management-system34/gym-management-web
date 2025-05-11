@@ -1,50 +1,15 @@
-// Angular import
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
-// Project import
-import { SharedModule } from '../../theme/shared/shared.module';
+import { BreadcrumbComponent } from '../../theme/shared/components/breadcrumb/breadcrumb.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { BreadcrumbBarComponent } from './nav-bar/breadcrumb-bar/breadcrumb-bar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, SharedModule, NavigationComponent, NavBarComponent, RouterModule, BreadcrumbBarComponent],
+  imports: [CommonModule, NavBarComponent, SidebarComponent, BreadcrumbComponent, RouterOutlet],
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminComponent {
-  // public props
-  navCollapsed: boolean;
-  navCollapsedMob: boolean;
-
-  // public method
-  navMobClick() {
-    if (this.navCollapsedMob && !document.querySelector('app-navigation.pc-sidebar')?.classList.contains('mob-open')) {
-      this.navCollapsedMob = !this.navCollapsedMob;
-      setTimeout(() => {
-        this.navCollapsedMob = !this.navCollapsedMob;
-      }, 100);
-    } else {
-      this.navCollapsedMob = !this.navCollapsedMob;
-    }
-    if (document.querySelector('app-navigation.pc-sidebar')?.classList.contains('navbar-collapsed')) {
-      document.querySelector('app-navigation.pc-sidebar')?.classList.remove('navbar-collapsed');
-    }
-  }
-
-  handleKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Escape') {
-      this.closeMenu();
-    }
-  }
-
-  closeMenu() {
-    if (document.querySelector('app-navigation.pc-sidebar')?.classList.contains('mob-open')) {
-      document.querySelector('app-navigation.pc-sidebar')?.classList.remove('mob-open');
-    }
-  }
-}
+export class AdminComponent {}

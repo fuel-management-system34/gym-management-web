@@ -1,0 +1,27 @@
+<div class="role-form-container">
+  <h2 mat-dialog-title>{{ isEdit ? 'Edit Role' : 'Create Role' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="roleForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter role name" />
+        <mat-error *ngIf="roleForm.get('name').hasError('required')">Role name is required</mat-error>
+        <mat-error *ngIf="roleForm.get('name').hasError('minlength')">Role name must be at least 2 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Enter role description" rows="3"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="roleForm.invalid || loading" (click)="onSubmit()">
+      <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+      <span *ngIf="!loading">{{ isEdit ? 'Update' : 'Create' }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

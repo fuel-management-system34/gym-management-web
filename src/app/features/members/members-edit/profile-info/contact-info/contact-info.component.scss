@@ -1,0 +1,28 @@
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fafafa;
+    border-radius: 8px;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+mat-form-field {
+    flex: 1;
+    min-width: 220px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+}

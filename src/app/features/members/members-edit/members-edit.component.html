@@ -1,0 +1,71 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="breadcrumb">
+    Iron Forge Fitness Center /
+    <span>Members Edit</span>
+  </div>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="goBack()" aria-label="Back">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" (click)="enableEdit()">Edit</button>
+</mat-toolbar>
+
+<div class="member-banner mat-elevation-z3">
+  <img class="avatar" src="https://i.pravatar.cc/100?img=12" alt="Member Avatar" />
+
+  <div class="member-details">
+    <h2>John Doe</h2>
+    <div class="info-grid">
+      <div>
+        <strong>Member ID:</strong>
+        GM-001234
+      </div>
+      <div>
+        <strong>Joined:</strong>
+        Jan 10, 2023
+      </div>
+      <div>
+        <strong>Membership:</strong>
+        Gold Monthly
+      </div>
+      <div>
+        <strong>Expires On:</strong>
+        May 10, 2025
+      </div>
+      <div>
+        <strong>Phone:</strong>
+        +1 (555) 123-4567
+      </div>
+      <div>
+        <strong>Email:</strong>
+        john.doegmail.com
+      </div>
+      <div>
+        <strong>Last Check-in:</strong>
+        Apr 21, 2025 - 5:45 PM
+      </div>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag active">Active</span>
+    <span class="tag premium">Premium Plan</span>
+  </div>
+</div>
+
+<div class="edit-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="profile" routerLinkActive="active">Profile Info</a>
+        <a mat-list-item routerLink="membership" routerLinkActive="active">Membership</a>
+        <a mat-list-item routerLink="attendance" routerLinkActive="active">Attendance</a>
+        <a mat-list-item routerLink="billing" routerLinkActive="active">Billing</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

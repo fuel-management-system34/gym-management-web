@@ -1,0 +1,46 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="breadcrumb">
+    Iron Forge Fitness Center /
+    <span>Reports</span>
+  </div>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="goBack()" aria-label="Back">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" (click)="openNewReportDialogBox()">New</button>
+</mat-toolbar>
+<mat-tab-group class="custom-tabs">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a mat-button routerLink="attendance" routerLinkActive="active-tab">Attendance</a>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a mat-button routerLink="payments" routerLinkActive="active-tab">Payments</a>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a mat-button routerLink="trainerPerformance" routerLinkActive="active-tab">Performance</a>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a mat-button routerLink="classEnrollment" routerLinkActive="active-tab">Enrollments</a>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a mat-button routerLink="sales" routerLinkActive="active-tab">Sales</a>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<div class="tab-content">
+  <router-outlet></router-outlet>
+</div>

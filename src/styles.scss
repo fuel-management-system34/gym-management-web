@@ -1,12 +1,3 @@
-/**======================================================================
-=========================================================================
-Template Name: DashboardKit - Most Complete Bootstrap Admin Template
-Author: Phoenixcoded
-Support: support@phoenixcoded.net
-File: style.css
-=========================================================================
-=================================================================================== */
-
 // main framework
 @import 'node_modules/bootstrap/scss/functions';
 @import 'node_modules/bootstrap/scss/variables';
@@ -18,27 +9,11 @@ File: style.css
 
 // bootstrap import
 @import 'scss/bootstrap/bootstrap.scss';
-
 @import 'node_modules/bootstrap/scss/utilities';
 @import 'node_modules/bootstrap/scss/utilities/api';
 
-// main framework
-@import 'scss/themes/generic.scss';
-@import 'scss/themes/general.scss';
-
 @import 'scss/themes/components/components.scss';
-
-// theme
-@import 'scss/themes/layouts/menu/sidebar.scss';
 @import 'scss/themes/layouts/navbar/navbar.scss';
-@import 'scss/themes/layouts/pc-common.scss';
-@import 'scss/themes/layouts/breadcrumb/breadcrumb.scss';
-@import 'scss/themes/layouts/footer/footer.scss';
-
-@import 'scss/themes/preset-style.scss';
-
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
 
 html,
 body {
@@ -47,9 +22,71 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .dashoard-mat-card {
   min-height: 70vh;
+}
+
+.chip-active {
+  background-color: #b7ff8b !important;
+  color: black;
+}
+
+.chip-inactive {
+  background-color: #beffca !important;
+  color: black;
+}
+
+/* Change background and text color of FullCalendar buttons */
+.fc .fc-button {
+  background-color: var(--pc-header-background) !important; /* custom background color */
+  color: white; /* text color */
+  border: none;
+  border-radius: 4px;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--pc-header-background) !important; /* darker on hover */
+}
+
+.fc .fc-button-primary {
+  background-color: var(--pc-header-background) !important; /* different color for primary buttons */
+  color: white;
+}
+/* Header title (e.g., "Apr 27 – May 3, 2025") */
+.fc .fc-toolbar-title {
+  font-size: 18px;
+  color: #2b2a2a;
+  font-weight: 500;
+}
+
+.fc .fc-button {
+  font-size: 14px;
+  color: white;
+  background-color: var(--pc-header-background) !important; // blue
+  border: none;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--pc-header-background) !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 13px;
+  color: #444444;
+  font-weight: 500;
+}
+.fc .fc-timegrid-slot-label {
+  font-size: 12px;
+  color: #777;
+}
+.fc .fc-event-title {
+  font-size: 12px;
+  color: #ffffff; // white text on events
+}
+
+.fc .fc-event {
+  background-color: var(--pc-header-background) !important; // change event background color
 }

@@ -1,0 +1,21 @@
+.w-full {
+  width: 100%;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+
+:host ::ng-deep .mat-mdc-form-field .mdc-text-field--filled {
+  background-color: #fff !important;
+}
+
+th.mat-column-workout {
+  width: 50%;
+}
+

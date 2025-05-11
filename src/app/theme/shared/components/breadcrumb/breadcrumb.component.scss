@@ -1,0 +1,99 @@
+.large-font{
+    font-size: larger;
+}
+
+.page-header {
+    display: flex;
+    position: sticky;
+    align-items: center;
+    top: 60px;
+    left: 250px;
+    right: 0;
+    z-index: 1023;
+    min-height: 50px;
+    padding: 0px 0px 0px 0px;
+    background-color: #34495e;
+
+    .page-block {
+        width: 100%;
+    }
+
+    .page-header-title {
+        display: inline-block;
+    }
+
+    h5 {
+        margin-bottom: 0;
+        margin-right: 8px;
+        padding-right: 8px;
+        font-weight: 500;
+    }
+
+    .breadcrumb {
+        padding: 0;
+        display: inline-flex;
+        margin-bottom: 0;
+        background: transparent;
+        font-size: 13px;
+        margin-left: 25px;
+
+        a {
+            color: var(--pc-sidebar-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item {
+            .home {
+                color: var(--pc-sidebar-color);
+                font-size: 14px;
+            }
+
+            +.breadcrumb-item::before {
+                position: relative;
+                top: 2px;
+            }
+        }
+
+        svg {
+            width: 14px;
+            height: 14px;
+            vertical-align: baseline;
+        }
+    }
+}
+
+.margin-right{
+    margin-right: 10px;
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    background-color: #1abc9c; // You can replace with your theme variable
+    color: white;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-left: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px;
+
+    .btn-icon {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+
+    .btn-text {
+        font-size: 14px;
+    }
+
+    &:hover {
+        background-color: darken(#1abc9c, 5%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+        background-color: darken(#1abc9c, 10%);
+    }
+}

@@ -1,0 +1,74 @@
+<div class="common-dialog">
+  <div class="common-dialog-header">
+    <h2 mat-dialog-title>User Details</h2>
+  </div>
+
+  <mat-dialog-content class="common-dialog-content">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form mt-1">
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="tel" formControlName="phoneNumber" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Preferred Language</mat-label>
+            <mat-select formControlName="preferredLanguage">
+              <mat-option value="en">English</mat-option>
+              <mat-option value="si">Sinhala</mat-option>
+              <mat-option value="tm">Tamil</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Roles</mat-label>
+            <mat-select formControlName="roleIds" multiple>
+              <mat-option *ngFor="let role of availableRoles" [value]="role.roleId">{{ role.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <div class="toggle-row">
+            <mat-slide-toggle formControlName="isActive" color="primary">
+              {{ userForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+            </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="common-dialog-actions">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+      {{ isEdit ? 'Update' : 'Create' }}
+    </button>
+  </mat-dialog-actions>
+</div>

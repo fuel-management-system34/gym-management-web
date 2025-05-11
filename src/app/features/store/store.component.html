@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="breadcrumb">
+    Iron Forge Fitness Center /
+    <span>Store</span>
+  </div>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="goBack()" aria-label="Back">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" (click)="addNew()">New</button>
+</mat-toolbar>
+<div class="store-dashboard">
+  <mat-card class="store-header">
+    <h2>Store Insights</h2>
+    <div class="insights">
+      <mat-card *ngFor="let insight of storeInsights" class="insight-card">
+        <mat-icon>{{ insight.icon }}</mat-icon>
+        <div class="insight-content">
+          <h3>{{ insight.title }}</h3>
+          <p>{{ insight.value }}</p>
+        </div>
+      </mat-card>
+    </div>
+  </mat-card>
+
+  <mat-card class="category-cards">
+    <h3>Explore Store Categories</h3>
+    <mat-grid-list cols="4" rowHeight="250px">
+      <mat-grid-tile *ngFor="let category of categories">
+        <mat-card class="category-card">
+          <img mat-card-image [src]="category.imgSrc" alt="{{ category.name }}" class="img-card" />
+          <mat-card-footer>
+            <h4>{{ category.name }}</h4>
+          </mat-card-footer>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</div>

@@ -1,0 +1,57 @@
+<div class="member-add-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Add New Member</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="fullName" required />
+              <mat-error *ngIf="memberForm.get('fullName').hasError('required')">Full name is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" required email />
+              <mat-error *ngIf="memberForm.get('email').hasError('required')">Email is required.</mat-error>
+              <mat-error *ngIf="memberForm.get('email').hasError('email')">Enter a valid email.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Age</mat-label>
+              <input matInput formControlName="age" required type="number" min="18" />
+              <mat-error *ngIf="memberForm.get('age').hasError('required')">Age is required.</mat-error>
+              <mat-error *ngIf="memberForm.get('age').hasError('min')">Age must be 18 or older.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender" required>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="other">Other</mat-option>
+              </mat-select>
+              <mat-error *ngIf="memberForm.get('gender').hasError('required')">Gender is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Membership Type</mat-label>
+              <mat-select formControlName="membershipType" required>
+                <mat-option value="monthly">Monthly</mat-option>
+                <mat-option value="yearly">Yearly</mat-option>
+              </mat-select>
+              <mat-error *ngIf="memberForm.get('membershipType').hasError('required')">Membership type is required.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

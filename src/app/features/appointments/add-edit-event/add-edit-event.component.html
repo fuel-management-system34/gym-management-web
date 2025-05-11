@@ -1,0 +1,69 @@
+<div class="common-dialog container-fluid">
+  <div class="common-dialog-header">
+    <h2 mat-dialog-title>{{ data.event ? 'Edit' : 'Add' }} Event</h2>
+  </div>
+
+  <mat-dialog-content class="common-dialog-content">
+    <div class="row gy-3">
+      <div class="col-md-8">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="title" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Service</mat-label>
+          <input matInput [(ngModel)]="service" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="description"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Member(s)</mat-label>
+          <input matInput [(ngModel)]="members" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Trainer</mat-label>
+          <input matInput [(ngModel)]="trainer" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Start Time</mat-label>
+          <input matInput [(ngModel)]="start" [ngxMatTimepicker]="picker" readonly>
+          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>End Time</mat-label>
+          <input matInput [(ngModel)]="end" [ngxMatTimepicker]="picker2" readonly>
+          <ngx-mat-timepicker #picker2></ngx-mat-timepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <mat-slide-toggle color="primary">Is Active</mat-slide-toggle>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="common-dialog-actions mt-3">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>

@@ -1,14 +1,6 @@
-import { NotificationUtilService } from '../../../../Services/notification-util.service';
-// angular import
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-
-// project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-
-// third party
-
-// icon
 import { IconService } from '@ant-design/icons-angular';
 import {
   BellOutline,
@@ -29,7 +21,12 @@ import {
   ArrowRightOutline,
   GithubOutline
 } from '@ant-design/icons-angular/icons';
-import { AuthService } from 'src/app/Services/auth.service';
+import { TokenService } from 'src/app/Core/services/token.service';
+import { User } from 'src/app/Core/models/User';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { NotificationService } from '../../../../Services/notification-util.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-right',
@@ -38,91 +35,96 @@ import { AuthService } from 'src/app/Services/auth.service';
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss']
 })
-export class NavRightComponent implements OnInit {
+export class NavRightComponent implements OnInit, OnDestroy {
   @Input() styleSelectorToggle!: boolean;
   @Output() Customize = new EventEmitter();
-  windowWidth: number;
+
+  windowWidth: number = window.innerWidth;
   screenFull: boolean = true;
   loggedUserData: any;
+  activeUserData!: User;
+
+  private destroy$ = new Subject<void>();
+
+  profile = [{ icon: 'edit', title: 'Edit Profile' }];
+  setting = [
+    { icon: 'question-circle', title: 'Support' },
+    { icon: 'user', title: 'Account Settings' },
+    { icon: 'lock', title: 'Privacy Center' },
+    { icon: 'comment', title: 'Feedback' },
+    { icon: 'unordered-list', title: 'History' }
+  ];
+
   constructor(
     private iconService: IconService,
-    private authService: AuthService,
     private router: Router,
-    private notificationUtilService: NotificationUtilService
+    private notificationUtilService: NotificationService,
+    private tokenService: TokenService,
+    private authService: AuthService
   ) {
-    this.windowWidth = window.innerWidth;
-    this.iconService.addIcon(
-      ...[
-        CheckCircleOutline,
-        GiftOutline,
-        MessageOutline,
-        SettingOutline,
-        PhoneOutline,
-        LogoutOutline,
-        UserOutline,
-        EditOutline,
-        ProfileOutline,
-        QuestionCircleOutline,
-        LockOutline,
-        CommentOutline,
-        UnorderedListOutline,
-        ArrowRightOutline,
-        BellOutline,
-        GithubOutline,
-        WalletOutline
-      ]
-    );
+    this.registerIcons();
   }
-
-  profile = [
-    {
-      icon: 'edit',
-      title: 'Edit Profile'
-    },
-    {
-      icon: 'user',
-      title: 'View Profile'
-    },
-    {
-      icon: 'profile',
-      title: 'Social Profile'
-    },
-    {
-      icon: 'wallet',
-      title: 'Billing'
-    }
-  ];
-
-  setting = [
-    {
-      icon: 'question-circle',
-      title: 'Support'
-    },
-    {
-      icon: 'user',
-      title: 'Account Settings'
-    },
-    {
-      icon: 'lock',
-      title: 'Privacy Center'
-    },
-    {
-      icon: 'comment',
-      title: 'Feedback'
-    },
-    {
-      icon: 'unordered-list',
-      title: 'History'
-    }
-  ];
 
   ngOnInit(): void {
-    this.loggedUserData = JSON.parse(localStorage.getItem('loggedUserData') || '{}');
+    this.getUserDataWithRetry(3);
   }
 
-  logOut() {
-    this.authService.logout();
-    this.notificationUtilService.showSuccess('User logged out successfully!');
-    this.router.navigate(['/login']);
+  getUserDataWithRetry(retries: number): void {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      const userData = this.tokenService.getUserData();
+      attempts++;
+
+      if (userData) {
+        this.activeUserData = JSON.parse(userData);
+        clearInterval(interval);
+      } else if (attempts >= retries) {
+        clearInterval(interval);
+        console.warn('Failed to retrieve user data after retries.');
+      }
+    }, 1000); // Retry every 1 second
+  }
+
+  logOut(): void {
+    this.authService
+      .logout()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.notificationUtilService.success('Logged out successfully');
+        },
+        error: (err) => {
+          console.error('Logout failed:', err);
+          this.notificationUtilService.error('Logout failed');
+        }
+      });
+  }
+
+  private registerIcons(): void {
+    const icons = [
+      CheckCircleOutline,
+      GiftOutline,
+      MessageOutline,
+      SettingOutline,
+      PhoneOutline,
+      LogoutOutline,
+      UserOutline,
+      EditOutline,
+      ProfileOutline,
+      QuestionCircleOutline,
+      LockOutline,
+      CommentOutline,
+      UnorderedListOutline,
+      ArrowRightOutline,
+      BellOutline,
+      GithubOutline,
+      WalletOutline
+    ];
+    this.iconService.addIcon(...icons);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

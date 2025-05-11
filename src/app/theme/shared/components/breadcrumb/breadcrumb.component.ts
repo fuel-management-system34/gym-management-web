@@ -1,100 +1,64 @@
-// Angular Import
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterModule, Event } from '@angular/router';
+import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
+import { MenuItems } from '../../../../Models/menu-items.type';
+import { ToolbarService } from '../../../../Core/services/toolbar.service';
+import { ToolbarButton } from 'src/app/Core/models/toolbar-button.type';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
-// project import
-
-// icons
-import { IconModule, IconService } from '@ant-design/icons-angular';
-import { GlobalOutline, NodeExpandOutline } from '@ant-design/icons-angular/icons';
-import { NavigationItem, NavigationItems } from '../../../../Layout/admin-layout/navigation/navigation';
-
-interface titleType {
-  // eslint-disable-next-line
-  url: any;
+interface Breadcrumb {
+  url: string | false;
   title: string;
-  breadcrumbs: unknown;
   type: string;
-  link?: string | undefined;
-  description?: string | undefined;
-  path?: string | undefined;
+  breadcrumbs?: boolean;
 }
 
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule, IconModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatProgressSpinner],
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
-  // public props
-  @Input() type: string;
-  @Input() dashboard = true;
-  @Input() Component = false;
+  navigationList: Breadcrumb[] = [];
+  toolbarButtons: ToolbarButton[] = [];
 
-  navigations: NavigationItem[];
-  ComponentNavigations: NavigationItem[];
-  breadcrumbList: Array<string> = [];
-  navigationList!: titleType[];
-  componentList!: titleType[];
-
-  // constructor
   constructor(
-    private route: Router,
+    private router: Router,
     private titleService: Title,
-    private iconService: IconService
+    private toolbarService: ToolbarService
   ) {
-    this.navigations = NavigationItems;
-    this.type = 'theme1';
-    this.setBreadcrumb();
-    this.iconService.addIcon(...[GlobalOutline, NodeExpandOutline]);
+    this.initBreadcrumb();
+
+    this.toolbarService.visibleBtns$.subscribe((actions) => {
+      this.toolbarButtons = actions;
+    });
   }
 
-  // public method
-  setBreadcrumb() {
-    this.route.events.subscribe((router: Event) => {
-      if (router instanceof NavigationEnd) {
-        const activeLink = router.url;
-        const breadcrumbList = this.filterNavigation(this.navigations, activeLink);
-        this.navigationList = breadcrumbList;
-        const title = breadcrumbList[breadcrumbList.length - 1]?.title || 'Welcome';
-        this.titleService.setTitle(title + ' | Mantis  Angular Admin Template');
+  initBreadcrumb() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        const path = event.urlAfterRedirects;
+        const list = this.generateBreadcrumb(MenuItems, path);
+        this.navigationList = list;
+        const pageTitle = list[list.length - 1]?.title || 'Welcome';
+        this.titleService.setTitle(`${pageTitle} | Iron Forge Fitness`);
       }
     });
   }
 
-  filterNavigation(navItems: NavigationItem[], activeLink: string): titleType[] {
-    for (const navItem of navItems) {
-      if (navItem.type === 'item' && 'url' in navItem && navItem.url === activeLink) {
-        return [
-          {
-            url: 'url' in navItem ? navItem.url : false,
-            title: navItem.title,
-            link: navItem.link,
-            description: navItem.description,
-            path: navItem.path,
-            breadcrumbs: 'breadcrumbs' in navItem ? navItem.breadcrumbs : true,
-            type: navItem.type
-          }
-        ];
+  generateBreadcrumb(items: any[], url: string): Breadcrumb[] {
+    for (const item of items) {
+      if (item.route === url) {
+        return [{ url: item.route, title: item.title, type: 'item', breadcrumbs: true }];
       }
-      if ((navItem.type === 'group' || navItem.type === 'collapse') && 'children' in navItem) {
-        // eslint-disable-next-line
-        const breadcrumbList = this.filterNavigation(navItem.children!, activeLink);
-        if (breadcrumbList.length > 0) {
-          breadcrumbList.unshift({
-            url: 'url' in navItem ? navItem.url : false,
-            title: navItem.title,
-            link: navItem.link,
-            path: navItem.path,
-            description: navItem.description,
-            breadcrumbs: 'breadcrumbs' in navItem ? navItem.breadcrumbs : true,
-            type: navItem.type
-          });
-          return breadcrumbList;
+      if (item.children) {
+        const childTrail = this.generateBreadcrumb(item.children, url);
+        if (childTrail.length > 0) {
+          return [{ url: false, title: item.title, type: 'group', breadcrumbs: true }, ...childTrail];
         }
       }
     }

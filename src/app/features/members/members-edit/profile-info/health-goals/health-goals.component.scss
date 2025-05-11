@@ -1,0 +1,29 @@
+.goal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    mat-form-field {
+        flex: 1;
+        min-width: 240px;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+}

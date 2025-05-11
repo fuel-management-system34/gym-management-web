@@ -1,0 +1,42 @@
+<mat-card class="p-3">
+  <!-- Metrics Overview -->
+  <div class="metrics-grid">
+    <mat-card class="metric-card mat-elevation-z4" *ngFor="let metric of metrics">
+      <mat-icon class="metric-icon">{{ metric.icon }}</mat-icon>
+      <div class="metric-info">
+        <h3 class="metric-value">{{ metric.value }}</h3>
+        <p class="metric-label">{{ metric.label }}</p>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="welcome-banner mat-elevation-z4 mt-2">
+    <div class="banner-content">
+      <div class="text-content">
+        <h1>
+          🏋️‍♂️ Welcome to
+          <span>IRON FORGE</span>
+          Fitness Center
+        </h1>
+        <p>Track performance, manage staff, and engage members — all in one place.</p>
+      </div>
+      <img src="assets/images/img2.png" alt="Gym Banner" class="banner-image" />
+    </div>
+  </mat-card>
+
+  <!-- Recent Activities -->
+  <mat-card class="activity-card mat-elevation-z3 mt-3">
+    <h2 class="activity-title">Recent Activities</h2>
+
+    <div *ngFor="let item of recentActivities" class="activity-item">
+      <mat-icon class="activity-icon">notifications</mat-icon>
+      <div class="activity-details">
+        <span class="activity-text">
+          <strong>{{ item.user }}</strong>
+          {{ item.activity }}
+        </span>
+        <small class="activity-time">{{ item.time }}</small>
+      </div>
+    </div>
+  </mat-card>
+</mat-card>

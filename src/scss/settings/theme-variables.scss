@@ -11,7 +11,7 @@
 
   // Navbar
   --pc-sidebar-background: #e4eff494;
-  --pc-sidebar-color: #262626;
+  --pc-sidebar-color: #ffffff;
   --pc-sidebar-color-rgb: #{to-rgb(#262626)};
   --pc-sidebar-active-color: var(--bs-primary);
   --pc-sidebar-shadow: none;
@@ -31,7 +31,7 @@
 }
 
 $header-height: 60px;
-$sidebar-width: 260px;
+$sidebar-width: 250px;
 $sidebar-collapsed-width: 60px;
 $sidebar-collapsed-active-width: 300px;
 $sidebar-tab-width: 75px;
@@ -104,4 +104,8 @@ $danger-border-subtle: $red-200;
 $light-border-subtle: $gray-200;
 $dark-border-subtle: $gray-500;
 
-$preset-colors: (preset-1: (primary: #1677ff));
+$preset-colors: (
+  preset-1: (
+    primary: #1677ff
+  )
+);
