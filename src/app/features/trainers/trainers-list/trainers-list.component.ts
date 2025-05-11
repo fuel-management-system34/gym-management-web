@@ -51,11 +51,9 @@ export class TrainersListComponent implements OnInit, OnDestroy {
     private toolbarService: ToolbarService,
     private routes: Router
   ) {}
-  ngOnDestroy(): void {
-    this.setToolBar();
-  }
+
   ngOnInit(): void {
-    this.toolbarService.reset();
+    this.setToolBar();
   }
   private fb = inject(FormBuilder);
 
@@ -109,5 +107,9 @@ export class TrainersListComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.toolbarService.reset();
   }
 }
