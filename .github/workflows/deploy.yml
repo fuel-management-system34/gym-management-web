@@ -3,7 +3,7 @@ name: Build and Deploy Angular to cPanel via FTP
 on:
   push:
     branches:
-      - release/staging  # Trigger only on this branch
+      - release/staging # Trigger only on this branch
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18  # Match Angular version requirement
+          node-version: 18 # Match Angular version requirement
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -28,9 +28,10 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
 
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ftp.cerburus.com
+          username: cerburus_gym@gym.cerburus.com
           password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/ # Replace with actual project folder name inside dist/
+          server-dir: /gym.cerburus.com/ # Replace with target folder on cPanel
+          protocol: ftp # or 'ftps' if you want encryption
           port: 21
-          local-dir: ./dist/  # Replace with actual project folder name inside dist/
-          server-dir: /gym.cerburus.com/   # Replace with target folder on cPanel
