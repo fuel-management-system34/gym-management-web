@@ -22,11 +22,22 @@
           </ul>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center toolbar-buttons">
-          <ng-container *ngFor="let action of toolbarButtons">
-            <button mat-flat-button color="primary" [disabled]="action.isDisabled" (click)="action.callback()" class="toolbar-btn my-2">
-              <mat-icon class="btn-icon">{{ action.icon }}</mat-icon>
+          <ng-container *ngFor="let action of toolbarButtons; let last = last">
+            <button
+              mat-flat-button
+              color="primary"
+              [disabled]="action.isDisabled"
+              (click)="toolbarBtnClick(action)"
+              class="toolbar-btn my-2"
+              [ngClass]="{ 'margin-right': last }"
+            >
+              <ng-container *ngIf="!action.isLoading; else loadingIcon">
+                <mat-icon class="btn-icon">{{ action.icon }}</mat-icon>
+              </ng-container>
+              <ng-template #loadingIcon>
+                <mat-spinner class="spinner" diameter="20" strokeWidth="2"></mat-spinner>
+              </ng-template>
               <span class="btn-text">{{ action.title }}</span>
-              <!-- <mat-spinner diameter="20" strokeWidth="3"></mat-spinner> -->
             </button>
           </ng-container>
         </div>

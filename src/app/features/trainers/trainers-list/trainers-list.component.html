@@ -1,12 +1,4 @@
 <mat-card>
-  <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>keyboard_backspace</mat-icon>
-    </button>
-    <span>Trainers & Staff List</span>
-    <span class="spacer"></span>
-    <button mat-raised-button color="accent" [routerLink]="['/trainers/new']">+ Add New Trainer</button>
-  </mat-toolbar>
   <mat-card-content>
     <form [formGroup]="filterForm" class="filters">
       <mat-form-field appearance="outline">

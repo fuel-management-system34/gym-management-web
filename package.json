@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "author": "Paradise",
   "license": "MIT",
+  "private": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-prod": "ng build --configuration production --base-href /angular/free/",
+    "build-prod": "ng build --configuration production --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix"
   },
-  "private": false,
   "dependencies": {
     "@angular/animations": "^18.2.8",
     "@angular/cdk": "^18.0.5",
@@ -77,7 +77,13 @@
   "engines": {
     "node": "20.13.x"
   },
-  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\r [![Price](https://img.shields.io/badge/price-FREE-0098f7.svg)](https://github.com/codedthemes/mantis-free-angular-admin-template/blob/main/LICENSE)\r [![GitHub package version](https://img.shields.io/github/package-json/v/codedthemes/mantis-free-angular-admin-template)](https://github.com/codedthemes/mantis-free-angular-admin-template/)",
+  "description": "Iron Forge Gym Management System - Angular-based admin panel for managing gym operations, clients, and reports.",
   "main": "karma.conf.js",
-  "keywords": []
+  "keywords": [
+    "gym",
+    "management",
+    "angular",
+    "admin-panel",
+    "fitness"
+  ]
 }

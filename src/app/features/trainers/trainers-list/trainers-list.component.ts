@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { Observable, of, combineLatest } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ToolbarService } from '../../../Core/services/toolbar.service';
+import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
 
 interface StaffMember {
   id: number;
@@ -44,7 +46,15 @@ interface StaffMember {
   templateUrl: './trainers-list.component.html',
   styleUrls: ['./trainers-list.component.scss']
 })
-export class TrainersListComponent {
+export class TrainersListComponent implements OnInit, OnDestroy {
+  constructor(
+    private toolbarService: ToolbarService,
+    private routes: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.setToolBar();
+  }
   private fb = inject(FormBuilder);
 
   // Mock staff data (replace with API in real app)
@@ -80,5 +90,26 @@ export class TrainersListComponent {
 
   clearFilters() {
     this.filterForm.reset();
+  }
+
+  setToolBar(): void {
+    this.toolbarService.reset();
+    this.toolbarService.setVisible([ToolbarButtons.New, ToolbarButtons.Refresh]);
+    this.toolbarService.clickButton$.subscribe((res) => {
+      if (res) {
+        switch (res) {
+          case ToolbarButtons.New:
+            this.routes.navigate(['/trainers/new']);
+            break;
+          case ToolbarButtons.Refresh:
+            //this.loadMembers();
+            break;
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.toolbarService.reset();
   }
 }

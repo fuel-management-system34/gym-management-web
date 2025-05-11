@@ -9,6 +9,7 @@ export class ToolbarService {
   private visibleBtnsSubject = new BehaviorSubject<ToolbarButton[]>([]);
   visibleBtns$ = this.visibleBtnsSubject.asObservable();
   loadingButtons$ = new BehaviorSubject<ToolbarButton[]>([]);
+  clickButton$ = new BehaviorSubject<ToolbarButton | null>(null);
 
   setVisible(actions: ToolbarButton[]): void {
     this.visibleBtnsSubject.next(actions);
@@ -34,5 +35,6 @@ export class ToolbarService {
   reset(): void {
     this.visibleBtnsSubject.next([]);
     this.loadingButtons$.next([]);
+    this.clickButton$.next(null);
   }
 }

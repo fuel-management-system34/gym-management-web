@@ -11,12 +11,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { MemberApiService } from 'src/app/Services/api/member-api.service';
+import { MemberApiService } from '../../../Services/api/member-api.service';
 import { Member } from '../../workout plans/workout-plans-dashboard/workout-plans-dashboard.component';
-import { ToolbarService } from 'src/app/Core/services/toolbar.service';
-
+import { ToolbarService } from '../../../Core/services/toolbar.service';
+import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
 @Component({
   selector: 'app-members-list',
   standalone: true,
@@ -47,7 +47,8 @@ export class MembersListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private memberService: MemberApiService,
-    private toolbarService: ToolbarService
+    private toolbarService: ToolbarService,
+    private routes: Router
   ) {
     this.filterForm = this.fb.group({
       name: [''],
@@ -58,34 +59,23 @@ export class MembersListComponent implements OnInit {
   ngOnInit(): void {
     this.loadMembers();
     this.setToolBar();
-    // this.dataSource.data = MEMBER_DATA;
-
-    // this.filterForm.valueChanges.subscribe((values) => {
-    //   this.applyFilter(values);
-    // });
   }
 
   setToolBar(): void {
     this.toolbarService.reset();
-    this.toolbarService.setVisible([
-      {
-        title: 'Refresh',
-        icon: 'refresh',
-        callback: () => this.loadMembers()
-      },
-      {
-        title: 'New',
-        icon: 'new',
-        callback: () => this.loadMembers()
+    this.toolbarService.setVisible([ToolbarButtons.New, ToolbarButtons.Refresh]);
+    this.toolbarService.clickButton$.subscribe((res) => {
+      if (res) {
+        switch (res) {
+          case ToolbarButtons.New:
+            this.routes.navigate(['/members/new']);
+            break;
+          case ToolbarButtons.Refresh:
+            this.loadMembers();
+            break;
+        }
       }
-    ]);
-    this.toolbarService.setDisabled([
-      {
-        title: 'Refresh',
-        icon: 'refresh',
-        callback: () => this.loadMembers()
-      }
-    ]);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -93,70 +83,17 @@ export class MembersListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(values: any) {
-    this.dataSource.filterPredicate = (data: Member, filter: string): boolean => {
-      const filters = JSON.parse(filter);
-      return data.name.toLowerCase().includes(filters.name.toLowerCase()) && data.email.toLowerCase().includes(filters.email.toLowerCase());
-    };
-    this.dataSource.filter = JSON.stringify(values);
-  }
-
   loadMembers(): void {
+    ToolbarButtons.Refresh.isLoading = true;
     this.memberService.getAllMembers().subscribe({
       next: (members) => {
         this.dataSource.data = members?.data;
+        ToolbarButtons.Refresh.isLoading = false;
       },
       error: (err) => {
         console.error('Failed to load members:', err);
+        ToolbarButtons.Refresh.isLoading = false;
       }
     });
   }
 }
-
-const MEMBER_DATA: Member[] = [
-  {
-    id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
-    phone: '123-456-7890',
-    membership: 'Gold',
-    joinDate: '2023-01-15',
-    status: 'Active'
-  },
-  {
-    id: 2,
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    phone: '555-123-4567',
-    membership: 'Silver',
-    joinDate: '2022-12-01',
-    status: 'Inactive'
-  },
-  {
-    id: 3,
-    name: 'Bob Johnson',
-    email: 'bob@example.com',
-    phone: '999-888-7777',
-    membership: 'Platinum',
-    joinDate: '2023-02-20',
-    status: 'Active'
-  },
-  {
-    id: 4,
-    name: 'Alice Brown',
-    email: 'alice@example.com',
-    phone: '777-666-5555',
-    membership: 'Gold',
-    joinDate: '2023-03-05',
-    status: 'Active'
-  },
-  {
-    id: 5,
-    name: 'Tom Hardy',
-    email: 'tom@example.com',
-    phone: '321-654-0987',
-    membership: 'Basic',
-    joinDate: '2023-04-01',
-    status: 'Pending'
-  }
-];

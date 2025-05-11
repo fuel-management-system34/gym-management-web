@@ -24,9 +24,10 @@
     .menu-search {
         width: 100%;
         padding: 0.5rem;
+        padding-left: 15px;
         margin-bottom: 1rem;
         border-radius: 4px;
-        font-size: 14px;
+        font-size: 17px;
         border: 1px solid #ccc;
         border: none;
     }
@@ -48,7 +49,7 @@
             .menu-group {
                 display: flex;
                 align-items: center;
-                padding: 7px;
+                padding: 4px;
                 text-decoration: none;
                 cursor: pointer;
                 color: white;
