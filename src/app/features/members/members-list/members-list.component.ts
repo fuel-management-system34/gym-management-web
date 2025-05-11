@@ -87,7 +87,7 @@ export class MembersListComponent implements OnInit {
     ToolbarButtons.Refresh.isLoading = true;
     this.memberService.getAllMembers().subscribe({
       next: (members) => {
-        this.dataSource.data = members?.data;
+        this.dataSource.data = members;
         ToolbarButtons.Refresh.isLoading = false;
       },
       error: (err) => {
