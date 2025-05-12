@@ -94,7 +94,7 @@ export class TrainersListComponent implements OnInit, OnDestroy {
 
   setToolBar(): void {
     this.toolbarService.reset();
-    this.toolbarService.setVisible([ToolbarButtons.New, ToolbarButtons.Refresh]);
+    this.toolbarService.setVisible([ToolbarButtons.New, ToolbarButtons.Refresh, ToolbarButtons.Export]);
     this.toolbarService.clickButton$.subscribe((res) => {
       if (res) {
         switch (res) {

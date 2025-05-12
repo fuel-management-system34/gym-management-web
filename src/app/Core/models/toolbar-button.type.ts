@@ -2,7 +2,18 @@ export enum ToolbarButtonKey {
   Refresh = 'Refresh',
   New = 'New',
   Save = 'Save',
-  SaveAndClose = 'SaveAndClose'
+  SaveAndClose = 'SaveAndClose',
+  Upload = 'Upload',
+  Download = 'Download',
+  Export = 'Export',
+  Delete = 'Delete',
+  Edit = 'Edit',
+  Import = 'Import',
+  Print = 'Print',
+  Back = 'Back',
+  Next = 'Next',
+  Cancel = 'Cancel',
+  Submit = 'Submit',
 }
 
 export interface ToolbarButton {
