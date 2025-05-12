@@ -26,24 +26,16 @@ export class AuthService {
     this.init();
   }
 
-  private init(): void {
-    if (this.tokenService.getToken()) {
-      this.validateToken().subscribe({
-        next: (isValid) => {
-          if (isValid) {
-            this.loadUserProfile();
-          } else {
-            this.attemptRefresh();
-          }
-        },
-        error: (error) => {
-          this.attemptRefresh();
-        }
-      });
-    } else {
-      this.isAuthenticatedSubject.next(false);
-    }
+private init(): void {
+  const token = this.tokenService.getToken();
+
+  if (token && !this.tokenService.isTokenExpired(token)) {
+    this.loadUserProfile();
+  } else {
+    this.attemptRefresh();
   }
+}
+
 
   // JWT login
   login(credentials: { email: string; password: string }): Observable<TokenResponse> {
@@ -185,17 +177,26 @@ export class AuthService {
     } catch (e) {}
   }
 
-  private attemptRefresh(): void {
-    const refreshToken = this.tokenService.getRefreshToken();
-    if (!refreshToken) {
-      return;
-    }
+private attemptRefresh(): void {
+  const refreshToken = this.tokenService.getRefreshToken();
 
-    this.refreshToken(refreshToken).subscribe({
-      next: () => {},
-      error: (error) => {
-        // User will be logged out on next API call that returns 401
-      }
-    });
+  if (!refreshToken) {
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/login']);
+    return;
   }
+
+  this.tokenRefreshService.refreshToken(refreshToken).subscribe({
+    next: (response) => {
+     this.tokenService.saveToken(response.token);
+      this.tokenService.saveRefreshToken(response.refreshToken);
+      this.loadUserProfile();
+    },
+    error: () => {
+      this.isAuthenticatedSubject.next(false);
+      this.router.navigate(['/login']); 
+    }
+  });
+}
+
 }
