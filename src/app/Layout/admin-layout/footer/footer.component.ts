@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { readFileSync } from 'fs';
+import { APP_VERSION } from 'src/environments/version';
 
 @Component({
   selector: 'app-footer',
@@ -11,6 +11,5 @@ import { readFileSync } from 'fs';
   imports: [CommonModule, MatCardModule]
 })
 export class FooterComponent {
-  packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
-  version = this.packageJson.version;
+  version = APP_VERSION;
 }
