@@ -10,13 +10,13 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 import { AddEditRoleComponent } from '../add-edit-role/add-edit-role.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatCommonModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NotificationService } from '../../../../Services/notification-util.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinner, MatSpinner } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-role-list',
@@ -24,14 +24,15 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     CommonModule,
     MatCommonModule,
-    MatCardModule,
     MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatProgressSpinner,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   templateUrl: './role-list.component.html',
   styleUrl: './role-list.component.scss'
@@ -39,7 +40,7 @@ import { MatMenuModule } from '@angular/material/menu';
 export class RoleListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'actions'];
   dataSource = new MatTableDataSource<Role>([]);
-  loading = true;
+  filter = new FormControl('');
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -69,22 +70,21 @@ export class RoleListComponent implements OnInit {
   }
 
   loadRoles() {
-    this.loading = true;
-    this.roleService
-      .getRoles()
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
-      .subscribe(
-        (roles) => {
-          this.dataSource.data = roles;
-        },
-        (error) => {
-          this.notificationService.error(`Failed to load roles`);
-        }
-      );
+    // this.roleService
+    //   .getRoles()
+    //   .pipe(
+    //     finalize(() => {
+    //       this.loading = false;
+    //     })
+    //   )
+    //   .subscribe(
+    //     (roles) => {
+    //       this.dataSource.data = roles;
+    //     },
+    //     (error) => {
+    //       this.notificationService.error(`Failed to load roles`);
+    //     }
+    //   );
   }
 
   openRoleForm(role?: Role) {
@@ -126,9 +126,5 @@ export class RoleListComponent implements OnInit {
     });
   }
 
-  viewUsers(role: Role) {
-    // This would typically open a dialog showing users with this role
-    // For this example, we'll just show a toast
-    // this.toastr.info(`View users with role "${role.name}" functionality would be implemented here`, 'Information');
-  }
+  viewUsers(role: Role) {}
 }

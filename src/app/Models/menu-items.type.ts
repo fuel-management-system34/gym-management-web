@@ -95,7 +95,7 @@ export const MenuItems: any[] = [
     children: [
       { title: 'Holidays', icon: 'event_note', route: '/site-settings/holidays' },
       { title: 'Users', icon: 'account_circle', route: '/site-settings/users' },
-      { title: 'Roles', icon: 'security', route: '/site-settings/roles' },
+      { title: 'Roles', icon: 'group_add', route: '/site-settings/roles' },
       { title: 'Sites', icon: 'domain', route: '/site-settings/sites' }
     ]
   }

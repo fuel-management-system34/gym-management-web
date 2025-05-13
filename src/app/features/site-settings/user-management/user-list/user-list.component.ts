@@ -14,12 +14,14 @@ import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../../../theme/shared/shared.module';
-import { NotificationService } from 'src/app/Services/notification-util.service';
+import { NotificationService } from '../../../../Services/notification-util.service';
+import { ToolbarService } from '../../../../Core/services/toolbar.service';
+import { ToolbarButtons } from '../../../../Core/const/common-toolbar-buttons';
 
 @Component({
   selector: 'app-user-list',
@@ -48,7 +50,7 @@ import { NotificationService } from 'src/app/Services/notification-util.service'
 export class UserListComponent implements OnInit, AfterViewInit {
   displayedColumns = ['username', 'email', 'firstName', 'lastName', 'isActive', 'actions'];
   dataSource = new MatTableDataSource<User>([]);
-  loading = true;
+  filter = new FormControl('');
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -56,11 +58,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private toolbarService: ToolbarService
   ) {}
 
   ngOnInit(): void {
     this.loadUsers();
+    this.setupToolBar();
   }
 
   ngAfterViewInit(): void {
@@ -78,14 +82,13 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   loadUsers(): void {
-    this.loading = true;
-    this.userService
-      .getUsers()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe({
-        next: (users) => (this.dataSource.data = users),
-        error: () => this.notificationService.error('Failed to load users')
-      });
+    // this.userService
+    //   .getUsers()
+    //   .pipe(finalize(() => (this.loading = false)))
+    //   .subscribe({
+    //     next: (users) => (this.dataSource.data = users),
+    //     error: () => this.notificationService.error('Failed to load users')
+    //   });
   }
 
   openUserForm(user?: User): void {
@@ -163,6 +166,23 @@ export class UserListComponent implements OnInit, AfterViewInit {
       if (result) {
         // Implement reset password logic here
         this.notificationService.error(`Password reset functionality would be implemented here`);
+      }
+    });
+  }
+
+  setupToolBar(): void {
+    this.toolbarService.reset();
+    this.toolbarService.setVisible([ToolbarButtons.New, ToolbarButtons.Refresh]);
+    this.toolbarService.clickButton$.subscribe((res) => {
+      if (res) {
+        switch (res) {
+          case ToolbarButtons.New:
+            this.openUserForm();
+            break;
+          case ToolbarButtons.Refresh:
+            this.loadUsers();
+            break;
+        }
       }
     });
   }
