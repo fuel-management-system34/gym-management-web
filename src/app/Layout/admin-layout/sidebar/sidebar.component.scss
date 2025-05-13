@@ -3,15 +3,17 @@
     background-color: #0E1E52;
     color: white;
     padding-top: 70px !important;
-    transition: width 0.5s ease;
+    transition: width 0.3s ease;
     overflow-y: auto;
     overflow-x: hidden;
     height: 100vh;
 
-    .cstm-padding{
-        padding: 0.5rem !important;
-        padding-right: 0px !important;
-        padding-top: 0px !important;
+    .cstm-padding-1 {
+        padding-top: 5px !important;
+    }
+
+    .cstm-padding-2 {
+        padding-bottom: 10px !important;
     }
 
     &.collapsed {
@@ -98,7 +100,7 @@
 
 .search{
     width: 80%;
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
 .collapsed-btn {

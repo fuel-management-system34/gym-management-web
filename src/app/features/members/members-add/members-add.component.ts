@@ -1,7 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,15 +22,14 @@ import { Subscription } from 'rxjs';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
     HttpClientModule,
     MatToolbarModule,
-    MatIconModule,    
-    MatDatepickerModule  
+    MatIconModule,
+    MatDatepickerModule
   ]
 })
 export class MembersAddComponent implements OnInit, OnDestroy {
@@ -42,18 +40,16 @@ export class MembersAddComponent implements OnInit, OnDestroy {
   private location = inject(Location);
   private notificationService = inject(NotificationService);
   private router = inject(Router);
-   private subscriptions = new Subscription();
+  private subscriptions = new Subscription();
 
   constructor() {
     this.createForm();
   }
 
-    ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
 
   createForm(): void {
-     this.memberForm = this.fb.group({
+    this.memberForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -65,59 +61,59 @@ export class MembersAddComponent implements OnInit, OnDestroy {
       address: [''],
       emergency_contact_name: [''],
       emergency_contact_phone: [''],
-      emergency_contact_relationship: [''],
+      emergency_contact_relationship: ['']
     });
   }
 
   onSubmit(): void {
     if (this.memberForm.valid) {
-       const formValues = this.memberForm.value;
+      const formValues = this.memberForm.value;
       const mappedValues = this.mapValuesForBind(formValues);
-      this.subscriptions.add(this.memberService.addMember(this.memberForm.value).subscribe({
-        next: () => {
-          this.notificationService.success('Member added successfully');
-          this.router.navigate(['/members']);
-        },
-        error: () => {
-          this.notificationService.error('Error adding member');
-        }
-      })
-    );
-    }
-    else{
-      console.log('invalid from')
+      this.subscriptions.add(
+        this.memberService.addMember(this.memberForm.value).subscribe({
+          next: () => {
+            this.notificationService.success('Member added successfully');
+            this.router.navigate(['/members']);
+          },
+          error: () => {
+            this.notificationService.error('Error adding member');
+          }
+        })
+      );
+    } else {
+      console.log('invalid from');
     }
   }
 
   mapValuesForBind(formValues: any): any {
-      const mappedValues = {    
-        first_name: formValues.first_name,
-        last_name: formValues.last_name,
-        email: formValues.email,
-        phone_number: formValues.phone_number,
-        date_of_birth: new Date(formValues.date_of_birth).toISOString(), 
-        gender: formValues.gender,
-        height: formValues.height,
-        weight: formValues.weight,
-        address: formValues.address,
-        emergency_contact_name: formValues.emergency_contact_name,
-        emergency_contact_phone: formValues.emergency_contact_phone,
-        emergency_contact_relationship: formValues.emergency_contact_relationship,
-        current_active_workout_plan_id: formValues.current_active_workout_plan_id,
-        workout_plan_history_id: formValues.workout_plan_history_id,
-        preferred_workout_type_id: formValues.preferred_workout_type_id,    
-        is_active: 1,
-        is_deleted: 0,
-        created_at: new Date().toISOString(),    
-      };
-      return mappedValues;
-    }
-    
-    goBack(): void {
-      this.location.back();
-    }
+    const mappedValues = {
+      first_name: formValues.first_name,
+      last_name: formValues.last_name,
+      email: formValues.email,
+      phone_number: formValues.phone_number,
+      date_of_birth: new Date(formValues.date_of_birth).toISOString(),
+      gender: formValues.gender,
+      height: formValues.height,
+      weight: formValues.weight,
+      address: formValues.address,
+      emergency_contact_name: formValues.emergency_contact_name,
+      emergency_contact_phone: formValues.emergency_contact_phone,
+      emergency_contact_relationship: formValues.emergency_contact_relationship,
+      current_active_workout_plan_id: formValues.current_active_workout_plan_id,
+      workout_plan_history_id: formValues.workout_plan_history_id,
+      preferred_workout_type_id: formValues.preferred_workout_type_id,
+      is_active: 1,
+      is_deleted: 0,
+      created_at: new Date().toISOString()
+    };
+    return mappedValues;
+  }
 
-      ngOnDestroy(): void {
-      this.subscriptions.unsubscribe();
-    }
+  goBack(): void {
+    this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

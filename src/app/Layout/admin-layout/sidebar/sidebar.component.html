@@ -1,6 +1,6 @@
 <aside [class.collapsed]="isCollapsed" class="admin-sidebar">
-  <nav class="cstm-padding">
-    <div class="row">
+  <nav>
+    <div class="row" [ngClass]="{ 'cstm-padding-1': !isCollapsed }">
       <div class="search" *ngIf="!isCollapsed">
         <input type="text" [formControl]="searchControl" placeholder="Search" class="menu-search" />
       </div>
@@ -9,7 +9,7 @@
           {{ isCollapsed ? '»' : '«' }}
         </button>
       </div>
-      <button (click)="toggleSidebar()" class="toggle-btn" *ngIf="isCollapsed">
+      <button (click)="toggleSidebar()" class="toggle-btn cstm-padding-2" *ngIf="isCollapsed">
         {{ isCollapsed ? '»' : '«' }}
       </button>
     </div>
@@ -18,7 +18,7 @@
       <ng-container *ngFor="let item of filteredItems">
         <!-- Parent without children -->
         <li *ngIf="!item.isGroup">
-          <a [routerLink]="item.route" [class.active-tab]="isActiveRoute(item.route)">
+          <a [routerLink]="item.route" [class.active-tab]="isActiveRoute(item.route)" [ngClass]="{ 'justify-content-center': isCollapsed }">
             <span class="material-icons">{{ item.icon }}</span>
             <span class="menu-item" *ngIf="!isCollapsed">{{ item.title }}</span>
           </a>
@@ -26,7 +26,7 @@
 
         <!-- Parent with children -->
         <li *ngIf="item.isGroup">
-          <div class="menu-group" (click)="toggleGroup(item)">
+          <div class="menu-group" (click)="toggleGroup(item)" [ngClass]="{ 'justify-content-center': isCollapsed }">
             <span class="material-icons">{{ item.icon }}</span>
             <span class="menu-item" *ngIf="!isCollapsed">{{ item.title }}</span>
             <span class="material-icons expand-icon" *ngIf="!isCollapsed">

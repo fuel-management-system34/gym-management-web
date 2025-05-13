@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -36,7 +36,7 @@ import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
     MatIconModule
   ]
 })
-export class MembersListComponent implements OnInit {
+export class MembersListComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
   displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'membership', 'joinDate', 'status'];
   dataSource = new MatTableDataSource<Member>();
@@ -95,5 +95,9 @@ export class MembersListComponent implements OnInit {
         ToolbarButtons.Refresh.isLoading = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.toolbarService.reset();
   }
 }
