@@ -1,7 +1,4 @@
 
-.version-text{
-  color: #929294 !important
-}
 
 .version-card {
   display: flex;
@@ -9,7 +6,8 @@
 }
 
 .version-text {
-  font-size: 0.875rem;
-  color: #666;
+  font-size: 0.775rem;
+  color: #7c7878;
+  margin-left: 85%;
 }
 
