@@ -18,7 +18,7 @@ export class TokenRefreshService {
 
   validateToken(token: string): Observable<boolean> {
     return this.http
-      .get(`${this.apiUrl}/Auth/validate-token`, {
+      .get(`${this.apiUrl}validate-token`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

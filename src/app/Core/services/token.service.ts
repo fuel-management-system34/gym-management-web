@@ -37,4 +37,25 @@ export class TokenService {
   removeRefreshToken(): void {
     localStorage.removeItem(this.refreshTokenKey);
   }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const [, payload] = token.split('.');
+      const decodedPayload = JSON.parse(atob(payload));
+      const exp = decodedPayload.exp;
+      const now = Math.floor(Date.now() / 1000);
+      return exp < now;
+    } catch (e) {
+      console.error('Token parsing error:', e);
+      return true;
+    }
+  }
+
+  saveTokens(response: { access_token: string; refresh_token: string }): void 
+  {
+    this.saveToken(response.access_token);
+    this.saveRefreshToken(response.refresh_token);
+  }
+
+
 }
