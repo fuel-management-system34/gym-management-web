@@ -1,6 +1,6 @@
 {
   "name": "iron-forge-gym-management-system",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "author": "Paradise",
   "license": "MIT",
   "private": false,
@@ -15,7 +15,9 @@
     "lint-fix": "ng lint --fix",
     "set-version": "ts-node ./tools/set-version.ts",
     "version": "npm run set-version && git add src/environments/version.ts",
-    "version:patch": "npm version patch -m \"chore(release): bump patch version to %s\""
+    "version:patch": "npm version patch -m \"chore(release): bump patch version to %s\"",
+    "version:minor": "npm version minor -m \"chore(release): bump minor version to %s\" && npm run version",
+    "version:major": "npm version major -m \"chore(release): bump major version to %s\" && npm run version"
   },
   "dependencies": {
     "@angular/animations": "^18.2.8",
