@@ -1,6 +1,8 @@
 import { writeFileSync, readFileSync } from 'fs';
-const { version } = JSON.parse(readFileSync('./package.json', 'utf8'));
+
+const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const version = packageJson.version;
 
 const content = `export const APP_VERSION = '${version}';\n`;
 writeFileSync('./src/environments/version.ts', content);
-console.log(`Version ${version} written to src/environments/version.ts`);
+console.log(`✅ Version ${version} written to src/environments/version.ts`);
