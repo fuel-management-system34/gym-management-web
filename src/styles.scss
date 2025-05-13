@@ -67,6 +67,16 @@ form.filters {
     --mdc-outlined-text-field-outline-color: #e53935;
     --mdc-outlined-text-field-focus-outline-color: #e53935;
   }
+
+  .mat-mdc-form-field-infix{
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-height: 30px !important;
+  }
+
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 50% !important;
+  }
 }
 
 // Smaller input and select text
