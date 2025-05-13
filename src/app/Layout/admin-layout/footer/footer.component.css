@@ -1,0 +1,13 @@
+
+
+.version-card {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.version-text {
+  font-size: 0.775rem;
+  color: #7c7878;
+  margin-left: 85%;
+}
+
