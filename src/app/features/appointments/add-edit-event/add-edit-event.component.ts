@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,13 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton-loader-table/skeleton-loader-table.component';
-import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/breadcrumb.component';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { AddEditUserComponent } from '../../user-management/add-edit-user/add-edit-user.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
@@ -31,7 +26,6 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSort,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -41,11 +35,7 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
     MatProgressSpinnerModule,
     MatMenuModule,
     ReactiveFormsModule,
-    AddEditUserComponent,
-    ConfirmDialogComponent,
     SharedModule,
-    BreadcrumbComponent,
-    SkeletonLoaderTableComponent,
     MatSlideToggleModule,
     NgxMatTimepickerModule
   ]

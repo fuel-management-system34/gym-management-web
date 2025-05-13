@@ -8,17 +8,17 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
-import { User } from '../../..//Core/models/User';
-import { UserService } from '../../../Core/services/user.service';
+import { User } from '../../../../Core/models/User';
+import { UserService } from '../../../../Core/services/user.service';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
-import { SharedModule } from '../../../theme/shared/shared.module';
+import { SharedModule } from '../../../../theme/shared/shared.module';
 import { NotificationService } from 'src/app/Services/notification-util.service';
 
 @Component({

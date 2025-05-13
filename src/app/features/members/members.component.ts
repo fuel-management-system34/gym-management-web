@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,6 +6,6 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss'],
-  imports: [RouterOutlet, MatCardModule]
+  imports: [RouterOutlet]
 })
 export class MembersComponent {}

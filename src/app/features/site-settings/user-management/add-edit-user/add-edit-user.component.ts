@@ -13,10 +13,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/Services/notification-util.service';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { Role } from '../../../Core/models/Role';
-import { User } from '../../../Core/models/User';
-import { RoleService } from '../../../Core/services/role.service';
-import { UserService } from '../../../Core/services/user.service';
+import { Role } from '../../../../Core/models/Role';
+import { User } from '../../../../Core/models/User';
+import { RoleService } from '../../../../Core/services/role.service';
+import { UserService } from '../../../../Core/services/user.service';
 
 @Component({
   selector: 'app-add-edit-user',

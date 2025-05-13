@@ -7,6 +7,7 @@ import { MembersEditComponent } from './features/members/members-edit/members-ed
 import { TrainersComponent } from './features/trainers/trainers.component';
 import { TrainersEditComponent } from './features/trainers/trainers-edit/trainers-edit.component';
 import { ReportsComponent } from './features/reports/reports.component';
+import { SiteListComponent } from './features/site-settings/site-list/site-list.component';
 
 const routes: Routes = [
   {
@@ -29,16 +30,26 @@ const routes: Routes = [
       },
       {
         path: 'site-settings',
-        loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent),
+        loadComponent: () => import('./features/site-settings/site-settings.component').then((c) => c.SiteSettingsComponent),
         children: [
           { path: '', redirectTo: 'users', pathMatch: 'full' },
           {
             path: 'users',
-            loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+            loadComponent: () =>
+              import('./features/site-settings/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+          },
+          {
+            path: 'roles',
+            loadComponent: () =>
+              import('./features/site-settings/user-management/role-list/role-list.component').then((c) => c.RoleListComponent)
           },
           {
             path: 'sites',
-            loadComponent: () => import('./features/user-management/user-list/user-list.component').then((c) => c.UserListComponent)
+            loadComponent: () => import('./features/site-settings/site-list/site-list.component').then((c) => c.SiteListComponent)
+          },
+          {
+            path: 'holidays',
+            loadComponent: () => import('./features/site-settings/holidays/holidays.component').then((c) => c.HolidaysComponent)
           }
         ]
       },

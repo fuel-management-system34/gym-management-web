@@ -17,7 +17,6 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 import { SkeletonLoaderTableComponent } from 'src/app/shared/components/skeleton-loader-table/skeleton-loader-table.component';
 import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/breadcrumb.component';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { AddEditUserComponent } from '../../user-management/add-edit-user/add-edit-user.component';
 import { User } from 'src/app/Core/models/User';
 
 @Component({
@@ -28,7 +27,6 @@ import { User } from 'src/app/Core/models/User';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSort,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -38,11 +36,7 @@ import { User } from 'src/app/Core/models/User';
     MatProgressSpinnerModule,
     MatMenuModule,
     ReactiveFormsModule,
-    AddEditUserComponent,
-    ConfirmDialogComponent,
     SharedModule,
-    BreadcrumbComponent,
-    SkeletonLoaderTableComponent,
     MatDialogModule
   ],
   templateUrl: './site-dashboard.component.html',

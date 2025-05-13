@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg, EventDropArg } from '@fullcalendar/core';
@@ -13,9 +12,9 @@ import { AddEditEventComponent } from '../add-edit-event/add-edit-event.componen
 @Component({
   selector: 'app-calender',
   templateUrl: './calender.component.html',
-  styleUrls: ['./calender.component.css'],
+  styleUrls: ['./calender.component.scss'],
   standalone: true,
-  imports: [CommonModule, FullCalendarModule, MatCardModule, AddEditEventComponent]
+  imports: [CommonModule, FullCalendarModule]
 })
 export class CalenderComponent {
   @ViewChild('calendar') calendarComponent: any;

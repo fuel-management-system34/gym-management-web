@@ -93,10 +93,10 @@ export const MenuItems: any[] = [
     route: '/site-settings',
     isGroup: true,
     children: [
-      { title: 'Sites', icon: 'domain', route: '/site-settings/sites' },
       { title: 'Holidays', icon: 'event_note', route: '/site-settings/holidays' },
-      { title: 'Users', route: '/site-settings/users' },
-      { title: 'Sites', route: '/site-settings/sites' }
+      { title: 'Users', icon: 'account_circle', route: '/site-settings/users' },
+      { title: 'Roles', icon: 'security', route: '/site-settings/roles' },
+      { title: 'Sites', icon: 'domain', route: '/site-settings/sites' }
     ]
   }
 ];
