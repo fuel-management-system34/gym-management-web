@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -27,6 +27,25 @@ const routes: Routes = [
       {
         path: 'store',
         loadComponent: () => import('./features/store/store.component').then((c) => c.StoreComponent)
+      },
+      {
+        path: 'equipments',
+        children: [
+          {
+            path: 'list',
+            loadComponent: () =>
+              import('./features/equipments-management/equipments/equipment-list/equipment-list.component').then(
+                (c) => c.EquipmentListComponent
+              )
+          },
+          {
+            path: 'types',
+            loadComponent: () =>
+              import('./features/equipments-management/equipment-types/equipments-type-list/equipments-type-list.component').then(
+                (c) => c.EquipmentsTypeListComponent
+              )
+          }
+        ]
       },
       {
         path: 'site-settings',

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { SiteDashboardComponent } from '../site-dashboard/site-dashboard.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-site-list',
@@ -34,10 +35,11 @@ import { SiteDashboardComponent } from '../site-dashboard/site-dashboard.compone
   templateUrl: './site-list.component.html',
   styleUrl: './site-list.component.scss'
 })
-export class SiteListComponent implements OnInit {
+export class SiteListComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
   displayedColumns: string[] = ['id', 'name', 'description', 'phone', 'status', 'action'];
   dataSource = new MatTableDataSource<Member>();
+  subscriptions = new Subscription();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -79,9 +81,14 @@ export class SiteListComponent implements OnInit {
       data: { user }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      //if (result) this.loadUsers();
-    });
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe((result) => {
+        //if (result) this.loadUsers();
+      })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
 

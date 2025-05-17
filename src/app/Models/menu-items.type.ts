@@ -75,6 +75,16 @@ export const MenuItems: any[] = [
     ]
   },
   {
+    title: 'Equipments',
+    icon: 'event_seat',
+    route: '/equipments',
+    isGroup: true,
+    children: [
+      { title: 'Equipment types', icon: 'category', route: '/equipments/types' },
+      { title: 'Equipment list', icon: 'line_style', route: '/equipments/list' }
+    ]
+  },
+  {
     title: 'Resources',
     icon: 'business',
     isGroup: true,
