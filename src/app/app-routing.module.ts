@@ -7,13 +7,12 @@ import { MembersEditComponent } from './features/members/members-edit/members-ed
 import { TrainersComponent } from './features/trainers/trainers.component';
 import { TrainersEditComponent } from './features/trainers/trainers-edit/trainers-edit.component';
 import { ReportsComponent } from './features/reports/reports.component';
-import { SiteListComponent } from './features/site-settings/site-list/site-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: '',

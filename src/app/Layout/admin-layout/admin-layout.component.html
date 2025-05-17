@@ -1,11 +1,12 @@
 <app-nav-bar></app-nav-bar>
+<app-mobile-nav-bar *ngIf="hideNavBar" #mobileNav></app-mobile-nav-bar>
 <div class="admin-layout">
   <div class="admin-body">
-    <app-sidebar></app-sidebar>
+    <app-sidebar *ngIf="!hideNavBar"></app-sidebar>
     <div class="admin-content">
-      <app-breadcrumb></app-breadcrumb>
+      <app-breadcrumb [topValue]="mobileNavHeight"></app-breadcrumb>
       <div class="dashboard-router">
-        <mat-card class="h-100">
+        <mat-card class="h-83">
           <router-outlet></router-outlet>
         </mat-card>
       </div>

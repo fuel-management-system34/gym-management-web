@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MenuItems } from '../../../Models/menu-items.type';
@@ -13,7 +13,7 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed: boolean = false;
   searchControl: FormControl = new FormControl('');
   filteredItems = MenuItems;
 

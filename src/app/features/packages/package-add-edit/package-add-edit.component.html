@@ -59,63 +59,77 @@
       </div>
       <div class="col-md-12">
         <label class="font-bold">Allowed Days</label>
-        <div class="custom">
-          <mat-checkbox
-            color="primary"
-            [value]="'0'"
-            [checked]="packageForm.get('availableDays')?.value.includes(0)"
-            (change)="onCheckboxChange($event)"
-          >
-            Monday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'1'"
-            [checked]="packageForm.get('availableDays')?.value.includes(1)"
-            (change)="onCheckboxChange($event)"
-          >
-            Tuesday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'2'"
-            [checked]="packageForm.get('availableDays')?.value.includes(2)"
-            (change)="onCheckboxChange($event)"
-          >
-            Wednesday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'3'"
-            [checked]="packageForm.get('availableDays')?.value.includes(3)"
-            (change)="onCheckboxChange($event)"
-          >
-            Thursday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'4'"
-            [checked]="packageForm.get('availableDays')?.value.includes(4)"
-            (change)="onCheckboxChange($event)"
-          >
-            Friday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'5'"
-            [checked]="packageForm.get('availableDays')?.value.includes(5)"
-            (change)="onCheckboxChange($event)"
-          >
-            Saturday
-          </mat-checkbox>
-          <mat-checkbox
-            color="primary"
-            [value]="'6'"
-            [checked]="packageForm.get('availableDays')?.value.includes(6)"
-            (change)="onCheckboxChange($event)"
-          >
-            Sunday
-          </mat-checkbox>
+        <div class="row">
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'0'"
+              [checked]="packageForm.get('availableDays')?.value.includes(0)"
+              (change)="onCheckboxChange($event)"
+            >
+              Monday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'1'"
+              [checked]="packageForm.get('availableDays')?.value.includes(1)"
+              (change)="onCheckboxChange($event)"
+            >
+              Tuesday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'2'"
+              [checked]="packageForm.get('availableDays')?.value.includes(2)"
+              (change)="onCheckboxChange($event)"
+            >
+              Wednesday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'3'"
+              [checked]="packageForm.get('availableDays')?.value.includes(3)"
+              (change)="onCheckboxChange($event)"
+            >
+              Thursday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'4'"
+              [checked]="packageForm.get('availableDays')?.value.includes(4)"
+              (change)="onCheckboxChange($event)"
+            >
+              Friday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'5'"
+              [checked]="packageForm.get('availableDays')?.value.includes(5)"
+              (change)="onCheckboxChange($event)"
+            >
+              Saturday
+            </mat-checkbox>
+          </div>
+          <div class="col">
+            <mat-checkbox
+              color="primary"
+              [value]="'6'"
+              [checked]="packageForm.get('availableDays')?.value.includes(6)"
+              (change)="onCheckboxChange($event)"
+            >
+              Sunday
+            </mat-checkbox>
+          </div>
         </div>
       </div>
 

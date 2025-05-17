@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -24,6 +24,7 @@ interface Breadcrumb {
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
+  @Input() topValue: number;
   navigationList: Breadcrumb[] = [];
   toolbarButtons: ToolbarButton[] = [];
 
