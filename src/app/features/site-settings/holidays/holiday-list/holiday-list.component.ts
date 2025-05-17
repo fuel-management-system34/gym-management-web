@@ -3,21 +3,20 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { ToolbarService } from '../../../Core/services/toolbar.service';
+import { ToolbarService } from '../../../../Core/services/toolbar.service';
 import { Router, RouterModule } from '@angular/router';
-import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
+import { ToolbarButtons } from '../../../../Core/const/common-toolbar-buttons';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Package } from '../../../Models/package.type';
-import { PackageApiService } from '../../../Services/api/package-api.service';
-import { MatSelectModule } from '@angular/material/select';
+import { HolidayApiService } from '../../../../Services/api/holiday-api.service';
+import { Holiday } from '../../../../Models/holiday.type';
 
 @Component({
-  selector: 'app-package-list',
+  selector: 'app-holiday-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -30,34 +29,32 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
-    MatIconModule,
-    MatSelectModule
+    MatIconModule
   ],
-  templateUrl: './package-list.component.html',
-  styleUrl: './package-list.component.scss'
+  templateUrl: './holiday-list.component.html',
+  styleUrl: './holiday-list.component.scss'
 })
-export class PackageListComponent {
+export class HolidayListComponent {
   filterForm: FormGroup;
-  displayedColumns: string[] = ['PackageId', 'PackageName', 'PackageType', 'PackageDuration', 'Price', 'IsRecurring'];
-  dataSource = new MatTableDataSource<Package>();
+  displayedColumns: string[] = ['HolidayId', 'HolidayName', 'Date', 'IsRecurring', 'IsActive'];
+  dataSource = new MatTableDataSource<Holiday>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
-    private packageApiService: PackageApiService,
+    private holidayApiService: HolidayApiService,
     private toolbarService: ToolbarService,
     private routes: Router
   ) {
     this.filterForm = this.fb.group({
-      packageName: [''],
-      packageType: []
+      holidayName: ['']
     });
   }
 
   ngOnInit(): void {
-    this.loadPackages();
+    this.loadHolidays();
     this.setToolBar();
   }
 
@@ -68,10 +65,10 @@ export class PackageListComponent {
       if (res) {
         switch (res) {
           case ToolbarButtons.New:
-            this.routes.navigate(['/packages/new']);
+            this.routes.navigate(['/holidays/new']);
             break;
           case ToolbarButtons.Refresh:
-            this.loadPackages();
+            this.loadHolidays();
             break;
         }
       }
@@ -83,9 +80,9 @@ export class PackageListComponent {
     this.dataSource.sort = this.sort;
   }
 
-  loadPackages(): void {
+  loadHolidays(): void {
     ToolbarButtons.Refresh.isLoading = true;
-    this.packageApiService.getPackages().subscribe({
+    this.holidayApiService.getHolidayList().subscribe({
       next: (packages) => {
         this.dataSource.data = packages;
         ToolbarButtons.Refresh.isLoading = false;

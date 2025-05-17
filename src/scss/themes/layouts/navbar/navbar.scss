@@ -469,21 +469,11 @@
   }
 }
 
-@media (min-width: 1025px) {
-  .pc-header .pc-h-item.pc-sidebar-popup {
-    display: none;
-  }
-}
-
 @media (max-width: 1024px) {
   .pc-header {
     top: 0;
     left: 0;
     transition: all 0.15s ease-in-out;
-
-    .m-header {
-      display: none;
-    }
 
     .pc-head-link {
 

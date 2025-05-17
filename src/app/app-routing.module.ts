@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
@@ -87,7 +87,28 @@ const routes: Routes = [
           },
           {
             path: 'holidays',
-            loadComponent: () => import('./features/site-settings/holidays/holidays.component').then((c) => c.HolidaysComponent)
+            loadComponent: () => import('./features/site-settings/holidays/holidays.component').then((c) => c.HolidaysComponent),
+            children: [
+              {
+                path: '',
+                loadComponent: () =>
+                  import('./features/site-settings/holidays/holiday-list/holiday-list.component').then((c) => c.HolidayListComponent)
+              },
+              {
+                path: 'new',
+                loadComponent: () =>
+                  import('./features/site-settings/holidays/holiday-add-edit/holiday-add-edit.component').then(
+                    (c) => c.HolidayAddEditComponent
+                  )
+              },
+              {
+                path: 'edit/:id',
+                loadComponent: () =>
+                  import('./features/site-settings/holidays/holiday-add-edit/holiday-add-edit.component').then(
+                    (c) => c.HolidayAddEditComponent
+                  )
+              }
+            ]
           }
         ]
       },

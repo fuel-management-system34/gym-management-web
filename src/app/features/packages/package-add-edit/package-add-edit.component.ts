@@ -14,8 +14,8 @@ import { AvailableDays, Package, PackageTye } from '../../../Models/package.type
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToolbarService } from '../../../Core/services/toolbar.service';
 import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { ActivatedRoute, Router } from '@angular/router';
+import {} from 'ngx-mat-timepicker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NotificationService } from 'src/app/Services/notification-util.service';
 
@@ -79,6 +79,7 @@ export class PackageAddEditComponent implements OnInit {
   createForm(): void {
     this.packageForm = this.fb.group({
       packageId: [null],
+      packageCode: [null],
       packageName: ['', Validators.required],
       packageType: [PackageTye.Individual, Validators.required],
       gender: [0, Validators.required],

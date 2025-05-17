@@ -12,8 +12,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
-import { User } from 'src/app/Core/models/User';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { User } from '../../../Core/models/User';
+import { SharedModule } from '../../../theme/shared/shared.module';
 
 @Component({
   selector: 'app-site-dashboard',
@@ -60,12 +60,6 @@ export class SiteDashboardComponent implements OnInit {
       address: [''],
       site: ['']
     });
-
-    // this.companyService.getCompanyDetails().subscribe((data) => {
-    //   this.companyForm.patchValue(data);
-    //   this.logoPreview = data.logo_url;
-    //   this.membershipPreview = data.membership_card_url;
-    // });
   }
 
   onFileChange(event: Event, field: string): void {
