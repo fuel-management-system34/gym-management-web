@@ -47,6 +47,16 @@ export const MenuItems: any[] = [
     ]
   },
   {
+    title: 'Packages',
+    icon: 'card_membership',
+    route: '/packages',
+    isGroup: false,
+    children: [
+      { title: 'Add Package', route: '/packages/new' },
+      { title: 'Edit Package', route: '/packages/edit/:id' }
+    ]
+  },
+  {
     title: 'Appointments',
     icon: 'event',
     route: '/appointments'
