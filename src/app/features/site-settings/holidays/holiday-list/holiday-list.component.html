@@ -16,13 +16,13 @@
     <table mat-table [dataSource]="dataSource" matSort class="mat-table">
       <!-- ID Column -->
       <ng-container matColumnDef="HolidayId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Package Code</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Holiday Code</th>
         <td mat-cell *matCellDef="let holiday">{{ holiday.HolidayCode }}</td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="HolidayName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Package Name</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Holiday Name</th>
         <td mat-cell *matCellDef="let holiday">{{ holiday.HolidayName }}</td>
       </ng-container>
 
@@ -41,9 +41,10 @@
       </ng-container>
 
       <ng-container matColumnDef="IsActive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
         <td mat-cell *matCellDef="let holiday">
-          <mat-icon color="primary" *ngIf="holiday.IsRecurring">check_circle</mat-icon>
-          <mat-icon color="warn" *ngIf="!holiday.IsRecurring">cancel</mat-icon>
+          <mat-icon color="primary" *ngIf="holiday.IsActive">check_circle</mat-icon>
+          <mat-icon color="warn" *ngIf="!holiday.IsActive">cancel</mat-icon>
         </td>
       </ng-container>
 

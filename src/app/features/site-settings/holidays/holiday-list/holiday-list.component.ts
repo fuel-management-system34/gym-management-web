@@ -29,6 +29,7 @@ import { Holiday } from '../../../../Models/holiday.type';
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    MatIconModule,
     MatIconModule
   ],
   templateUrl: './holiday-list.component.html',
@@ -65,7 +66,7 @@ export class HolidayListComponent {
       if (res) {
         switch (res) {
           case ToolbarButtons.New:
-            this.routes.navigate(['/holidays/new']);
+            this.routes.navigate(['holidays/new']);
             break;
           case ToolbarButtons.Refresh:
             this.loadHolidays();
