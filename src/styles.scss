@@ -125,6 +125,7 @@ mat-label{
 
 input{
   font-size: 14px !important;
+  color: #0E1E52 !important
 }
 
 .cdk-overlay-container {
@@ -156,4 +157,8 @@ input{
 
 .mat-mdc-form-field-required-marker {
   color: red !important;
+}
+
+mat-select{
+  color: #0E1E52 !important
 }
