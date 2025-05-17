@@ -88,8 +88,8 @@ export class PackageAddEditComponent implements OnInit {
       timeFrom: [null],
       timeTo: [null],
       packageDuration: [0, Validators.required],
-      minMembers: [2, Validators.required],
-      maxMembers: [2, Validators.required],
+      minMembers: [1, Validators.required],
+      maxMembers: [1, Validators.required],
       price: [0, [Validators.required, Validators.min(0)]]
     });
   }
@@ -149,6 +149,13 @@ export class PackageAddEditComponent implements OnInit {
   }
 
   setMinimumMembers(): void {
-    this.memberMin = this.packageForm.get('packageType')?.value == 1 ? 2 : 1;
+    if (this.packageForm.get('packageType')?.value == 1) {
+      this.memberMin = 2;
+      if (this.packageForm.get('minMembers')?.value < 2) {
+        this.packageForm.get('minMembers')?.setValue(null);
+      }
+    } else {
+      this.memberMin = 1;
+    }
   }
 }

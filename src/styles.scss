@@ -81,10 +81,6 @@ form {
       font-size: 14px;
       line-height: 1.4;
     }
-
-    ::ng-deep .mat-mdc-form-field-required-marker {
-      color: red !important;
-    }
 }
 
 .mat-mdc-select-panel {
@@ -120,6 +116,7 @@ mat-label{
   padding:2rem 1rem !important;
   margin: 4.5rem 0.5rem 0.8rem 0.8rem !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  height: 83vh !important;
 }
 
 .font-bold{
@@ -155,4 +152,8 @@ input{
 ::ng-deep .snackbar-warning {
   background-color: #ff9800 !important;
   color: white !important;
+}
+
+.mat-mdc-form-field-required-marker {
+  color: red !important;
 }

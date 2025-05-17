@@ -10,7 +10,7 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Package Type</mat-label>
-          <mat-select formControlName="packageType" (valueChange)="setMinimumMembers()">
+          <mat-select formControlName="packageType" (selectionChange)="setMinimumMembers()">
             <mat-option [value]="0">Individual</mat-option>
             <mat-option [value]="1">Group</mat-option>
           </mat-select>
