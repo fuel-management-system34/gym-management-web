@@ -10,7 +10,7 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Package Type</mat-label>
-          <mat-select formControlName="packageType">
+          <mat-select formControlName="packageType" (valueChange)="setMinimumMembers()">
             <mat-option [value]="0">Individual</mat-option>
             <mat-option [value]="1">Group</mat-option>
           </mat-select>
@@ -26,7 +26,6 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-3"><mat-checkbox color="primary" formControlName="isRecurring">Recurring</mat-checkbox></div>
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Package Duration (months)</mat-label>
@@ -42,19 +41,19 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Min Members</mat-label>
-          <input type="number" matInput formControlName="minMembers" min="2" />
+          <input type="number" matInput formControlName="minMembers" [attr.min]="memberMin" />
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Max Members</mat-label>
-          <input type="number" matInput formControlName="maxMembers" min="2" />
+          <input type="number" matInput formControlName="maxMembers" [attr.min]="memberMin" [attr.max]="memberMax" />
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Price</mat-label>
-          <input type="number" matInput formControlName="price" min="1" />
+          <input type="number" matInput formControlName="price" min="priceMin" />
         </mat-form-field>
       </div>
       <div class="col-md-12">

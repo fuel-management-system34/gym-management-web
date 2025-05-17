@@ -41,9 +41,9 @@ import { NotificationService } from 'src/app/Services/notification-util.service'
 })
 export class PackageAddEditComponent implements OnInit {
   packageForm!: FormGroup;
-  availableDays = Object.keys(AvailableDays).filter((key) => isNaN(Number(key)));
   packageTypes = PackageTye;
-  day: AvailableDays;
+  memberMin: number = 1;
+  memberMax: number = 5;
 
   constructor(
     private fb: FormBuilder,
@@ -88,7 +88,6 @@ export class PackageAddEditComponent implements OnInit {
       timeFrom: [null],
       timeTo: [null],
       packageDuration: [0, Validators.required],
-      isRecurring: [false],
       minMembers: [2, Validators.required],
       maxMembers: [2, Validators.required],
       price: [0, [Validators.required, Validators.min(0)]]
@@ -147,5 +146,9 @@ export class PackageAddEditComponent implements OnInit {
       const daysArray = this.packageForm.get('availableDays') as FormArray;
       pkg.AvailableDays.forEach((day) => daysArray.push(this.fb.control(day)));
     });
+  }
+
+  setMinimumMembers(): void {
+    this.memberMin = this.packageForm.get('packageType')?.value == 1 ? 2 : 1;
   }
 }

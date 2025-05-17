@@ -113,7 +113,15 @@ export const MenuItems: any[] = [
     route: '/site-settings',
     isGroup: true,
     children: [
-      { title: 'Holidays', icon: 'event_note', route: '/site-settings/holidays' },
+      {
+        title: 'Holidays',
+        icon: 'event_note',
+        route: '/site-settings/holidays',
+        children: [
+          { title: 'Add Holiday', route: '/holidays/new' },
+          { title: 'Edit Holiday', route: '/holidays/edit/:id' }
+        ]
+      },
       { title: 'Users', icon: 'account_circle', route: '/site-settings/users' },
       { title: 'Roles', icon: 'group_add', route: '/site-settings/roles' },
       { title: 'Sites', icon: 'domain', route: '/site-settings/sites' }

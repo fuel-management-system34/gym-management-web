@@ -9,7 +9,6 @@ export interface Package {
   TimeFrom?: Date;
   TimeTo?: Date;
   PackageDuration: number;
-  isRecurring: boolean;
   MinMembers: number;
   MaxMembers: number;
   Price: number;

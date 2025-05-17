@@ -45,7 +45,7 @@ export class AdminComponent implements OnInit {
       this.hideNavBar = false;
     }
     this.mobileNavHeight = 60 + this.getMobileNavHeight();
-    console.log(this.mobileNavHeight);
+    //console.log(this.mobileNavHeight);
   }
 
   getMobileNavHeight(): number {
