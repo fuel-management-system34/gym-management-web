@@ -11,7 +11,7 @@ import { take } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   // public props
-  title = 'Paradise project';
+  title = 'IRON FORGE';
 
   constructor(
     private authService: AuthService,

@@ -1,27 +1,23 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { ToolbarService } from '../../../Core/services/toolbar.service';
+import { Router, RouterModule } from '@angular/router';
+import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Router, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { MemberApiService } from '../../../Services/api/member-api.service';
-import { ToolbarService } from '../../../Core/services/toolbar.service';
-import { ToolbarButtons } from '../../../Core/const/common-toolbar-buttons';
-import { Member } from 'src/app/Models/member/member.type';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Package } from '../../../Models/package.type';
+import { PackageApiService } from '../../../Services/api/package-api.service';
+
 @Component({
-  selector: 'app-members-list',
+  selector: 'app-package-list',
   standalone: true,
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.scss'],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -34,30 +30,32 @@ import { Member } from 'src/app/Models/member/member.type';
     ReactiveFormsModule,
     RouterModule,
     MatIconModule
-  ]
+  ],
+  templateUrl: './package-list.component.html',
+  styleUrl: './package-list.component.scss'
 })
-export class MembersListComponent implements OnInit, OnDestroy {
+export class PackageListComponent {
   filterForm: FormGroup;
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone', 'membership', 'joinDate', 'status'];
-  dataSource = new MatTableDataSource<Member>();
+  displayedColumns: string[] = ['PackageId', 'PackageName', 'PackageType'];
+  dataSource = new MatTableDataSource<Package>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
-    private memberService: MemberApiService,
+    private packageApiService: PackageApiService,
     private toolbarService: ToolbarService,
     private routes: Router
   ) {
     this.filterForm = this.fb.group({
-      name: [''],
-      email: ['']
+      packageName: [''],
+      packageType: []
     });
   }
 
   ngOnInit(): void {
-    this.loadMembers();
+    this.loadPackages();
     this.setToolBar();
   }
 
@@ -68,10 +66,10 @@ export class MembersListComponent implements OnInit, OnDestroy {
       if (res) {
         switch (res) {
           case ToolbarButtons.New:
-            this.routes.navigate(['/members/new']);
+            this.routes.navigate(['/packages/new']);
             break;
           case ToolbarButtons.Refresh:
-            this.loadMembers();
+            this.loadPackages();
             break;
         }
       }
@@ -83,15 +81,15 @@ export class MembersListComponent implements OnInit, OnDestroy {
     this.dataSource.sort = this.sort;
   }
 
-  loadMembers(): void {
+  loadPackages(): void {
     ToolbarButtons.Refresh.isLoading = true;
-    this.memberService.getAllMembers().subscribe({
-      next: (members) => {
-        this.dataSource.data = members;
+    this.packageApiService.getPackages().subscribe({
+      next: (packages) => {
+        this.dataSource.data = packages;
         ToolbarButtons.Refresh.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load members:', err);
+        console.error('Failed to load packages:', err);
         ToolbarButtons.Refresh.isLoading = false;
       }
     });

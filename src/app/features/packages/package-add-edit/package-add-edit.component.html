@@ -1,0 +1,147 @@
+<div class="main-card">
+  <form [formGroup]="packageForm" (ngSubmit)="savePackage()">
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Package Name</mat-label>
+          <input matInput formControlName="packageName" required />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Package Type</mat-label>
+          <mat-select formControlName="packageType">
+            <mat-option [value]="0">Individual</mat-option>
+            <mat-option [value]="1">Group</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option [value]="0">Any</mat-option>
+            <mat-option [value]="1">Male</mat-option>
+            <mat-option [value]="2">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3"><mat-checkbox color="primary" formControlName="isRecurring">Recurring</mat-checkbox></div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Package Duration (months)</mat-label>
+          <mat-select formControlName="packageDuration">
+            <mat-option [value]="0">1 Month</mat-option>
+            <mat-option [value]="1">3 Month</mat-option>
+            <mat-option [value]="2">6 Month</mat-option>
+            <mat-option [value]="2">1 Year</mat-option>
+            <mat-option [value]="2">2 Year</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Min Members</mat-label>
+          <input type="number" matInput formControlName="minMembers" min="2" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Max Members</mat-label>
+          <input type="number" matInput formControlName="maxMembers" min="2" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput formControlName="price" min="1" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+        <label class="font-bold">Allowed Days</label>
+        <div class="custom">
+          <mat-checkbox
+            color="primary"
+            [value]="'0'"
+            [checked]="packageForm.get('availableDays')?.value.includes(0)"
+            (change)="onCheckboxChange($event)"
+          >
+            Monday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'1'"
+            [checked]="packageForm.get('availableDays')?.value.includes(1)"
+            (change)="onCheckboxChange($event)"
+          >
+            Tuesday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'2'"
+            [checked]="packageForm.get('availableDays')?.value.includes(2)"
+            (change)="onCheckboxChange($event)"
+          >
+            Wednesday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'3'"
+            [checked]="packageForm.get('availableDays')?.value.includes(3)"
+            (change)="onCheckboxChange($event)"
+          >
+            Thursday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'4'"
+            [checked]="packageForm.get('availableDays')?.value.includes(4)"
+            (change)="onCheckboxChange($event)"
+          >
+            Friday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'5'"
+            [checked]="packageForm.get('availableDays')?.value.includes(5)"
+            (change)="onCheckboxChange($event)"
+          >
+            Saturday
+          </mat-checkbox>
+          <mat-checkbox
+            color="primary"
+            [value]="'6'"
+            [checked]="packageForm.get('availableDays')?.value.includes(6)"
+            (change)="onCheckboxChange($event)"
+          >
+            Sunday
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-3">
+        <label class="font-bold">Allowed Time</label>
+      </div>
+
+      <div class="col-md-3">
+        <mat-checkbox color="primary" formControlName="noTimeRange" (change)="onTimeRangeChange($event)">No Time Range</mat-checkbox>
+      </div>
+
+      <div class="col-md-3" *ngIf="!packageForm.get('noTimeRange')?.value">
+        <mat-form-field appearance="outline">
+          <mat-label>Time From</mat-label>
+          <input matInput [ngxTimepicker]="fromPicker" formControlName="timeFrom" readonly />
+          <ngx-material-timepicker #fromPicker></ngx-material-timepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3" *ngIf="!packageForm.get('noTimeRange')?.value">
+        <mat-form-field appearance="outline">
+          <mat-label>Time To</mat-label>
+          <input matInput [ngxTimepicker]="toPicker" formControlName="timeTo" readonly />
+          <ngx-material-timepicker #toPicker></ngx-material-timepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

@@ -3,7 +3,7 @@
     <div class="page-header">
       <div class="col-md-12 d-flex">
         <div class="col-8">
-          <ul class="breadcrumb mt-2" [ngClass]="{ 'mt-3': toolbarButtons.length > 0 }">
+          <ul class="breadcrumb mt-2">
             @for (breadcrumb of navigationList; track breadcrumb; let first = $first) {
               @if (first) {
                 <li class="breadcrumb-item">

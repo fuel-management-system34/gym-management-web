@@ -25,6 +25,26 @@ const routes: Routes = [
         loadComponent: () => import('./features/home/home.component').then((c) => c.HomeComponent)
       },
       {
+        path: 'packages',
+        loadComponent: () => import('./features/packages/packages.component').then((c) => c.PackagesComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./features/packages/package-list/package-list.component').then((c) => c.PackageListComponent)
+          },
+          {
+            path: 'new',
+            loadComponent: () =>
+              import('./features/packages/package-add-edit/package-add-edit.component').then((c) => c.PackageAddEditComponent)
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./features/packages/package-add-edit/package-add-edit.component').then((c) => c.PackageAddEditComponent)
+          }
+        ]
+      },
+      {
         path: 'store',
         loadComponent: () => import('./features/store/store.component').then((c) => c.StoreComponent)
       },

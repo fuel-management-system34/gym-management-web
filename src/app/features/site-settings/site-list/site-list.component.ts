@@ -13,6 +13,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { SiteDashboardComponent } from '../site-dashboard/site-dashboard.component';
+import { Member } from '../../../Models/member/member.type';
 
 @Component({
   selector: 'app-site-list',
@@ -83,16 +84,6 @@ export class SiteListComponent implements OnInit {
       //if (result) this.loadUsers();
     });
   }
-}
-
-export interface Member {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  membership: string;
-  joinDate: string;
-  status: string;
 }
 
 const MEMBER_DATA: any[] = [

@@ -23,7 +23,7 @@ export class NotificationService {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       data: data,
-      panelClass: 'custom-notification'
+      panelClass: ['custom-snackbar', 'mat-elevation-z4']
     };
 
     this.snackBar.openFromComponent(CustomNotificationComponent, config);

@@ -13,6 +13,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { AddEditWorkoutPlansComponent } from '../add-edit-workout-plans/add-edit-workout-plans.component';
+import { Member } from '../../../Models/member/member.type';
 
 @Component({
   selector: 'app-workout-plans-dashboard',
@@ -83,16 +84,6 @@ export class WorkoutPlansDashboardComponent implements OnInit {
       //if (result) this.loadUsers();
     });
   }
-}
-
-export interface Member {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  membership: string;
-  joinDate: string;
-  status: string;
 }
 
 const MEMBER_DATA: any[] = [
